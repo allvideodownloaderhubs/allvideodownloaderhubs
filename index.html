@@ -355,11 +355,12 @@
                 // --- SIMULATED BACKEND RESPONSE (for frontend preview) ---
                 setTimeout(() => {
                     setDownloadOptions([
-                        { quality: '1080p', format: 'MP4', size: '150MB', link: '#' },
-                        { quality: '720p', format: 'MP4', size: '80MB', link: '#' },
-                        { quality: '480p', format: 'MP4', size: '40MB', link: '#' },
-                        { quality: '360p', format: 'MP4', size: '25MB', link: '#' },
-                        { quality: 'MP3', format: 'Audio', size: '5MB', link: '#' },
+                        // Using a dummy MP4 URL for simulation
+                        { quality: '1080p', format: 'MP4', size: '150MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+                        { quality: '720p', format: 'MP4', size: '80MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+                        { quality: '480p', format: 'MP4', size: '40MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+                        { quality: '360p', format: 'MP4', size: '25MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+                        { quality: 'MP3', format: 'Audio', size: '5MB', link: '#' }, // MP3 still uses '#' as there's no generic dummy audio file
                     ]);
                     setIsLoading(false); // Stop loading after simulation
                 }, 2000); // Simulate a 2-second delay
