@@ -54,7 +54,7 @@
 
         /* Header */
         .header-custom {
-            background: linear-gradient(to right, #007bff, #0056b3); /* Gradient for header */
+            background: linear-gradient(to right, var(--primary-color), var(--primary-dark)); /* Gradient for header */
             box-shadow: 0 4px 15px var(--shadow-medium);
             position: sticky;
             top: 0;
@@ -151,7 +151,7 @@
         }
 
         /* Cards */
-        .download-card, .options-card, .ad-area-card, .preview-card {
+        .download-card, .options-card, .ad-area-card, .preview-card, .info-card {
             background-color: var(--card-bg);
             border-radius: 1.25rem !important; /* Even larger rounded corners */
             box-shadow: 0 8px 30px var(--shadow-light);
@@ -161,6 +161,32 @@
             transform: translateY(-5px);
             box-shadow: 0 12px 40px var(--shadow-medium);
         }
+        .info-card {
+            padding: 2.5rem; /* Add padding for info cards */
+        }
+        .info-card h3 {
+            color: var(--primary-dark);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        .info-card p, .info-card ul {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+        .info-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .info-card ul li {
+            margin-bottom: 0.75rem;
+        }
+        .info-card ul li i {
+            color: var(--primary-color);
+            margin-right: 0.75rem;
+            font-size: 1.25rem;
+        }
+
 
         /* Input Field */
         .input-field {
@@ -298,7 +324,8 @@
             const [error, setError] = useState('');
             const [isSidebarOpen, setIsSidebarOpen] = useState(false);
             const [isLoading, setIsLoading] = useState(false);
-            const [selectedPlatform, setSelectedPlatform] = useState('General');
+            // currentPage can be 'General', 'AboutUs', 'Contact', 'PrivacyPolicy', 'TermsConditions'
+            const [currentPage, setCurrentPage] = useState('General');
             const [videoThumbnail, setVideoThumbnail] = useState(null);
 
             // Function to extract YouTube video ID
@@ -339,7 +366,7 @@
                 }
 
                 // --- Video Preview Logic (Frontend Simulation) ---
-                if (selectedPlatform === 'YouTube') {
+                if (currentPage === 'YouTube') { // Use currentPage for platform specific logic
                     const youtubeId = getYouTubeVideoId(videoUrl);
                     if (youtubeId) {
                         // Using a standard YouTube thumbnail URL
@@ -366,20 +393,24 @@
                 }, 2000); // Simulate a 2-second delay
             };
 
-            // Function to get dynamic main title based on selected platform
+            // Function to get dynamic main title based on selected platform or page
             const getMainTitle = () => {
-                switch (selectedPlatform) {
+                switch (currentPage) {
                     case 'YouTube': return 'Download YouTube Videos!';
                     case 'Facebook': return 'Download Facebook Videos!';
                     case 'TikTok': return 'Download TikTok Videos!';
                     case 'Pinterest': return 'Download Pinterest Videos & Images!';
+                    case 'AboutUs': return 'About allvideodownloaderhubs.in';
+                    case 'Contact': return 'Contact Us';
+                    case 'PrivacyPolicy': return 'Privacy Policy';
+                    case 'TermsConditions': return 'Terms & Conditions';
                     default: return 'Download Videos from Any Platform!';
                 }
             };
 
             // Function to get dynamic input placeholder based on selected platform
             const getInputPlaceholder = () => {
-                switch (selectedPlatform) {
+                switch (currentPage) {
                     case 'YouTube': return 'Paste YouTube video link here...';
                     case 'Facebook': return 'Paste Facebook video link here...';
                     case 'TikTok': return 'Paste TikTok video link here...';
@@ -393,13 +424,13 @@
                 setIsSidebarOpen(!isSidebarOpen);
             };
 
-            // Handle sidebar link clicks
-            const handlePlatformSelect = (platform) => {
-                setSelectedPlatform(platform);
-                setVideoUrl(''); // Clear URL input when changing platform
+            // Handle sidebar link clicks for platforms and info pages
+            const handleNavigationSelect = (page) => {
+                setCurrentPage(page);
+                setVideoUrl(''); // Clear URL input when changing page
                 setDownloadOptions(null); // Clear previous options
                 setError(''); // Clear any previous errors
-                setVideoThumbnail(null); // Clear thumbnail on platform change
+                setVideoThumbnail(null); // Clear thumbnail on page change
                 setIsSidebarOpen(false); // Close sidebar on mobile after selection
             };
 
@@ -414,79 +445,111 @@
                 return () => window.removeEventListener('resize', handleResize);
             }, []);
 
-            return (
-                <div className="d-flex flex-column min-vh-100 app-container" style={{ fontFamily: 'Inter, sans-serif' }}>
-                    {/* Common Header Placeholder */}
-                    <header className="bg-primary text-white py-3 shadow-lg header-custom">
-                        <div className="container d-flex justify-content-between align-items-center">
-                            <h1 className="h3 mb-0">
-                                <a href="#" onClick={() => handlePlatformSelect('General')} className="text-white text-decoration-none site-title">allvideodownloaderhubs</a>
-                            </h1>
-                            <button className="btn btn-primary d-md-none menu-toggle-btn" onClick={toggleSidebar} aria-label="Toggle navigation">
-                                <i className="fas fa-bars fa-lg"></i> {/* Font Awesome for menu icon */}
-                            </button>
-                        </div>
-                    </header>
+            // Render function for About Us content
+            const renderAboutUs = () => (
+                <div className="card shadow-lg mb-5 rounded-4 border-0 info-card">
+                    <div className="card-body">
+                        <h3 className="card-title text-center mb-4">Welcome to allvideodownloaderhubs.in</h3>
+                        <p>
+                            allvideodownloaderhubs.in is your one-stop destination to download videos from
+                            various online platforms. We are passionate about providing fast, secure, and
+                            easy-to-use tools for everyone. Our goal is to simplify your video downloading
+                            experience with just a few clicks.
+                        </p>
+                        <p>
+                            We strive to offer a seamless and efficient service, ensuring you can save your
+                            favorite videos for offline viewing without hassle. Our platform is designed
+                            with user-friendliness in mind, making video downloads accessible to everyone,
+                            regardless of technical expertise.
+                        </p>
+                    </div>
+                </div>
+            );
 
-                    <div className="d-flex flex-grow-1 main-content-wrapper">
-                        {/* Side Menu */}
-                        <nav className={`bg-light p-4 shadow-sm sidebar ${isSidebarOpen ? 'sidebar-open' : ''} d-flex flex-column`}>
-                            <h5 className="mb-4 text-primary sidebar-title">Tools & Navigation</h5>
-                            <ul className="nav flex-column sidebar-nav-list">
-                                <li className="nav-item mb-2">
-                                    <a href="#" onClick={() => handlePlatformSelect('YouTube')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${selectedPlatform === 'YouTube' ? 'active' : ''}`}>
-                                        <i className="fab fa-youtube me-2"></i>YouTube Downloader
-                                    </a>
-                                </li>
-                                <li className="nav-item mb-2">
-                                    <a href="#" onClick={() => handlePlatformSelect('Facebook')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${selectedPlatform === 'Facebook' ? 'active' : ''}`}>
-                                        <i className="fab fa-facebook me-2"></i>Facebook Downloader
-                                    </a>
-                                </li>
-                                <li className="nav-item mb-2">
-                                    <a href="#" onClick={() => handlePlatformSelect('TikTok')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${selectedPlatform === 'TikTok' ? 'active' : ''}`}>
-                                        <i className="fab fa-tiktok me-2"></i>TikTok Downloader
-                                    </a>
-                                </li>
-                                <li className="nav-item mb-2">
-                                    <a href="#" onClick={() => handlePlatformSelect('Pinterest')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${selectedPlatform === 'Pinterest' ? 'active' : ''}`}>
-                                        <i className="fab fa-pinterest me-2"></i>Pinterest Downloader
-                                    </a>
-                                </li>
-                                <li className="nav-item mb-2">
-                                    <a href="#" onClick={() => handlePlatformSelect('General')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${selectedPlatform === 'General' ? 'active' : ''}`}>
-                                        <i className="fas fa-link me-2"></i>Other Platforms
-                                    </a>
-                                </li>
-                                <li className="nav-item border-top pt-3 mt-3 mb-2">
-                                    <a href="#" className="nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link">
-                                        <i className="fas fa-info-circle me-2"></i>About Us
-                                    </a>
-                                </li>
-                                <li className="nav-item mb-2">
-                                    <a href="#" className="nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link">
-                                        <i className="fas fa-envelope me-2"></i>Contact
-                                    </a>
-                                </li>
-                                <li className="nav-item mb-2">
-                                    <a href="#" className="nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link">
-                                        <i className="fas fa-shield-alt me-2"></i>Privacy Policy
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+            // Render function for Contact Us content
+            const renderContact = () => (
+                <div className="card shadow-lg mb-5 rounded-4 border-0 info-card">
+                    <div className="card-body">
+                        <h3 className="card-title text-center mb-4">Contact Us</h3>
+                        <p>
+                            Have questions, suggestions, or feedback? We'd love to hear from you!
+                        </p>
+                        <ul className="list-unstyled">
+                            <li>
+                                <i className="fas fa-envelope me-2"></i> Email us at: <a href="mailto:allvideodownloaderhuts@gmail.com">allvideodownloaderhuts@gmail.com</a>
+                            </li>
+                            <li>
+                                <i className="fas fa-clock me-2"></i> We usually respond within 24–48 hours.
+                            </li>
+                        </ul>
+                        <p className="mt-4">
+                            Your feedback is important to us as we continuously work to improve our services.
+                            Don't hesitate to reach out!
+                        </p>
+                    </div>
+                </div>
+            );
 
-                        {/* Main Content Area */}
-                        <main className="flex-grow-1 p-4 bg-light-subtle main-content-area">
-                            <div className="container">
-                                <h2 className="text-center text-primary mb-5 main-title">{getMainTitle()}</h2>
+            // Render function for Privacy Policy content
+            const renderPrivacyPolicy = () => (
+                <div className="card shadow-lg mb-5 rounded-4 border-0 info-card">
+                    <div className="card-body">
+                        <h3 className="card-title text-center mb-4">Privacy Policy</h3>
+                        <p>
+                            We respect your privacy. We do not collect or share any personal information from
+                            users. Our site may use cookies to enhance the user experience, but we do not
+                            track or store identifiable user data.
+                        </p>
+                        <p>
+                            By using our site, you agree to our privacy practices. We are committed to
+                            maintaining your trust and ensuring your online safety.
+                        </p>
+                    </div>
+                </div>
+            );
 
+            // Render function for Terms & Conditions content
+            const renderTermsConditions = () => (
+                <div className="card shadow-lg mb-5 rounded-4 border-0 info-card">
+                    <div className="card-body">
+                        <h3 className="card-title text-center mb-4">Terms & Conditions</h3>
+                        <p>
+                            By using allvideodownloaderhubs.in, you agree to use our services for personal and
+                            non-commercial purposes only. We do not host or store any copyrighted content.
+                        </p>
+                        <p>
+                            Users are responsible for how they use the downloaded content. We do not take liability for misuse of
+                            the tools provided on this site.
+                        </p>
+                        <p className="mt-4">
+                            Please ensure you comply with all applicable copyright laws and the terms of service
+                            of the platforms from which you download content.
+                        </p>
+                    </div>
+                </div>
+            );
+
+
+            // Main content rendering logic
+            const renderMainContent = () => {
+                switch (currentPage) {
+                    case 'AboutUs':
+                        return renderAboutUs();
+                    case 'Contact':
+                        return renderContact();
+                    case 'PrivacyPolicy':
+                        return renderPrivacyPolicy();
+                    case 'TermsConditions':
+                        return renderTermsConditions();
+                    default: // This is the 'General' or main download page
+                        return (
+                            <>
                                 <div className="card shadow-lg p-4 mb-5 rounded-4 border-0 download-card">
                                     <div className="card-body">
                                         <form onSubmit={handleDownload}>
                                             <div className="mb-4">
                                                 <label htmlFor="videoUrl" className="form-label fs-5 text-dark input-label">
-                                                    Enter {selectedPlatform === 'Pinterest' ? 'Link (Video/Image)' : 'Video URL'}:
+                                                    Enter {currentPage === 'Pinterest' ? 'Link (Video/Image)' : 'Video URL'}:
                                                 </label>
                                                 <input
                                                     type="text"
@@ -513,7 +576,7 @@
                                                         </>
                                                     ) : (
                                                         <>
-                                                            <i className="fas fa-download me-2"></i> Download {selectedPlatform === 'Pinterest' ? 'Content' : 'Video'}
+                                                            <i className="fas fa-download me-2"></i> Download {currentPage === 'Pinterest' ? 'Content' : 'Video'}
                                                         </>
                                                     )}
                                                 </button>
@@ -542,7 +605,7 @@
                                             <img src={videoThumbnail} alt="Video Thumbnail" className="img-fluid video-preview-thumbnail mb-3"
                                                 onerror="this.onerror=null;this.src='https://placehold.co/480x360/E0E0E0/666666?text=Preview+Not+Available';" />
                                             <p className="preview-placeholder-text">
-                                                {selectedPlatform === 'YouTube' ? 'This is a YouTube video preview.' : 'Preview for this platform would require specific API integration.'}
+                                                {currentPage === 'YouTube' ? 'This is a YouTube video preview.' : 'Preview for this platform would require specific API integration.'}
                                             </p>
                                         </div>
                                     </div>
@@ -605,9 +668,88 @@
                                         </p>
                                     </div>
                                 </div>
+                            </>
+                        );
+                }
+            };
 
-                                {/* Ads Management Placeholder */}
-                                <div className="card bg-warning-subtle text-warning-emphasis p-4 text-center rounded-4 shadow-sm ad-area-card">
+            return (
+                <div className="d-flex flex-column min-vh-100 app-container" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    {/* Common Header Placeholder */}
+                    <header className="bg-primary text-white py-3 shadow-lg header-custom">
+                        <div className="container d-flex justify-content-between align-items-center">
+                            <h1 className="h3 mb-0">
+                                <a href="#" onClick={() => handleNavigationSelect('General')} className="text-white text-decoration-none site-title">allvideodownloaderhubs</a>
+                            </h1>
+                            <button className="btn btn-primary d-md-none menu-toggle-btn" onClick={toggleSidebar} aria-label="Toggle navigation">
+                                <i className="fas fa-bars fa-lg"></i> {/* Font Awesome for menu icon */}
+                            </button>
+                        </div>
+                    </header>
+
+                    <div className="d-flex flex-grow-1 main-content-wrapper">
+                        {/* Side Menu */}
+                        <nav className={`bg-light p-4 shadow-sm sidebar ${isSidebarOpen ? 'sidebar-open' : ''} d-flex flex-column`}>
+                            <h5 className="mb-4 text-primary sidebar-title">Tools & Navigation</h5>
+                            <ul className="nav flex-column sidebar-nav-list">
+                                <li className="nav-item mb-2">
+                                    <a href="#" onClick={() => handleNavigationSelect('YouTube')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${currentPage === 'YouTube' ? 'active' : ''}`}>
+                                        <i className="fab fa-youtube me-2"></i>YouTube Downloader
+                                    </a>
+                                </li>
+                                <li className="nav-item mb-2">
+                                    <a href="#" onClick={() => handleNavigationSelect('Facebook')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${currentPage === 'Facebook' ? 'active' : ''}`}>
+                                        <i className="fab fa-facebook me-2"></i>Facebook Downloader
+                                    </a>
+                                </li>
+                                <li className="nav-item mb-2">
+                                    <a href="#" onClick={() => handleNavigationSelect('TikTok')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${currentPage === 'TikTok' ? 'active' : ''}`}>
+                                        <i className="fab fa-tiktok me-2"></i>TikTok Downloader
+                                    </a>
+                                </li>
+                                <li className="nav-item mb-2">
+                                    <a href="#" onClick={() => handleNavigationSelect('Pinterest')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${currentPage === 'Pinterest' ? 'active' : ''}`}>
+                                        <i className="fab fa-pinterest me-2"></i>Pinterest Downloader
+                                    </a>
+                                </li>
+                                <li className="nav-item mb-2">
+                                    <a href="#" onClick={() => handleNavigationSelect('General')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${currentPage === 'General' ? 'active' : ''}`}>
+                                        <i className="fas fa-link me-2"></i>Other Platforms
+                                    </a>
+                                </li>
+                                <li className="nav-item border-top pt-3 mt-3 mb-2">
+                                    <a href="#" onClick={() => handleNavigationSelect('AboutUs')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${currentPage === 'AboutUs' ? 'active' : ''}`}>
+                                        <i className="fas fa-info-circle me-2"></i>About Us
+                                    </a>
+                                </li>
+                                <li className="nav-item mb-2">
+                                    <a href="#" onClick={() => handleNavigationSelect('Contact')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${currentPage === 'Contact' ? 'active' : ''}`}>
+                                        <i className="fas fa-envelope me-2"></i>Contact
+                                    </a>
+                                </li>
+                                <li className="nav-item mb-2">
+                                    <a href="#" onClick={() => handleNavigationSelect('PrivacyPolicy')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${currentPage === 'PrivacyPolicy' ? 'active' : ''}`}>
+                                        <i className="fas fa-shield-alt me-2"></i>Privacy Policy
+                                    </a>
+                                </li>
+                                <li className="nav-item mb-2">
+                                    <a href="#" onClick={() => handleNavigationSelect('TermsConditions')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${currentPage === 'TermsConditions' ? 'active' : ''}`}>
+                                        <i className="fas fa-file-contract me-2"></i>Terms & Conditions
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        {/* Main Content Area */}
+                        <main className="flex-grow-1 p-4 bg-light-subtle main-content-area">
+                            <div className="container">
+                                <h2 className="text-center text-primary mb-5 main-title">{getMainTitle()}</h2>
+
+                                {/* Render content based on currentPage state */}
+                                {renderMainContent()}
+
+                                {/* Ads Management Placeholder - Always visible regardless of page */}
+                                <div className="card bg-warning-subtle text-warning-emphasis p-4 text-center rounded-4 shadow-sm ad-area-card mt-5">
                                     <h4 className="mb-3 ad-title">Advertisement Area</h4>
                                     <p className="mb-0 ad-text">This is where your ads will be displayed. Integrate `ads.php` here.</p>
                                     <div className="ad-box bg-white p-3 mt-3 rounded-3 border border-warning ad-placeholder-box">
@@ -622,9 +764,9 @@
                         <div className="container text-center">
                             <p className="mb-2 footer-text">© {new Date().getFullYear()} allvideodownloaderhubs. All rights reserved.</p>
                             <ul className="list-inline mb-0 footer-links">
-                                <li className="list-inline-item"><a href="#" className="text-white text-decoration-none hover-text-primary footer-link">Terms of Service</a></li>
+                                <li className="list-inline-item"><a href="#" onClick={() => handleNavigationSelect('TermsConditions')} className="text-white text-decoration-none hover-text-primary footer-link">Terms of Service</a></li>
                                 <li className="list-inline-item">|</li>
-                                <li className="list-inline-item"><a href="#" className="text-white text-decoration-none hover-text-primary footer-link">Privacy Policy</a></li>
+                                <li className="list-inline-item"><a href="#" onClick={() => handleNavigationSelect('PrivacyPolicy')} className="text-white text-decoration-none hover-text-primary footer-link">Privacy Policy</a></li>
                             </ul>
                         </div>
                     </footer>
