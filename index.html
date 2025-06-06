@@ -9,12 +9,14 @@
     <meta name="keywords" content="video downloader, youtube downloader, facebook video download, tiktok video download, pinterest video download, free video downloader, online video downloader">
     <meta name="author" content="allvideodownloaderhubs">
 
+    <!-- Bootstrap CSS for responsive design and components -->
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
         crossorigin="anonymous"
     />
+    <!-- Font Awesome CSS for icons -->
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -23,147 +25,204 @@
         referrerpolicy="no-referrer"
     />
     <style>
+        /* Import Google's Inter font for consistent typography */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+        /* CSS Variables for a centralized and themeable color palette and common values */
         :root {
-            --primary-color: #007bff; /* Original Bootstrap primary */
-            --primary-dark: #0056b3;
-            --primary-light: #e0f2ff; /* Lighter shade for hover */
-            --accent-color: #28a745; /* Success green */
-            --accent-dark: #218838;
-            --text-dark: #343a40;
-            --text-light: #f8f9fa;
-            --bg-light: #f8f9fa;
-            --bg-subtle: #e9ecef; /* A slightly darker light background */
-            --card-bg: #ffffff;
-            --shadow-light: rgba(0, 0, 0, 0.1);
-            --shadow-medium: rgba(0, 0, 0, 0.15);
-            --shadow-strong: rgba(0, 0, 0, 0.2);
+            --primary-color: #007bff; /* Original Bootstrap primary blue */
+            --primary-dark: #0056b3; /* Darker blue for hover/active states */
+            --primary-light: #e0f2ff; /* Lighter blue for subtle highlights */
+            --accent-color: #28a745; /* Success green for download buttons */
+            --accent-dark: #218838; /* Darker green */
+            --text-dark: #343a40; /* Dark grey for primary text */
+            --text-light: #f8f9fa; /* Light grey for text on dark backgrounds */
+            --bg-light: #f8f9fa; /* Very light background */
+            --bg-subtle: #e9ecef; /* Slightly darker light background for body */
+            --card-bg: #ffffff; /* White background for cards */
+            --shadow-light: rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+            --shadow-medium: rgba(0, 0, 0, 0.15); /* Medium shadow for hover effects */
+            --shadow-strong: rgba(0, 0, 0, 0.2); /* Stronger shadow */
+            --border-radius-base: 0.75rem; /* Standard rounded corners */
+            --border-radius-large: 1.25rem; /* Larger rounded corners for main elements */
         }
 
+        /* Base styles for the entire page, ensuring full height and responsive layout */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-subtle); /* More attractive background */
+            background-color: var(--bg-subtle);
             color: var(--text-dark);
             margin: 0; /* Remove default body margin */
+            min-height: 100vh; /* Ensure body takes full viewport height */
+            display: flex;
+            flex-direction: column; /* Allows footer to stick to bottom */
         }
 
-        /* General Enhancements */
+        /* React root div to fill available space and manage internal layout */
+        #root {
+            flex-grow: 1; /* Allows the React app to expand and push footer down */
+            display: flex;
+            flex-direction: column; /* Ensures vertical stacking within the app */
+        }
+
+        /* Container for the main application content, applying a subtle background gradient */
         .app-container {
-            background: linear-gradient(to bottom right, #f0f2f5, #e0e5ec); /* Subtle gradient background */
+            background: linear-gradient(to bottom right, #f0f2f5, #e0e5ec);
+            flex-grow: 1; /* Allows content area to fill remaining vertical space */
+            display: flex;
+            flex-direction: column; /* Default to column layout on small screens */
         }
 
-        /* Header */
+        /* Custom Header Styling */
         .header-custom {
-            background: linear-gradient(to right, var(--primary-color), var(--primary-dark)); /* Gradient for header */
-            box-shadow: 0 4px 15px var(--shadow-medium);
-            position: sticky;
+            background: linear-gradient(to right, var(--primary-color), var(--primary-dark)); /* Gradient for a vibrant header */
+            box-shadow: 0 4px 15px var(--shadow-medium); /* Soft shadow for depth */
+            position: sticky; /* Keeps header visible on scroll */
             top: 0;
-            z-index: 1020; /* Above sidebar on scroll */
+            z-index: 1020; /* Ensures header is above other elements like sidebar on scroll */
         }
         .site-title {
             font-weight: 700;
             letter-spacing: 0.5px;
-            transition: transform 0.2s ease-in-out;
+            transition: transform 0.2s ease-in-out; /* Smooth hover effect */
+            color: var(--text-light); /* Ensures title text is white and readable */
+            text-decoration: none; /* Remove underline from link */
         }
         .site-title:hover {
-            transform: scale(1.02);
+            transform: scale(1.02); /* Slight scale on hover */
         }
         .menu-toggle-btn {
             border: none;
-            background-color: transparent !important;
-            color: white !important;
+            background-color: transparent; /* Transparent background */
+            color: white; /* White icon color */
             font-size: 1.2rem;
-            transition: transform 0.2s ease-in-out;
+            transition: transform 0.2s ease-in-out; /* Smooth hover effect */
         }
         .menu-toggle-btn:hover {
-            transform: scale(1.1);
+            transform: scale(1.1); /* Slight scale on hover */
         }
 
-        /* Side Menu */
+        /* Side Menu Styling */
         .sidebar {
-            width: 250px;
-            flex-shrink: 0;
-            background-color: var(--card-bg) !important;
-            border-right: 1px solid #e0e0e0;
-            box-shadow: 2px 0 10px var(--shadow-light);
-            padding-top: 2rem !important;
-            padding-bottom: 2rem !important;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
-            z-index: 1000; /* Ensure sidebar is above content on small screens */
+            width: 280px; /* Slightly wider sidebar for better readability */
+            flex-shrink: 0; /* Prevents sidebar from shrinking */
+            background-color: var(--card-bg); /* White background */
+            border-right: 1px solid #e0e0e0; /* Subtle right border */
+            box-shadow: 2px 0 10px var(--shadow-light); /* Soft shadow */
+            padding: 2rem 0; /* Vertical padding */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease; /* Smooth transitions for opening/closing */
+            z-index: 1000; /* Ensures sidebar is above content on small screens */
+            height: 100%; /* Take full height available in flex container */
+            overflow-y: auto; /* Enable scrolling if menu content is long */
         }
         .sidebar-title {
             font-weight: 600;
             color: var(--primary-dark);
-            margin-bottom: 1.5rem !important;
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem; /* Indent title to match nav items */
+        }
+        .sidebar-nav-list {
+            padding-left: 0; /* Remove default ul padding */
         }
         .sidebar-nav-list .nav-item {
-            margin-bottom: 0.75rem !important;
+            margin-bottom: 0.75rem;
         }
         .sidebar-nav-link {
-            color: var(--text-dark) !important;
+            color: var(--text-dark);
             font-weight: 500;
-            transition: all 0.2s ease;
-            border-radius: 0.5rem !important; /* Softer rounded corners */
+            transition: all 0.2s ease; /* Smooth hover effects */
+            border-radius: 0.5rem; /* Rounded corners for links */
+            padding: 0.75rem 1.5rem; /* Adequate padding for touch targets */
+            display: flex; /* For icon and text alignment */
+            align-items: center;
+            text-decoration: none; /* Remove underline */
         }
         .sidebar-nav-link:hover {
-            background-color: var(--primary-light) !important;
-            color: var(--primary-dark) !important;
-            transform: translateX(5px);
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+            transform: translateX(5px); /* Slide effect on hover */
         }
         .sidebar-nav-link.active {
-            background-color: var(--primary-light) !important;
-            color: var(--primary-dark) !important;
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
             font-weight: 600;
-            border-left: 4px solid var(--primary-color); /* Active indicator */
-            padding-left: calc(1rem + 4px); /* Adjust padding for border */
+            border-left: 4px solid var(--primary-color); /* Active indicator bar */
+            padding-left: calc(1.5rem - 4px + 4px); /* Adjust padding for border to maintain visual alignment */
         }
         .sidebar-nav-link i {
-            width: 20px; /* Align icons */
+            width: 24px; /* Fixed width for icons to align text */
             text-align: center;
+            margin-right: 0.75rem; /* Space between icon and text */
+            font-size: 1.1rem; /* Slightly larger icons */
         }
 
-        @media (max-width: 767.98px) {
+        /* Responsive adjustments for sidebar */
+        @media (max-width: 767.98px) { /* On small screens (Bootstrap's md breakpoint and below) */
             .sidebar {
+                position: fixed; /* Fixed position for off-canvas effect */
+                top: 0;
+                left: 0;
+                height: 100vh; /* Full viewport height */
+                transform: translateX(-100%); /* Hidden by default */
+                box-shadow: 5px 0 15px var(--shadow-medium);
+                padding-top: 5rem; /* Adjust padding for fixed header */
+            }
+            .sidebar-open {
+                transform: translateX(0%); /* Slide in when open */
+            }
+            /* Overlay to dim content when sidebar is open */
+            .overlay {
                 position: fixed;
                 top: 0;
                 left: 0;
-                height: 100vh;
-                transform: translateX(-100%);
-                box-shadow: 5px 0 15px var(--shadow-medium);
-                padding-top: 5rem !important; /* Adjust for fixed header */
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+                z-index: 999; /* Below sidebar but above main content */
+                display: none; /* Hidden by default */
             }
-            .sidebar-open {
-                transform: translateX(0%);
+            .sidebar-open + .overlay {
+                display: block; /* Show overlay when sidebar is open */
+            }
+        }
+        @media (min-width: 768px) { /* On medium screens and up (desktop) */
+            .app-container {
+                flex-direction: row; /* Horizontal layout for sidebar and main content */
             }
             .main-content-wrapper {
-                margin-left: 0;
+                margin-left: 0; /* No margin on desktop */
             }
         }
 
-        /* Main Content Area */
-        .main-content-area {
-            padding: 2.5rem !important;
+
+        /* Main Content Area Styling */
+        .main-content-wrapper {
+            flex-grow: 1; /* Allows main content to fill remaining space */
+            padding: 2.5rem; /* Consistent padding */
+            overflow-y: auto; /* Enables scrolling for content if it overflows vertically */
         }
         .main-title {
             font-weight: 700;
             color: var(--primary-dark);
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05); /* Subtle text shadow */
+            margin-bottom: 2rem; /* Spacing below title */
+            text-align: center; /* Center align title */
         }
 
-        /* Cards */
-        .download-card, .options-card, .ad-area-card, .preview-card, .info-card {
+        /* General Card Styling */
+        .download-card, .options-card, .ad-area-card, .preview-card, .info-card, .features-card {
             background-color: var(--card-bg);
-            border-radius: 1.25rem !important; /* Even larger rounded corners */
-            box-shadow: 0 8px 30px var(--shadow-light);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: var(--border-radius-large); /* Consistent large rounded corners */
+            box-shadow: 0 8px 30px var(--shadow-light); /* Soft, consistent shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+            border: none; /* Remove default Bootstrap card border */
         }
-        .download-card:hover, .options-card:hover, .preview-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px var(--shadow-medium);
+        .download-card:hover, .options-card:hover, .preview-card:hover, .features-card:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 12px 40px var(--shadow-medium); /* Enhanced shadow on hover */
         }
         .info-card {
-            padding: 2.5rem; /* Add padding for info cards */
+            padding: 2.5rem; /* Extra padding for informational cards */
         }
         .info-card h3 {
             color: var(--primary-dark);
@@ -172,11 +231,11 @@
         }
         .info-card p, .info-card ul {
             font-size: 1.1rem;
-            line-height: 1.8;
+            line-height: 1.8; /* Improved readability */
             color: var(--text-dark);
         }
         .info-card ul {
-            list-style: none;
+            list-style: none; /* Remove default bullet points */
             padding-left: 0;
         }
         .info-card ul li {
@@ -188,106 +247,135 @@
             font-size: 1.25rem;
         }
 
+        /* Specific styles for the Features Section card */
+        .features-card .feature-icon {
+            font-size: 2.5rem; /* Larger icons for features */
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+        .features-card .feature-item:hover .feature-icon {
+            transform: scale(1.1); /* Zoom effect on icon hover */
+        }
+        .features-card .feature-title {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
 
-        /* Input Field */
+
+        /* Input Field Styling */
         .input-field {
-            border: 2px solid var(--primary-light);
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
+            border: 2px solid var(--primary-light); /* Custom border color */
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Subtle inner shadow */
+            transition: all 0.3s ease; /* Smooth transition on focus */
             font-size: 1.1rem;
         }
         .input-field:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+            border-color: var(--primary-color); /* Highlight border on focus */
+            box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Bootstrap-like focus ring */
             background-color: #fff;
         }
         .input-label {
             font-weight: 600;
         }
 
-        /* Buttons */
+        /* Button Styling */
         .download-btn {
-            background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+            background: linear-gradient(to right, var(--primary-color), var(--primary-dark)); /* Gradient background */
             border: none;
             font-weight: 600;
             letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+            transition: all 0.3s ease; /* Smooth hover/active transitions */
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); /* Soft shadow */
+            color: white; /* Ensure text is white */
         }
         .download-btn:hover {
-            background: linear-gradient(to right, var(--primary-dark), #003c7a);
-            transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+            background: linear-gradient(to right, var(--primary-dark), #003c7a); /* Darker gradient on hover */
+            transform: translateY(-3px) scale(1.01); /* Lift and slight scale */
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4); /* Enhanced shadow on hover */
         }
         .download-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2);
+            transform: translateY(0); /* Return to original position on click */
+            box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2); /* Smaller shadow on click */
+        }
+        .download-btn:disabled {
+            opacity: 0.6; /* Dim disabled button */
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
+
         .download-link-btn {
-            background-color: var(--accent-color);
+            background-color: var(--accent-color); /* Green background */
             border: none;
             font-weight: 500;
             transition: all 0.2s ease;
+            color: white; /* Ensure text is white */
         }
         .download-link-btn:hover {
-            background-color: var(--accent-dark);
-            transform: translateY(-1px);
+            background-color: var(--accent-dark); /* Darker green on hover */
+            transform: translateY(-1px); /* Slight lift on hover */
         }
 
-        /* Table */
+        /* Table Styling for Download Options */
         .download-table thead th {
-            background-color: var(--primary-color);
+            background-color: var(--primary-color); /* Blue header */
             color: white;
             font-weight: 600;
             border-bottom: none;
         }
         .download-table tbody tr {
-            transition: background-color 0.2s ease;
+            transition: background-color 0.2s ease; /* Smooth zebra striping and hover */
         }
         .download-table tbody tr:nth-child(even) {
-            background-color: #f2f2f2; /* Zebra striping */
+            background-color: #f2f2f2; /* Light grey for even rows */
         }
         .download-table tbody tr:hover {
-            background-color: var(--primary-light);
+            background-color: var(--primary-light); /* Light blue on row hover */
         }
 
-        /* Ad Area */
+        /* Ad Area Styling (Placeholder) */
         .ad-area-card {
-            background-color: #fff3cd !important; /* Warning light */
-            border: 1px solid #ffeeba !important; /* Warning border */
+            background-color: #fff3cd; /* Light yellow warning background */
+            border: 1px solid #ffeeba; /* Matching border color */
             box-shadow: 0 4px 10px rgba(255, 193, 7, 0.2);
         }
         .ad-title {
-            color: #856404; /* Warning dark text */
+            color: #856404; /* Dark yellow text */
             font-weight: 600;
         }
         .ad-text {
             color: #856404;
         }
         .ad-placeholder-box {
-            border: 2px dashed #ffc107 !important; /* Dashed warning border */
+            border: 2px dashed #ffc107; /* Dashed warning border */
+            min-height: 150px; /* Minimum height for ad space */
         }
 
-        /* Footer */
+        /* Footer Styling */
         .footer-custom {
-            background: linear-gradient(to right, #343a40, #212529); /* Darker gradient for footer */
-            box-shadow: 0 -4px 15px var(--shadow-medium);
+            background: linear-gradient(to right, #343a40, #212529); /* Dark gradient for footer */
+            box-shadow: 0 -4px 15px var(--shadow-medium); /* Shadow above footer */
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            margin-top: auto; /* Pushes footer to the bottom of the page */
         }
         .footer-text {
             font-size: 0.9rem;
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.8); /* Slightly transparent white text */
         }
         .footer-links .list-inline-item a {
             font-size: 0.9rem;
             color: rgba(255,255,255,0.8);
             transition: color 0.2s ease;
+            text-decoration: none; /* Remove underline */
         }
         .footer-links .list-inline-item a:hover {
-            color: var(--primary-color) !important;
+            color: var(--primary-color); /* Highlight links on hover */
         }
 
-        /* Loading Spinner */
+        /* Loading Spinner Styling */
         .spinner-border {
             width: 1.5rem;
             height: 1.5rem;
@@ -298,45 +386,111 @@
         .video-preview-thumbnail {
             max-width: 100%;
             height: auto;
-            border-radius: 0.75rem;
+            border-radius: var(--border-radius-base);
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            max-height: 360px; /* Limit height for larger thumbnails */
+            object-fit: contain; /* Ensure image fits well within its bounds */
         }
         .preview-placeholder-text {
             color: var(--text-dark);
             font-style: italic;
+            font-size: 0.95rem;
         }
     </style>
 </head>
 <body>
     <div id="root"></div>
 
+    <!-- React and Babel CDNs -->
+    <!-- React.js library -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <!-- React DOM for rendering React components to the DOM -->
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel for transpiling JSX and ES6+ features in the browser -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <script type="text/babel">
-        // Destructure useState and useEffect from React
+        // Destructure useState and useEffect from React for easier use
         const { useState, useEffect } = React;
 
-        // Main App Component
-        const App = () => {
-            const [videoUrl, setVideoUrl] = useState('');
-            const [downloadOptions, setDownloadOptions] = useState(null);
-            const [error, setError] = useState('');
-            const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-            const [isLoading, setIsLoading] = useState(false);
-            // currentPage can be 'General', 'AboutUs', 'Contact', 'PrivacyPolicy', 'TermsConditions'
-            const [currentPage, setCurrentPage] = useState('General');
-            const [videoThumbnail, setVideoThumbnail] = useState(null);
+        // --- Reusable Components (for better modularity) ---
 
-            // Function to extract YouTube video ID
+        /**
+         * InfoCard Component: Renders a generic card for About Us, Contact, Privacy Policy, or Terms & Conditions.
+         * Props:
+         * - title (string): The title to display at the top of the card.
+         * - children (ReactNode): Content to be rendered inside the card body.
+         */
+        const InfoCard = ({ title, children }) => (
+            <div className="card shadow-lg mb-5 rounded-4 border-0 info-card">
+                <div className="card-body">
+                    <h3 className="card-title text-center mb-4">{title}</h3>
+                    {children}
+                </div>
+            </div>
+        );
+
+        /**
+         * FeaturesSection Component: Displays a list of features with icons, titles, and descriptions.
+         */
+        const FeaturesSection = () => {
+            // Array of feature objects
+            const features = [
+                { icon: 'fas fa-shield-alt', title: 'Secure & Private', description: 'Your privacy is our priority. We do not store any personal data.' },
+                { icon: 'fas fa-tachometer-alt', title: 'Lightning Fast', description: 'Experience rapid video processing and download speeds.' },
+                { icon: 'fas fa-share-alt', title: 'Multi-Platform', description: 'Supports YouTube, Facebook, TikTok, Pinterest, and more platforms.' },
+                { icon: 'fas fa-file-download', title: 'Multiple Formats', description: 'Download in various qualities and formats (MP4, MP3, etc.).' },
+                { icon: 'fas fa-mobile-alt', title: 'Mobile Friendly', description: 'Enjoy seamless downloads on any device, anywhere.' },
+                { icon: 'fas fa-star', title: 'User-Friendly', description: 'Simple and intuitive interface for effortless video saving.' },
+            ];
+
+            return (
+                <div className="card shadow-lg p-4 mb-5 rounded-4 border-0 bg-info-subtle text-info-emphasis features-card">
+                    <div className="card-body">
+                        <h3 className="card-title text-primary-dark mb-5 text-center">Our World-Class Features</h3>
+                        <div className="row g-4 justify-content-center">
+                            {features.map((feature, index) => (
+                                <div key={index} className="col-12 col-md-6 col-lg-4 d-flex align-items-stretch">
+                                    <div className="text-center p-3 feature-item flex-fill">
+                                        <i className={`${feature.icon} feature-icon mb-3`}></i>
+                                        <h5 className="feature-title">{feature.title}</h5>
+                                        <p className="text-muted">{feature.description}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Main App Component ---
+        const App = () => {
+            // State variables using React hooks
+            const [videoUrl, setVideoUrl] = useState(''); // Stores the input video URL
+            const [downloadOptions, setDownloadOptions] = useState(null); // Stores fetched download options
+            const [error, setError] = useState(''); // Stores error messages
+            const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Controls sidebar visibility on mobile
+            const [isLoading, setIsLoading] = useState(false); // Indicates if data is being processed
+            const [currentPage, setCurrentPage] = useState('General'); // Controls which main content page is displayed
+            const [videoThumbnail, setVideoThumbnail] = useState(null); // Stores the URL for the video thumbnail
+
+            /**
+             * Extracts YouTube video ID from a given URL.
+             * @param {string} url - The video URL.
+             * @returns {string|null} The YouTube video ID or null if not found.
+             */
             const getYouTubeVideoId = (url) => {
                 const regExp = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
                 const match = url.match(regExp);
                 return (match && match[1]) ? match[1] : null;
             };
 
-            // Function to validate URL
+            /**
+             * Validates if a given string is a syntactically correct URL.
+             * @param {string} url - The string to validate.
+             * @returns {boolean} True if valid URL, false otherwise.
+             */
             const isValidUrl = (url) => {
                 try {
                     new URL(url);
@@ -346,55 +500,104 @@
                 }
             };
 
-            // Handle form submission
+            /**
+             * Handles the download button click, simulates API call, and sets download options.
+             * @param {Event} e - The form submission event.
+             */
             const handleDownload = async (e) => {
-                e.preventDefault();
-                setError('');
-                setDownloadOptions(null);
+                e.preventDefault(); // Prevent default form submission
+                setError(''); // Clear previous errors
+                setDownloadOptions(null); // Clear previous download options
                 setVideoThumbnail(null); // Clear previous thumbnail
-                setIsLoading(true); // Start loading
+                setIsLoading(true); // Set loading state to true
 
+                // Input validation
                 if (!videoUrl) {
                     setError('Please enter a video URL.');
-                    setIsLoading(false); // Stop loading on error
+                    setIsLoading(false);
                     return;
                 }
 
                 if (!isValidUrl(videoUrl)) {
-                    setError('Please enter a valid URL.');
-                    setIsLoading(false); // Stop loading on error
+                    setError('Please enter a valid URL (e.g., https://www.example.com/video).');
+                    setIsLoading(false);
                     return;
                 }
 
-                // --- Video Preview Logic (Frontend Simulation) ---
-                if (currentPage === 'YouTube') { // Use currentPage for platform specific logic
-                    const youtubeId = getYouTubeVideoId(videoUrl);
-                    if (youtubeId) {
-                        // Using a standard YouTube thumbnail URL
-                        setVideoThumbnail(`https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`);
-                    } else {
-                        setVideoThumbnail(null); // Clear thumbnail if not a valid YouTube link
-                    }
+                // --- Frontend Video Preview Logic (Simulation) ---
+                // Attempts to get a YouTube thumbnail if the URL matches YouTube patterns.
+                const youtubeId = getYouTubeVideoId(videoUrl);
+                if (youtubeId && (currentPage === 'General' || currentPage === 'YouTube')) {
+                    setVideoThumbnail(`https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`);
                 } else {
-                    setVideoThumbnail(null); // Clear thumbnail for other platforms
+                    setVideoThumbnail(null); // Clear thumbnail for non-YouTube links or other platforms
                 }
                 // --- End Video Preview Logic ---
 
-                // --- SIMULATED BACKEND RESPONSE (for frontend preview) ---
+                // --- SIMULATED BACKEND RESPONSE ---
+                // In a real application, this is where you would make a fetch() call
+                // to your backend server (e.g., PHP, Node.js, Python) to get actual
+                // download links. The backend would handle parsing the URL and fetching
+                // video streams/metadata.
+                // Example:
+                // fetch('/api/get-download-links', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify({ url: videoUrl })
+                // })
+                // .then(response => response.json())
+                // .then(data => {
+                //     setDownloadOptions(data.options);
+                //     setVideoThumbnail(data.thumbnail || null); // Real thumbnail from backend
+                //     setIsLoading(false);
+                // })
+                // .catch(err => {
+                //     console.error("Backend error:", err);
+                //     setError('Failed to fetch download options. Please try again.');
+                //     setIsLoading(false);
+                // });
+
+                // Simulate a network request delay and then set dummy download options
                 setTimeout(() => {
-                    setDownloadOptions([
-                        // Using a dummy MP4 URL for simulation
-                        { quality: '1080p', format: 'MP4', size: '150MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-                        { quality: '720p', format: 'MP4', size: '80MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-                        { quality: '480p', format: 'MP4', size: '40MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-                        { quality: '360p', format: 'MP4', size: '25MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-                        { quality: 'MP3', format: 'Audio', size: '5MB', link: '#' }, // MP3 still uses '#' as there's no generic dummy audio file
-                    ]);
+                    let simulatedOptions = [];
+                    if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
+                        simulatedOptions = [
+                            { quality: '1080p', format: 'MP4', size: '150MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+                            { quality: '720p', format: 'MP4', size: '80MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+                            { quality: '480p', format: 'MP4', size: '40MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+                            { quality: '360p', format: 'MP4', size: '25MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+                            { quality: 'MP3', format: 'Audio', size: '5MB', link: '#' }, // MP3 still uses '#' as there's no generic dummy audio file
+                        ];
+                    } else if (videoUrl.includes('tiktok.com')) {
+                         simulatedOptions = [
+                            { quality: 'Original', format: 'MP4', size: '15MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+                            { quality: 'MP3', format: 'Audio', size: '2MB', link: '#' },
+                        ];
+                    } else if (videoUrl.includes('facebook.com')) {
+                         simulatedOptions = [
+                            { quality: 'HD', format: 'MP4', size: '70MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+                            { quality: 'SD', format: 'MP4', size: '30MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+                        ];
+                    } else if (videoUrl.includes('pinterest.com')) {
+                         simulatedOptions = [
+                            { quality: 'Original', format: 'MP4/JPG', size: '8MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' }, // Dummy for both video/image
+                        ];
+                    }
+                     else { // Default options for other unknown platforms
+                        simulatedOptions = [
+                            { quality: 'Best Available', format: 'MP4', size: 'Unknown', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+                            { quality: 'Standard', format: 'MP4', size: 'Unknown', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+                        ];
+                    }
+                    setDownloadOptions(simulatedOptions);
                     setIsLoading(false); // Stop loading after simulation
                 }, 2000); // Simulate a 2-second delay
             };
 
-            // Function to get dynamic main title based on selected platform or page
+            /**
+             * Returns the dynamic main title based on the currently selected page.
+             * @returns {string} The main title text.
+             */
             const getMainTitle = () => {
                 switch (currentPage) {
                     case 'YouTube': return 'Download YouTube Videos!';
@@ -409,7 +612,10 @@
                 }
             };
 
-            // Function to get dynamic input placeholder based on selected platform
+            /**
+             * Returns the dynamic input placeholder text based on the currently selected page.
+             * @returns {string} The placeholder text for the URL input.
+             */
             const getInputPlaceholder = () => {
                 switch (currentPage) {
                     case 'YouTube': return 'Paste YouTube video link here...';
@@ -420,12 +626,18 @@
                 }
             };
 
-            // Toggle sidebar visibility
+            /**
+             * Toggles the visibility of the sidebar for mobile views.
+             */
             const toggleSidebar = () => {
                 setIsSidebarOpen(!isSidebarOpen);
             };
 
-            // Handle sidebar link clicks for platforms and info pages
+            /**
+             * Handles navigation clicks from the sidebar, updating the current page.
+             * Also clears form states for a clean experience on page change.
+             * @param {string} page - The name of the page to navigate to.
+             */
             const handleNavigationSelect = (page) => {
                 setCurrentPage(page);
                 setVideoUrl(''); // Clear URL input when changing page
@@ -435,103 +647,92 @@
                 setIsSidebarOpen(false); // Close sidebar on mobile after selection
             };
 
+            // useEffect hook to handle window resize, closing sidebar on larger screens
             useEffect(() => {
-                // Close sidebar on larger screens if it was open
                 const handleResize = () => {
                     if (window.innerWidth >= 768) { // Bootstrap's md breakpoint
-                        setIsSidebarOpen(false);
+                        setIsSidebarOpen(false); // Ensure sidebar is closed on desktop
                     }
                 };
                 window.addEventListener('resize', handleResize);
+                // Cleanup function to remove event listener on component unmount
                 return () => window.removeEventListener('resize', handleResize);
-            }, []);
+            }, []); // Empty dependency array means this effect runs once on mount
 
-            // Render function for About Us content
+            // --- Render functions for various content sections ---
+
             const renderAboutUs = () => (
-                <div className="card shadow-lg mb-5 rounded-4 border-0 info-card">
-                    <div className="card-body">
-                        <h3 className="card-title text-center mb-4">Welcome to allvideodownloaderhubs.in</h3>
-                        <p>
-                            allvideodownloaderhubs.in is your one-stop destination to download videos from
-                            various online platforms. We are passionate about providing fast, secure, and
-                            easy-to-use tools for everyone. Our goal is to simplify your video downloading
-                            experience with just a few clicks.
-                        </p>
-                        <p>
-                            We strive to offer a seamless and efficient service, ensuring you can save your
-                            favorite videos for offline viewing without hassle. Our platform is designed
-                            with user-friendliness in mind, making video downloads accessible to everyone,
-                            regardless of technical expertise.
-                        </p>
-                    </div>
-                </div>
+                <InfoCard title="Welcome to allvideodownloaderhubs.in">
+                    <p>
+                        allvideodownloaderhubs.in is your one-stop destination to download videos from
+                        various online platforms. We are passionate about providing fast, secure, and
+                        easy-to-use tools for everyone. Our goal is to simplify your video downloading
+                        experience with just a few clicks.
+                    </p>
+                    <p>
+                        We strive to offer a seamless and efficient service, ensuring you can save your
+                        favorite videos for offline viewing without hassle. Our platform is designed
+                        with user-friendliness in mind, making video downloads accessible to everyone,
+                        regardless of technical expertise.
+                    </p>
+                </InfoCard>
             );
 
-            // Render function for Contact Us content
             const renderContact = () => (
-                <div className="card shadow-lg mb-5 rounded-4 border-0 info-card">
-                    <div className="card-body">
-                        <h3 className="card-title text-center mb-4">Contact Us</h3>
-                        <p>
-                            Have questions, suggestions, or feedback? We'd love to hear from you!
-                        </p>
-                        <ul className="list-unstyled">
-                            <li>
-                                <i className="fas fa-envelope me-2"></i> Email us at: <a href="mailto:allvideodownloaderhuts@gmail.com">allvideodownloaderhuts@gmail.com</a>
-                            </li>
-                            <li>
-                                <i className="fas fa-clock me-2"></i> We usually respond within 24–48 hours.
-                            </li>
-                        </ul>
-                        <p className="mt-4">
-                            Your feedback is important to us as we continuously work to improve our services.
-                            Don't hesitate to reach out!
-                        </p>
-                    </div>
-                </div>
+                <InfoCard title="Contact Us">
+                    <p>
+                        Have questions, suggestions, or feedback? We'd love to hear from you!
+                    </p>
+                    <ul className="list-unstyled">
+                        <li>
+                            <i className="fas fa-envelope me-2"></i> Email us at: <a href="mailto:allvideodownloaderhubs@gmail.com">allvideodownloaderhubs@gmail.com</a>
+                        </li>
+                        <li>
+                            <i className="fas fa-clock me-2"></i> We usually respond within 24–48 hours.
+                        </li>
+                    </ul>
+                    <p className="mt-4">
+                        Your feedback is important to us as we continuously work to improve our services.
+                        Don't hesitate to reach out!
+                    </p>
+                </InfoCard>
             );
 
-            // Render function for Privacy Policy content
             const renderPrivacyPolicy = () => (
-                <div className="card shadow-lg mb-5 rounded-4 border-0 info-card">
-                    <div className="card-body">
-                        <h3 className="card-title text-center mb-4">Privacy Policy</h3>
-                        <p>
-                            We respect your privacy. We do not collect or share any personal information from
-                            users. Our site may use cookies to enhance the user experience, but we do not
-                            track or store identifiable user data.
-                        </p>
-                        <p>
-                            By using our site, you agree to our privacy practices. We are committed to
-                            maintaining your trust and ensuring your online safety.
-                        </p>
-                    </div>
-                </div>
+                <InfoCard title="Privacy Policy">
+                    <p>
+                        We respect your privacy. We do not collect or share any personal information from
+                        users. Our site may use cookies to enhance the user experience, but we do not
+                        track or store identifiable user data.
+                    </p>
+                    <p>
+                        By using our site, you agree to our privacy practices. We are committed to
+                        maintaining your trust and ensuring your online safety.
+                    </p>
+                </InfoCard>
             );
 
-            // Render function for Terms & Conditions content
             const renderTermsConditions = () => (
-                <div className="card shadow-lg mb-5 rounded-4 border-0 info-card">
-                    <div className="card-body">
-                        <h3 className="card-title text-center mb-4">Terms & Conditions</h3>
-                        <p>
-                            By using allvideodownloaderhubs.in, you agree to use our services for personal and
-                            non-commercial purposes only. We do not host or store any copyrighted content.
-                        </p>
-                        <p>
-                            Users are responsible for how they use the downloaded content. We do not take liability for misuse of
-                            the tools provided on this site.
-                        </p>
-                        <p className="mt-4">
-                            Please ensure you comply with all applicable copyright laws and the terms of service
-                            of the platforms from which you download content.
-                        </p>
-                    </div>
-                </div>
+                <InfoCard title="Terms & Conditions">
+                    <p>
+                        By using allvideodownloaderhubs.in, you agree to use our services for personal and
+                        non-commercial purposes only. We do not host or store any copyrighted content.
+                    </p>
+                    <p>
+                        Users are responsible for how they use the downloaded content. We do not take liability for misuse of
+                        the tools provided on this site.
+                    </p>
+                    <p className="mt-4">
+                        Please ensure you comply with all applicable copyright laws and the terms of service
+                        of the platforms from which you download content.
+                    </p>
+                </InfoCard>
             );
 
-
-            // Main content rendering logic
+            /**
+             * Renders the main content area based on the currentPage state.
+             * This acts as a simple routing mechanism for a single-page application.
+             */
             const renderMainContent = () => {
                 switch (currentPage) {
                     case 'AboutUs':
@@ -542,10 +743,11 @@
                         return renderPrivacyPolicy();
                     case 'TermsConditions':
                         return renderTermsConditions();
-                    default: // This is the 'General' or main download page
+                    default: // This is the 'General' or main download page for video links
                         return (
                             <>
-                                <div className="card shadow-lg p-4 mb-5 rounded-4 border-0 download-card">
+                                {/* Main Download Input Card */}
+                                <div className="card shadow-lg p-4 mb-5 rounded-4 download-card">
                                     <div className="card-body">
                                         <form onSubmit={handleDownload}>
                                             <div className="mb-4">
@@ -558,8 +760,10 @@
                                                     id="videoUrl"
                                                     placeholder={getInputPlaceholder()}
                                                     value={videoUrl}
-                                                    onChange={(e) => setVideoUrl(e.target.value)}
-                                                    aria-describedby="urlValidationFeedback"
+                                                    onChange={(e) => {
+                                                        setVideoUrl(e.target.value);
+                                                        if (error) setError(''); // Clear error message when user starts typing again
+                                                    }}
                                                     disabled={isLoading}
                                                 />
                                                 {error && (
@@ -586,9 +790,9 @@
                                     </div>
                                 </div>
 
-                                {/* Video Preview Section (appears after download button) */}
+                                {/* Video Preview Section (Conditional Rendering based on loading and thumbnail state) */}
                                 {isLoading && !downloadOptions && (
-                                    <div className="card shadow-lg p-4 mb-5 rounded-4 border-0 preview-card text-center">
+                                    <div className="card shadow-lg p-4 mb-5 rounded-4 preview-card text-center">
                                         <div className="card-body">
                                             <h3 className="card-title text-primary mb-4">Fetching Preview...</h3>
                                             <div className="spinner-border text-primary" role="status">
@@ -600,11 +804,19 @@
                                 )}
 
                                 {videoThumbnail && !isLoading && (
-                                    <div className="card shadow-lg p-4 mb-5 rounded-4 border-0 preview-card text-center">
+                                    <div className="card shadow-lg p-4 mb-5 rounded-4 preview-card text-center">
                                         <div className="card-body">
                                             <h3 className="card-title text-primary mb-4">Video Preview</h3>
-                                            <img src={videoThumbnail} alt="Video Thumbnail" className="img-fluid video-preview-thumbnail mb-3"
-                                                onerror="this.onerror=null;this.src='https://placehold.co/480x360/E0E0E0/666666?text=Preview+Not+Available';" />
+                                            <img
+                                                src={videoThumbnail}
+                                                alt="Video Thumbnail"
+                                                className="img-fluid video-preview-thumbnail mb-3"
+                                                onError={(e) => {
+                                                    // Fallback for broken thumbnail images
+                                                    e.target.onerror = null; // Prevent infinite loop if fallback also fails
+                                                    e.target.src = 'https://placehold.co/480x360/E0E0E0/666666?text=Preview+Not+Available';
+                                                }}
+                                            />
                                             <p className="preview-placeholder-text">
                                                 {currentPage === 'YouTube' ? 'This is a YouTube video preview.' : 'Preview for this platform would require specific API integration.'}
                                             </p>
@@ -612,13 +824,13 @@
                                     </div>
                                 )}
 
-                                {/* Download Options Section (appears after preview) */}
+                                {/* Download Options Section (Conditional Rendering) */}
                                 {downloadOptions && (
                                     <>
                                         <div className="alert alert-info mt-4 rounded-3 shadow-sm text-center" role="alert">
                                             <i className="fas fa-info-circle me-2"></i> Download options are displayed! **(Important: Actual downloads require a backend PHP script on your server.)**
                                         </div>
-                                        <div className="card shadow-lg p-4 mb-5 rounded-4 border-0 options-card">
+                                        <div className="card shadow-lg p-4 mb-5 rounded-4 options-card">
                                             <div className="card-body">
                                                 <h3 className="card-title text-primary mb-4 text-center options-title">Available Download Options</h3>
                                                 <div className="table-responsive">
@@ -638,7 +850,7 @@
                                                                     <td>{option.format}</td>
                                                                     <td>{option.size}</td>
                                                                     <td>
-                                                                        <a href={option.link} className="btn btn-success btn-sm rounded-pill px-3 download-link-btn" download>
+                                                                        <a href={option.link} className="btn btn-success btn-sm rounded-pill px-3 download-link-btn" download={option.format !== 'Audio' ? true : false}>
                                                                             Download
                                                                         </a>
                                                                     </td>
@@ -652,21 +864,17 @@
                                     </>
                                 )}
 
-                                {/* World-Class Features Section (Placeholder) */}
-                                <div className="card shadow-lg p-4 mb-5 rounded-4 border-0 bg-info-subtle text-info-emphasis features-card">
+                                {/* World-Class Features Section (using the new component) */}
+                                <FeaturesSection />
+
+                                {/* Ad Area (Example Placeholder) */}
+                                <div className="card shadow-lg p-4 mb-5 rounded-4 border-0 ad-area-card text-center">
                                     <div className="card-body">
-                                        <h3 className="card-title text-info-dark mb-4 text-center">World-Class Features (Future Enhancements)</h3>
-                                        <ul className="list-unstyled text-center row">
-                                            <li className="col-md-6 mb-3"><i className="fas fa-cogs me-2 text-info"></i>Advanced Quality Selection</li>
-                                            <li className="col-md-6 mb-3"><i className="fas fa-list-ol me-2 text-info"></i>Playlist/Album Download</li>
-                                            <li className="col-md-6 mb-3"><i className="fas fa-history me-2 text-info"></i>Download History & Management</li>
-                                            <li className="col-md-6 mb-3"><i className="fas fa-file-audio me-2 text-info"></i>High-Quality Audio Extraction</li>
-                                            <li className="col-md-6 mb-3"><i className="fas fa-language me-2 text-info"></i>Multi-language Support</li>
-                                            <li className="col-md-6 mb-3"><i className="fas fa-shield-alt me-2 text-info"></i>Enhanced Security & Privacy</li>
-                                        </ul>
-                                        <p className="text-center mt-4 text-info-dark">
-                                            These features require robust backend development and are beyond the scope of this frontend demonstration.
-                                        </p>
+                                        <h4 className="ad-title mb-3">Support Us!</h4>
+                                        <p className="ad-text">Consider disabling your ad-blocker or clicking on ads to support our free service.</p>
+                                        <div className="ad-placeholder-box p-5 bg-light d-flex align-items-center justify-content-center text-muted rounded-3">
+                                            <span className="fs-5">AD BANNER HERE (300x250 or 728x90)</span>
+                                        </div>
                                     </div>
                                 </div>
                             </>
@@ -675,109 +883,152 @@
             };
 
             return (
-                <div className="d-flex flex-column min-vh-100 app-container" style={{ fontFamily: 'Inter, sans-serif' }}>
-                    {/* Common Header Placeholder */}
-                    <header className="bg-primary text-white py-3 shadow-lg header-custom">
-                        <div className="container d-flex justify-content-between align-items-center">
-                            <h1 className="h3 mb-0">
-                                <a href="#" onClick={() => handleNavigationSelect('General')} className="text-white text-decoration-none site-title">allvideodownloaderhubs</a>
-                            </h1>
-                            <button className="btn btn-primary d-md-none menu-toggle-btn" onClick={toggleSidebar} aria-label="Toggle navigation">
-                                <i className="fas fa-bars fa-lg"></i> {/* Font Awesome for menu icon */}
+                <div className="app-container">
+                    {/* Header Section */}
+                    <header className="header-custom py-3 shadow-sm">
+                        <nav className="navbar navbar-expand-md navbar-dark container">
+                            <a className="navbar-brand d-flex align-items-center site-title" href="#" onClick={() => handleNavigationSelect('General')}>
+                                <i className="fas fa-play-circle me-2"></i> allvideodownloaderhubs
+                            </a>
+                            {/* Navbar Toggler for mobile sidebar */}
+                            <button
+                                className="navbar-toggler menu-toggle-btn"
+                                type="button"
+                                aria-controls="sidebarMenu"
+                                aria-expanded={isSidebarOpen ? "true" : "false"}
+                                aria-label="Toggle navigation"
+                                onClick={toggleSidebar}
+                            >
+                                <span className="navbar-toggler-icon"></span>
                             </button>
-                        </div>
+                        </nav>
                     </header>
 
-                    <div className="d-flex flex-grow-1 main-content-wrapper">
-                        {/* Side Menu */}
-                        <nav className={`bg-light p-4 shadow-sm sidebar ${isSidebarOpen ? 'sidebar-open' : ''} d-flex flex-column`}>
-                            <h5 className="mb-4 text-primary sidebar-title">Tools & Navigation</h5>
+                    {/* Main Layout: Sidebar + Content */}
+                    <div className="d-flex flex-grow-1">
+                        {/* Sidebar Navigation */}
+                        <nav id="sidebarMenu" className={`sidebar bg-light p-4 d-flex flex-column ${isSidebarOpen ? 'sidebar-open' : 'd-none d-md-flex'}`}>
+                            <h4 className="sidebar-title">Platforms</h4>
                             <ul className="nav flex-column sidebar-nav-list">
-                                <li className="nav-item mb-2">
-                                    <a href="#" onClick={() => handleNavigationSelect('YouTube')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${currentPage === 'YouTube' ? 'active' : ''}`}>
-                                        <i className="fab fa-youtube me-2"></i>YouTube Downloader
+                                <li className="nav-item">
+                                    <a
+                                        className={`nav-link sidebar-nav-link ${currentPage === 'General' ? 'active' : ''}`}
+                                        href="#"
+                                        onClick={() => handleNavigationSelect('General')}
+                                    >
+                                        <i className="fas fa-globe"></i> General Downloader
                                     </a>
                                 </li>
-                                <li className="nav-item mb-2">
-                                    <a href="#" onClick={() => handleNavigationSelect('Facebook')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${currentPage === 'Facebook' ? 'active' : ''}`}>
-                                        <i className="fab fa-facebook me-2"></i>Facebook Downloader
+                                <li className="nav-item">
+                                    <a
+                                        className={`nav-link sidebar-nav-link ${currentPage === 'YouTube' ? 'active' : ''}`}
+                                        href="#"
+                                        onClick={() => handleNavigationSelect('YouTube')}
+                                    >
+                                        <i className="fab fa-youtube"></i> YouTube
                                     </a>
                                 </li>
-                                <li className="nav-item mb-2">
-                                    <a href="#" onClick={() => handleNavigationSelect('TikTok')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${currentPage === 'TikTok' ? 'active' : ''}`}>
-                                        <i className="fab fa-tiktok me-2"></i>TikTok Downloader
+                                <li className="nav-item">
+                                    <a
+                                        className={`nav-link sidebar-nav-link ${currentPage === 'Facebook' ? 'active' : ''}`}
+                                        href="#"
+                                        onClick={() => handleNavigationSelect('Facebook')}
+                                    >
+                                        <i className="fab fa-facebook"></i> Facebook
                                     </a>
                                 </li>
-                                <li className="nav-item mb-2">
-                                    <a href="#" onClick={() => handleNavigationSelect('Pinterest')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${currentPage === 'Pinterest' ? 'active' : ''}`}>
-                                        <i className="fab fa-pinterest me-2"></i>Pinterest Downloader
+                                <li className="nav-item">
+                                    <a
+                                        className={`nav-link sidebar-nav-link ${currentPage === 'TikTok' ? 'active' : ''}`}
+                                        href="#"
+                                        onClick={() => handleNavigationSelect('TikTok')}
+                                    >
+                                        <i className="fab fa-tiktok"></i> TikTok
                                     </a>
                                 </li>
-                                <li className="nav-item mb-2">
-                                    <a href="#" onClick={() => handleNavigationSelect('General')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${currentPage === 'General' ? 'active' : ''}`}>
-                                        <i className="fas fa-link me-2"></i>Other Platforms
+                                <li className="nav-item">
+                                    <a
+                                        className={`nav-link sidebar-nav-link ${currentPage === 'Pinterest' ? 'active' : ''}`}
+                                        href="#"
+                                        onClick={() => handleNavigationSelect('Pinterest')}
+                                    >
+                                        <i className="fab fa-pinterest"></i> Pinterest
                                     </a>
                                 </li>
-                                <li className="nav-item border-top pt-3 mt-3 mb-2">
-                                    <a href="#" onClick={() => handleNavigationSelect('AboutUs')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${currentPage === 'AboutUs' ? 'active' : ''}`}>
-                                        <i className="fas fa-info-circle me-2"></i>About Us
+                            </ul>
+
+                            <h4 className="sidebar-title mt-4">Information</h4>
+                            <ul className="nav flex-column sidebar-nav-list">
+                                <li className="nav-item">
+                                    <a
+                                        className={`nav-link sidebar-nav-link ${currentPage === 'AboutUs' ? 'active' : ''}`}
+                                        href="#"
+                                        onClick={() => handleNavigationSelect('AboutUs')}
+                                    >
+                                        <i className="fas fa-info-circle"></i> About Us
                                     </a>
                                 </li>
-                                <li className="nav-item mb-2">
-                                    <a href="#" onClick={() => handleNavigationSelect('Contact')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${currentPage === 'Contact' ? 'active' : ''}`}>
-                                        <i className="fas fa-envelope me-2"></i>Contact
+                                <li className="nav-item">
+                                    <a
+                                        className={`nav-link sidebar-nav-link ${currentPage === 'Contact' ? 'active' : ''}`}
+                                        href="#"
+                                        onClick={() => handleNavigationSelect('Contact')}
+                                    >
+                                        <i className="fas fa-envelope"></i> Contact Us
                                     </a>
                                 </li>
-                                <li className="nav-item mb-2">
-                                    <a href="#" onClick={() => handleNavigationSelect('PrivacyPolicy')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${currentPage === 'PrivacyPolicy' ? 'active' : ''}`}>
-                                        <i className="fas fa-shield-alt me-2"></i>Privacy Policy
+                                <li className="nav-item">
+                                    <a
+                                        className={`nav-link sidebar-nav-link ${currentPage === 'PrivacyPolicy' ? 'active' : ''}`}
+                                        href="#"
+                                        onClick={() => handleNavigationSelect('PrivacyPolicy')}
+                                    >
+                                        <i className="fas fa-user-shield"></i> Privacy Policy
                                     </a>
                                 </li>
-                                <li className="nav-item mb-2">
-                                    <a href="#" onClick={() => handleNavigationSelect('TermsConditions')} className={`nav-link text-dark rounded-pill py-2 px-3 sidebar-nav-link ${currentPage === 'TermsConditions' ? 'active' : ''}`}>
-                                        <i className="fas fa-file-contract me-2"></i>Terms & Conditions
+                                <li className="nav-item">
+                                    <a
+                                        className={`nav-link sidebar-nav-link ${currentPage === 'TermsConditions' ? 'active' : ''}`}
+                                        href="#"
+                                        onClick={() => handleNavigationSelect('TermsConditions')}
+                                    >
+                                        <i className="fas fa-file-contract"></i> Terms & Conditions
                                     </a>
                                 </li>
                             </ul>
                         </nav>
+                        {/* Overlay for when sidebar is open on mobile */}
+                        {isSidebarOpen && <div className="overlay d-md-none" onClick={toggleSidebar}></div>}
 
                         {/* Main Content Area */}
-                        <main className="flex-grow-1 p-4 bg-light-subtle main-content-area">
-                            <div className="container">
-                                <h2 className="text-center text-primary mb-5 main-title">{getMainTitle()}</h2>
-
-                                {/* Render content based on currentPage state */}
-                                {renderMainContent()}
-
-                                {/* Ads Management Placeholder - Always visible regardless of page */}
-                                <div className="card bg-warning-subtle text-warning-emphasis p-4 text-center rounded-4 shadow-sm ad-area-card mt-5">
-                                    <h4 className="mb-3 ad-title">Advertisement Area</h4>
-                                    <p className="mb-0 ad-text">This is where your ads will be displayed. Integrate `ads.php` here.</p>
-                                    <div className="ad-box bg-white p-3 mt-3 rounded-3 border border-warning ad-placeholder-box">
-                                        <img src="https://placehold.co/728x90/FFD700/000000?text=Your+Ad+Here" alt="Ad Placeholder" className="img-fluid rounded ad-image" />
-                                    </div>
-                                </div>
-                            </div>
+                        <main className="main-content-wrapper">
+                            <h1 className="main-title">{getMainTitle()}</h1>
+                            {renderMainContent()}
                         </main>
                     </div>
 
-                    <footer className="bg-dark text-white py-4 mt-auto shadow-lg footer-custom">
-                        <div className="container text-center">
-                            <p className="mb-2 footer-text">© {new Date().getFullYear()} allvideodownloaderhubs. All rights reserved.</p>
-                            <ul className="list-inline mb-0 footer-links">
-                                <li className="list-inline-item"><a href="#" onClick={() => handleNavigationSelect('TermsConditions')} className="text-white text-decoration-none hover-text-primary footer-link">Terms of Service</a></li>
-                                <li className="list-inline-item">|</li>
-                                <li className="list-inline-item"><a href="#" onClick={() => handleNavigationSelect('PrivacyPolicy')} className="text-white text-decoration-none hover-text-primary footer-link">Privacy Policy</a></li>
+                    {/* Footer Section */}
+                    <footer className="footer-custom text-white text-center">
+                        <div className="container">
+                            <ul className="list-inline footer-links mb-3">
+                                <li className="list-inline-item"><a href="#" onClick={() => handleNavigationSelect('AboutUs')} className="text-white">About Us</a></li>
+                                <li className="list-inline-item mx-3">|</li>
+                                <li className="list-inline-item"><a href="#" onClick={() => handleNavigationSelect('Contact')} className="text-white">Contact</a></li>
+                                <li className="list-inline-item mx-3">|</li>
+                                <li className="list-inline-item"><a href="#" onClick={() => handleNavigationSelect('PrivacyPolicy')} className="text-white">Privacy Policy</a></li>
+                                <li className="list-inline-item mx-3">|</li>
+                                <li className="list-inline-item"><a href="#" onClick={() => handleNavigationSelect('TermsConditions')} className="text-white">Terms & Conditions</a></li>
                             </ul>
+                            <p className="footer-text mb-0">&copy; 2025 allvideodownloaderhubs.in. All rights reserved.</p>
+                            <p className="footer-text">Made with <i className="fas fa-heart text-danger"></i> for you.</p>
                         </div>
                     </footer>
                 </div>
             );
         };
 
-        // Render the App component to the root div
-        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+        // Render the main App component into the 'root' div
+        ReactDOM.render(<App />, document.getElementById('root'));
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
