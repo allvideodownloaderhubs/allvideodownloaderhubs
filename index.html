@@ -40,9 +40,9 @@
             --bg-light: #f8f9fa; /* Very light background */
             --bg-subtle: #e9ecef; /* Slightly darker light background for body */
             --card-bg: #ffffff; /* White background for cards */
-            --shadow-light: rgba(0, 0, 0, 0.1); /* Light shadow for depth */
-            --shadow-medium: rgba(0, 0, 0, 0.15); /* Medium shadow for hover effects */
-            --shadow-strong: rgba(0, 0, 0, 0.2); /* Stronger shadow */
+            --shadow-light: rgba(0, 0, 0, 0.08); /* Lighter, more subtle shadow */
+            --shadow-medium: rgba(0, 0, 0, 0.12); /* Medium shadow for hover effects */
+            --shadow-strong: rgba(0, 0, 0, 0.18); /* Stronger shadow */
             --border-radius-base: 0.75rem; /* Standard rounded corners */
             --border-radius-large: 1.25rem; /* Larger rounded corners for main elements */
         }
@@ -56,6 +56,7 @@
             min-height: 100vh; /* Ensure body takes full viewport height */
             display: flex;
             flex-direction: column; /* Allows footer to stick to bottom */
+            line-height: 1.6; /* Improved readability for body text */
         }
 
         /* React root div to fill available space and manage internal layout */
@@ -95,7 +96,7 @@
             border: none;
             background-color: transparent; /* Transparent background */
             color: white; /* White icon color */
-            font-size: 1.2rem;
+            font-size: 1.4rem; /* Slightly larger icon */
             transition: transform 0.2s ease-in-out; /* Smooth hover effect */
         }
         .menu-toggle-btn:hover {
@@ -120,6 +121,7 @@
             color: var(--primary-dark);
             margin-bottom: 1.5rem;
             padding-left: 1.5rem; /* Indent title to match nav items */
+            font-size: 1.25rem; /* Larger title for sidebar sections */
         }
         .sidebar-nav-list {
             padding-left: 0; /* Remove default ul padding */
@@ -136,6 +138,7 @@
             display: flex; /* For icon and text alignment */
             align-items: center;
             text-decoration: none; /* Remove underline */
+            font-size: 1.05rem; /* Slightly larger text for nav links */
         }
         .sidebar-nav-link:hover {
             background-color: var(--primary-light);
@@ -150,10 +153,10 @@
             padding-left: calc(1.5rem - 4px + 4px); /* Adjust padding for border to maintain visual alignment */
         }
         .sidebar-nav-link i {
-            width: 24px; /* Fixed width for icons to align text */
+            width: 28px; /* Fixed width for icons to align text */
             text-align: center;
             margin-right: 0.75rem; /* Space between icon and text */
-            font-size: 1.1rem; /* Slightly larger icons */
+            font-size: 1.2rem; /* Slightly larger icons */
         }
 
         /* Responsive adjustments for sidebar */
@@ -205,32 +208,34 @@
             font-weight: 700;
             color: var(--primary-dark);
             text-shadow: 1px 1px 2px rgba(0,0,0,0.05); /* Subtle text shadow */
-            margin-bottom: 2rem; /* Spacing below title */
+            margin-bottom: 2.5rem; /* Increased spacing below title */
             text-align: center; /* Center align title */
+            font-size: 2.5rem; /* Larger main title */
         }
 
         /* General Card Styling */
         .download-card, .options-card, .ad-area-card, .preview-card, .info-card, .features-card {
             background-color: var(--card-bg);
             border-radius: var(--border-radius-large); /* Consistent large rounded corners */
-            box-shadow: 0 8px 30px var(--shadow-light); /* Soft, consistent shadow */
+            box-shadow: 0 10px 40px var(--shadow-light); /* Softer, deeper shadow */
             transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
             border: none; /* Remove default Bootstrap card border */
         }
         .download-card:hover, .options-card:hover, .preview-card:hover, .features-card:hover {
-            transform: translateY(-5px); /* Lift effect on hover */
-            box-shadow: 0 12px 40px var(--shadow-medium); /* Enhanced shadow on hover */
+            transform: translateY(-8px); /* Lift effect on hover */
+            box-shadow: 0 15px 50px var(--shadow-medium); /* Enhanced shadow on hover */
         }
         .info-card {
-            padding: 2.5rem; /* Extra padding for informational cards */
+            padding: 3rem; /* Extra padding for informational cards */
         }
         .info-card h3 {
             color: var(--primary-dark);
             font-weight: 700;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem; /* Increased spacing */
+            font-size: 1.8rem; /* Larger info card titles */
         }
         .info-card p, .info-card ul {
-            font-size: 1.1rem;
+            font-size: 1.05rem; /* Slightly larger body text */
             line-height: 1.8; /* Improved readability */
             color: var(--text-dark);
         }
@@ -239,19 +244,19 @@
             padding-left: 0;
         }
         .info-card ul li {
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.8rem; /* Increased spacing */
         }
         .info-card ul li i {
             color: var(--primary-color);
-            margin-right: 0.75rem;
-            font-size: 1.25rem;
+            margin-right: 0.8rem; /* Increased spacing */
+            font-size: 1.3rem; /* Slightly larger icons */
         }
 
         /* Specific styles for the Features Section card */
         .features-card .feature-icon {
-            font-size: 2.5rem; /* Larger icons for features */
+            font-size: 3rem; /* Larger icons for features */
             color: var(--primary-color);
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem; /* Increased spacing */
             transition: transform 0.3s ease;
         }
         .features-card .feature-item:hover .feature-icon {
@@ -260,6 +265,10 @@
         .features-card .feature-title {
             font-weight: 600;
             color: var(--primary-dark);
+            font-size: 1.3rem; /* Larger feature titles */
+        }
+        .features-card .text-muted {
+            font-size: 0.95rem; /* Slightly smaller description for compactness */
         }
 
 
@@ -268,11 +277,12 @@
             border: 2px solid var(--primary-light); /* Custom border color */
             box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Subtle inner shadow */
             transition: all 0.3s ease; /* Smooth transition on focus */
-            font-size: 1.1rem;
+            font-size: 1.15rem; /* Larger font size */
+            padding: 0.8rem 1.25rem; /* More generous padding */
         }
         .input-field:focus {
             border-color: var(--primary-color); /* Highlight border on focus */
-            box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Bootstrap-like focus ring */
+            box-shadow: 0 0 0 0.3rem rgba(0, 123, 255, 0.3); /* Bootstrap-like focus ring with more spread */
             background-color: #fff;
         }
         .input-label {
@@ -284,19 +294,21 @@
             background: linear-gradient(to right, var(--primary-color), var(--primary-dark)); /* Gradient background */
             border: none;
             font-weight: 600;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.7px; /* Increased letter spacing for impact */
             transition: all 0.3s ease; /* Smooth hover/active transitions */
-            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); /* Soft shadow */
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.35); /* Softer, deeper shadow */
             color: white; /* Ensure text is white */
+            padding: 0.8rem 1.5rem; /* More generous padding */
+            font-size: 1.1rem; /* Slightly larger font */
         }
         .download-btn:hover {
             background: linear-gradient(to right, var(--primary-dark), #003c7a); /* Darker gradient on hover */
-            transform: translateY(-3px) scale(1.01); /* Lift and slight scale */
-            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4); /* Enhanced shadow on hover */
+            transform: translateY(-5px) scale(1.02); /* More pronounced lift and scale */
+            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.45); /* Enhanced shadow on hover */
         }
         .download-btn:active {
             transform: translateY(0); /* Return to original position on click */
-            box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2); /* Smaller shadow on click */
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.25); /* Smaller shadow on click */
         }
         .download-btn:disabled {
             opacity: 0.6; /* Dim disabled button */
@@ -312,10 +324,11 @@
             font-weight: 500;
             transition: all 0.2s ease;
             color: white; /* Ensure text is white */
+            padding: 0.5rem 1rem; /* Adjusted padding */
         }
         .download-link-btn:hover {
             background-color: var(--accent-dark); /* Darker green on hover */
-            transform: translateY(-1px); /* Slight lift on hover */
+            transform: translateY(-2px); /* Slight lift on hover */
         }
 
         /* Table Styling for Download Options */
@@ -324,6 +337,7 @@
             color: white;
             font-weight: 600;
             border-bottom: none;
+            padding: 1rem 0.75rem; /* More padding for header cells */
         }
         .download-table tbody tr {
             transition: background-color 0.2s ease; /* Smooth zebra striping and hover */
@@ -334,52 +348,59 @@
         .download-table tbody tr:hover {
             background-color: var(--primary-light); /* Light blue on row hover */
         }
+        .download-table tbody td {
+            padding: 0.8rem 0.75rem; /* More padding for body cells */
+            font-size: 1rem; /* Consistent font size */
+        }
+
 
         /* Ad Area Styling (Placeholder) */
         .ad-area-card {
-            background-color: #fff3cd; /* Light yellow warning background */
-            border: 1px solid #ffeeba; /* Matching border color */
-            box-shadow: 0 4px 10px rgba(255, 193, 7, 0.2);
+            background-color: #fff8e1; /* Softer light yellow background */
+            border: 1px solid #ffe082; /* Matching border color */
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.15); /* Softer shadow */
         }
         .ad-title {
-            color: #856404; /* Dark yellow text */
+            color: #b38800; /* Darker yellow text */
             font-weight: 600;
+            font-size: 1.5rem;
         }
         .ad-text {
-            color: #856404;
+            color: #b38800;
+            font-size: 1rem;
         }
         .ad-placeholder-box {
-            border: 2px dashed #ffc107; /* Dashed warning border */
+            border: 2px dashed #ffb300; /* Dashed warning border */
             min-height: 150px; /* Minimum height for ad space */
         }
 
         /* Footer Styling */
         .footer-custom {
-            background: linear-gradient(to right, #343a40, #212529); /* Dark gradient for footer */
+            background: linear-gradient(to right, #2c3e50, #212529); /* Darker, richer gradient for footer */
             box-shadow: 0 -4px 15px var(--shadow-medium); /* Shadow above footer */
-            padding-top: 2rem;
-            padding-bottom: 2rem;
+            padding-top: 2.5rem; /* More padding */
+            padding-bottom: 2.5rem; /* More padding */
             margin-top: auto; /* Pushes footer to the bottom of the page */
         }
         .footer-text {
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.8); /* Slightly transparent white text */
+            font-size: 0.95rem; /* Slightly larger text */
+            color: rgba(255,255,255,0.85); /* Slightly less transparent white text */
         }
         .footer-links .list-inline-item a {
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.8);
+            font-size: 0.95rem; /* Slightly larger text */
+            color: rgba(255,255,255,0.85);
             transition: color 0.2s ease;
             text-decoration: none; /* Remove underline */
         }
         .footer-links .list-inline-item a:hover {
-            color: var(--primary-color); /* Highlight links on hover */
+            color: var(--primary-light); /* Highlight links on hover with a lighter color */
         }
 
         /* Loading Spinner Styling */
         .spinner-border {
-            width: 1.5rem;
-            height: 1.5rem;
-            margin-right: 0.5rem;
+            width: 1.6rem; /* Slightly larger spinner */
+            height: 1.6rem;
+            margin-right: 0.6rem; /* More space */
         }
 
         /* Video Preview Specific Styles */
@@ -387,14 +408,14 @@
             max-width: 100%;
             height: auto;
             border-radius: var(--border-radius-base);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            max-height: 360px; /* Limit height for larger thumbnails */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15); /* More pronounced shadow */
+            max-height: 400px; /* Increased max height for preview */
             object-fit: contain; /* Ensure image fits well within its bounds */
         }
         .preview-placeholder-text {
             color: var(--text-dark);
             font-style: italic;
-            font-size: 0.95rem;
+            font-size: 1rem; /* Slightly larger text */
         }
     </style>
 </head>
@@ -501,7 +522,7 @@
             };
 
             /**
-             * Handles the download button click, simulates API call, and sets download options.
+             * Handles the download button click, makes API call to PHP backend, and sets download options.
              * @param {Event} e - The form submission event.
              */
             const handleDownload = async (e) => {
@@ -524,74 +545,40 @@
                     return;
                 }
 
-                // --- Frontend Video Preview Logic (Simulation) ---
-                // Attempts to get a YouTube thumbnail if the URL matches YouTube patterns.
-                const youtubeId = getYouTubeVideoId(videoUrl);
-                if (youtubeId && (currentPage === 'General' || currentPage === 'YouTube')) {
-                    setVideoThumbnail(`https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`);
-                } else {
-                    setVideoThumbnail(null); // Clear thumbnail for non-YouTube links or other platforms
+                try {
+                    // Make a fetch call to your PHP backend script on Hostinger
+                    // Replace '/download.php' with the actual path if your PHP file is in a subdirectory,
+                    // e.g., 'https://www.allvideodownloaderhubs.in/api/download.php'
+                    const response = await fetch('download.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json', // Sending JSON to PHP backend
+                        },
+                        body: JSON.stringify({ url: videoUrl }) // Send video URL as JSON
+                    });
+
+                    // Check if the response is OK (status 200-299)
+                    if (response.ok) {
+                        const data = await response.json(); // PHP script should return JSON
+
+                        if (data.success) {
+                            setDownloadOptions(data.options);
+                            setVideoThumbnail(data.thumbnail || null); // Use thumbnail from backend
+                        } else {
+                            setError(data.message || 'Failed to fetch download options.');
+                        }
+                    } else {
+                        // Handle HTTP errors (e.g., 404, 500)
+                        const errorText = await response.text();
+                        setError(`Server error: ${response.status} - ${errorText || 'Unknown error'}`);
+                    }
+                } catch (err) {
+                    // Handle network errors (e.g., no internet, CORS issues)
+                    console.error("Frontend fetch error:", err);
+                    setError(`An unexpected error occurred: ${err.message}. Please try again.`);
+                } finally {
+                    setIsLoading(false); // Always stop loading, regardless of success or error
                 }
-                // --- End Video Preview Logic ---
-
-                // --- SIMULATED BACKEND RESPONSE ---
-                // In a real application, this is where you would make a fetch() call
-                // to your backend server (e.g., PHP, Node.js, Python) to get actual
-                // download links. The backend would handle parsing the URL and fetching
-                // video streams/metadata.
-                // Example:
-                // fetch('/api/get-download-links', {
-                //     method: 'POST',
-                //     headers: { 'Content-Type': 'application/json' },
-                //     body: JSON.stringify({ url: videoUrl })
-                // })
-                // .then(response => response.json())
-                // .then(data => {
-                //     setDownloadOptions(data.options);
-                //     setVideoThumbnail(data.thumbnail || null); // Real thumbnail from backend
-                //     setIsLoading(false);
-                // })
-                // .catch(err => {
-                //     console.error("Backend error:", err);
-                //     setError('Failed to fetch download options. Please try again.');
-                //     setIsLoading(false);
-                // });
-
-                // Simulate a network request delay and then set dummy download options
-                setTimeout(() => {
-                    let simulatedOptions = [];
-                    if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
-                        simulatedOptions = [
-                            { quality: '1080p', format: 'MP4', size: '150MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-                            { quality: '720p', format: 'MP4', size: '80MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-                            { quality: '480p', format: 'MP4', size: '40MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-                            { quality: '360p', format: 'MP4', size: '25MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-                            { quality: 'MP3', format: 'Audio', size: '5MB', link: '#' }, // MP3 still uses '#' as there's no generic dummy audio file
-                        ];
-                    } else if (videoUrl.includes('tiktok.com')) {
-                         simulatedOptions = [
-                            { quality: 'Original', format: 'MP4', size: '15MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-                            { quality: 'MP3', format: 'Audio', size: '2MB', link: '#' },
-                        ];
-                    } else if (videoUrl.includes('facebook.com')) {
-                         simulatedOptions = [
-                            { quality: 'HD', format: 'MP4', size: '70MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-                            { quality: 'SD', format: 'MP4', size: '30MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-                        ];
-                    } else if (videoUrl.includes('pinterest.com')) {
-                         simulatedOptions = [
-                            { quality: 'Original', format: 'MP4/JPG', size: '8MB', link: 'https://www.w3schools.com/html/mov_bbb.mp4' }, // Dummy for both video/image
-                        ];
-                    }
-                     else { // Default options for other unknown platforms
-                        simulatedOptions = [
-                            { quality: 'Best Available', format: 'MP4', size: 'Unknown', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-                            { quality: 'Standard', format: 'MP4', size: 'Unknown', link: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-                        ];
-                    }
-                    setDownloadOptions(simulatedOptions);
-                    setIsLoading(false); // Stop loading after simulation
-                }, 2000); // Simulate a 2-second delay
             };
 
             /**
@@ -662,77 +649,77 @@
             // --- Render functions for various content sections ---
 
             const renderAboutUs = () => (
-                <InfoCard title="Welcome to allvideodownloaderhubs.in">
-                    <p>
-                        allvideodownloaderhubs.in is your one-stop destination to download videos from
-                        various online platforms. We are passionate about providing fast, secure, and
-                        easy-to-use tools for everyone. Our goal is to simplify your video downloading
-                        experience with just a few clicks.
-                    </p>
-                    <p>
-                        We strive to offer a seamless and efficient service, ensuring you can save your
-                        favorite videos for offline viewing without hassle. Our platform is designed
-                        with user-friendliness in mind, making video downloads accessible to everyone,
-                        regardless of technical expertise.
-                    </p>
+                <InfoCard title="About allvideodownloaderhubs.in">
+                    <p>Welcome to allvideodownloaderhubs.in, your one-stop solution for downloading videos from a multitude of online platforms! We strive to provide a fast, free, and incredibly user-friendly experience, enabling you to save your favorite videos for offline viewing without hassle.</p>
+                    <p>Our mission is to simplify the video download process. With support for popular sites like YouTube, Facebook, TikTok, Pinterest, and many others, you can quickly get high-quality videos and audio files directly to your device. We are committed to your privacy and security, ensuring that your data remains confidential and your downloads are safe.</p>
+                    <p>Thank you for choosing allvideodownloaderhubs.in. Enjoy your videos, anytime, anywhere!</p>
                 </InfoCard>
             );
 
             const renderContact = () => (
                 <InfoCard title="Contact Us">
-                    <p>
-                        Have questions, suggestions, or feedback? We'd love to hear from you!
+                    <p>Have questions, feedback, or need assistance? We're here to help!</p>
+                    <p>You can reach us directly via email:</p>
+                    <p className="lead text-center fw-bold text-primary-dark">
+                        <i className="fas fa-envelope me-2"></i> support@allvideodownloaderhubs.in
                     </p>
-                    <ul className="list-unstyled">
-                        <li>
-                            <i className="fas fa-envelope me-2"></i> Email us at: <a href="mailto:allvideodownloaderhubs@gmail.com">allvideodownloaderhubs@gmail.com</a>
-                        </li>
-                        <li>
-                            <i className="fas fa-clock me-2"></i> We usually respond within 24–48 hours.
-                        </li>
+                    <p>We aim to respond to all inquiries within 24-48 business hours.</p>
+                    <p>For technical issues, please include:</p>
+                    <ul>
+                        <li><i className="fas fa-check-circle"></i> The URL you were trying to download.</li>
+                        <li><i className="fas fa-check-circle"></i> A description of the error or issue you encountered.</li>
+                        <li><i className="fas fa-check-circle"></i> The device and browser you are using.</li>
                     </ul>
-                    <p className="mt-4">
-                        Your feedback is important to us as we continuously work to improve our services.
-                        Don't hesitate to reach out!
-                    </p>
+                    <p>Your feedback is valuable to us as we continuously work to improve our service!</p>
                 </InfoCard>
             );
 
             const renderPrivacyPolicy = () => (
                 <InfoCard title="Privacy Policy">
-                    <p>
-                        We respect your privacy. We do not collect or share any personal information from
-                        users. Our site may use cookies to enhance the user experience, but we do not
-                        track or store identifiable user data.
-                    </p>
-                    <p>
-                        By using our site, you agree to our privacy practices. We are committed to
-                        maintaining your trust and ensuring your online safety.
-                    </p>
+                    <p>At allvideodownloaderhubs.in, your privacy is of utmost importance to us. This Privacy Policy outlines the types of information we collect, how it's used, and the measures we take to protect it.</p>
+                    <h4>Information We Collect:</h4>
+                    <ul>
+                        <li><i className="fas fa-user-shield"></i> <strong>Non-Personal Information:</strong> We may collect non-personally identifiable information such as browser type, operating system, IP address (anonymized), and access times to analyze trends, administer the site, and track user movements for aggregate use. This data helps us improve our service.</li>
+                        <li><i className="fas fa-video"></i> <strong>Video URLs:</strong> When you use our service, the video URLs you paste are processed solely for the purpose of generating download links. We do not store these URLs or any content associated with them on our servers beyond what is necessary to facilitate the download process.</li>
+                        <li><i className="fas fa-cookie-bite"></i> <strong>Cookies:</strong> We may use cookies to enhance your experience, such as remembering your preferences. You can configure your browser to refuse cookies, but some parts of our service may not function properly without them.</li>
+                    </ul>
+                    <h4>How We Use Information:</h4>
+                    <p>The information collected is used exclusively to operate, maintain, and improve the features and functionality of allvideodownloaderhubs.in. We do not sell, trade, or otherwise transfer your personally identifiable information to outside parties.</p>
+                    <h4>Data Security:</h4>
+                    <p>We implement a variety of security measures to maintain the safety of your information when you use our service. However, no method of transmission over the Internet or method of electronic storage is 100% secure.</p>
+                    <h4>Third-Party Links:</h4>
+                    <p>Our website may contain links to third-party websites or services that are not owned or controlled by allvideodownloaderhubs.in. We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party sites or services.</p>
+                    <h4>Changes to This Policy:</h4>
+                    <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
+                    <p>By using our site, you consent to our Privacy Policy.</p>
                 </InfoCard>
             );
 
             const renderTermsConditions = () => (
                 <InfoCard title="Terms & Conditions">
-                    <p>
-                        By using allvideodownloaderhubs.in, you agree to use our services for personal and
-                        non-commercial purposes only. We do not host or store any copyrighted content.
-                    </p>
-                    <p>
-                        Users are responsible for how they use the downloaded content. We do not take liability for misuse of
-                        the tools provided on this site.
-                    </p>
-                    <p className="mt-4">
-                        Please ensure you comply with all applicable copyright laws and the terms of service
-                        of the platforms from which you download content.
-                    </p>
+                    <p>Welcome to allvideodownloaderhubs.in. By accessing or using our website, you agree to comply with and be bound by the following Terms and Conditions.</p>
+                    <h4>Acceptance of Terms:</h4>
+                    <p>By using this service, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use our website.</p>
+                    <h4>Service Description:</h4>
+                    <p>allvideodownloaderhubs.in provides a tool to facilitate the downloading of publicly available video content from various online platforms. We do not host any video content on our servers. Our service acts solely as an intermediary.</p>
+                    <h4>User Responsibilities:</h4>
+                    <ul>
+                        <li><i className="fas fa-check-circle"></i> You agree to use this service only for lawful purposes.</li>
+                        <li><i className="fas fa-check-circle"></i> You are solely responsible for compliance with any copyright laws and terms of service of the video platforms from which you download content.</li>
+                        <li><i className="fas fa-check-circle"></i> You must not use this service to download copyrighted material without permission from the copyright holder.</li>
+                        <li><i className="fas fa-check-circle"></i> You agree not to use our service for any commercial purposes without prior written consent from us.</li>
+                    </ul>
+                    <h4>Disclaimer of Warranties:</h4>
+                    <p>Our service is provided "as is" without any warranties, express or implied. We do not guarantee that the service will be uninterrupted, error-free, or free of viruses or other harmful components.</p>
+                    <h4>Limitation of Liability:</h4>
+                    <p>In no event shall allvideodownloaderhubs.in be liable for any direct, indirect, incidental, special, or consequential damages arising out of or in any way connected with the use of our service.</p>
+                    <h4>Changes to Terms:</h4>
+                    <p>We reserve the right to modify these Terms and Conditions at any time. Your continued use of the website after any such changes constitutes your acceptance of the new Terms and Conditions.</p>
+                    <p>If you have any questions about these Terms, please contact us.</p>
                 </InfoCard>
             );
 
-            /**
-             * Renders the main content area based on the currentPage state.
-             * This acts as a simple routing mechanism for a single-page application.
-             */
+            // Conditional rendering for the main content area based on currentPage state
             const renderMainContent = () => {
                 switch (currentPage) {
                     case 'AboutUs':
@@ -743,140 +730,124 @@
                         return renderPrivacyPolicy();
                     case 'TermsConditions':
                         return renderTermsConditions();
-                    default: // This is the 'General' or main download page for video links
+                    default: // 'General', 'YouTube', 'Facebook', 'TikTok', 'Pinterest'
                         return (
                             <>
-                                {/* Main Download Input Card */}
-                                <div className="card shadow-lg p-4 mb-5 rounded-4 download-card">
+                                {/* Main Input Card */}
+                                <div className="card download-card p-4 p-md-5 mb-5 rounded-4">
                                     <div className="card-body">
-                                        <form onSubmit={handleDownload}>
-                                            <div className="mb-4">
-                                                <label htmlFor="videoUrl" className="form-label fs-5 text-dark input-label">
-                                                    Enter {currentPage === 'Pinterest' ? 'Link (Video/Image)' : 'Video URL'}:
-                                                </label>
+                                        <h2 className="main-title text-center mb-4">{getMainTitle()}</h2>
+                                        <form onSubmit={handleDownload} className="row g-3 align-items-center">
+                                            <div className="col-12 col-lg-9">
+                                                <label htmlFor="videoUrl" className="form-label input-label visually-hidden">Video URL</label>
                                                 <input
                                                     type="text"
-                                                    className={`form-control form-control-lg rounded-pill px-4 py-3 input-field ${error ? 'is-invalid' : ''}`}
+                                                    className="form-control form-control-lg input-field rounded-pill"
                                                     id="videoUrl"
                                                     placeholder={getInputPlaceholder()}
                                                     value={videoUrl}
-                                                    onChange={(e) => {
-                                                        setVideoUrl(e.target.value);
-                                                        if (error) setError(''); // Clear error message when user starts typing again
-                                                    }}
+                                                    onChange={(e) => setVideoUrl(e.target.value)}
+                                                    required
                                                     disabled={isLoading}
                                                 />
-                                                {error && (
-                                                    <div id="urlValidationFeedback" className="invalid-feedback">
-                                                        {error}
-                                                    </div>
-                                                )}
                                             </div>
-                                            <div className="d-grid gap-2">
-                                                <button type="submit" className="btn btn-primary btn-lg rounded-pill shadow-sm py-3 download-btn" disabled={isLoading}>
+                                            <div className="col-12 col-lg-3 d-grid">
+                                                <button
+                                                    type="submit"
+                                                    className="btn btn-lg download-btn rounded-pill"
+                                                    disabled={isLoading || !videoUrl.trim()}
+                                                >
                                                     {isLoading ? (
                                                         <>
                                                             <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                                            Processing...
+                                                            Loading...
                                                         </>
                                                     ) : (
                                                         <>
-                                                            <i className="fas fa-download me-2"></i> Download {currentPage === 'Pinterest' ? 'Content' : 'Video'}
+                                                            <i className="fas fa-cloud-download-alt me-2"></i>
+                                                            Download
                                                         </>
                                                     )}
                                                 </button>
                                             </div>
                                         </form>
+                                        {error && (
+                                            <div className="alert alert-danger mt-4 rounded-3" role="alert">
+                                                <i className="fas fa-exclamation-triangle me-2"></i> {error}
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
 
-                                {/* Video Preview Section (Conditional Rendering based on loading and thumbnail state) */}
-                                {isLoading && !downloadOptions && (
-                                    <div className="card shadow-lg p-4 mb-5 rounded-4 preview-card text-center">
-                                        <div className="card-body">
-                                            <h3 className="card-title text-primary mb-4">Fetching Preview...</h3>
-                                            <div className="spinner-border text-primary" role="status">
-                                                <span className="visually-hidden">Loading...</span>
-                                            </div>
-                                            <p className="mt-3 preview-placeholder-text">Please wait while we process the link.</p>
-                                        </div>
-                                    </div>
-                                )}
-
-                                {videoThumbnail && !isLoading && (
-                                    <div className="card shadow-lg p-4 mb-5 rounded-4 preview-card text-center">
-                                        <div className="card-body">
-                                            <h3 className="card-title text-primary mb-4">Video Preview</h3>
+                                {/* Video Preview Section */}
+                                {videoThumbnail && (currentPage === 'General' || currentPage === 'YouTube') && (
+                                    <div className="card preview-card p-4 mb-5 rounded-4">
+                                        <div className="card-body text-center">
+                                            <h4 className="card-title text-primary-dark mb-4">Video Preview</h4>
                                             <img
                                                 src={videoThumbnail}
                                                 alt="Video Thumbnail"
-                                                className="img-fluid video-preview-thumbnail mb-3"
+                                                className="video-preview-thumbnail mb-3"
                                                 onError={(e) => {
                                                     // Fallback for broken thumbnail images
-                                                    e.target.onerror = null; // Prevent infinite loop if fallback also fails
-                                                    e.target.src = 'https://placehold.co/480x360/E0E0E0/666666?text=Preview+Not+Available';
+                                                    e.target.onerror = null;
+                                                    e.target.src = "https://placehold.co/640x360/cccccc/333333?text=Thumbnail+Not+Available";
+                                                    e.target.alt = "Thumbnail Not Available";
                                                 }}
                                             />
-                                            <p className="preview-placeholder-text">
-                                                {currentPage === 'YouTube' ? 'This is a YouTube video preview.' : 'Preview for this platform would require specific API integration.'}
-                                            </p>
+                                            <p className="preview-placeholder-text">Thumbnail is a representation and may not reflect final video quality.</p>
                                         </div>
                                     </div>
                                 )}
 
-                                {/* Download Options Section (Conditional Rendering) */}
-                                {downloadOptions && (
-                                    <>
-                                        <div className="alert alert-info mt-4 rounded-3 shadow-sm text-center" role="alert">
-                                            <i className="fas fa-info-circle me-2"></i> Download options are displayed! **(Important: Actual downloads require a backend PHP script on your server.)**
-                                        </div>
-                                        <div className="card shadow-lg p-4 mb-5 rounded-4 options-card">
-                                            <div className="card-body">
-                                                <h3 className="card-title text-primary mb-4 text-center options-title">Available Download Options</h3>
-                                                <div className="table-responsive">
-                                                    <table className="table table-hover align-middle download-table">
-                                                        <thead>
-                                                            <tr>
-                                                                <th scope="col">Quality</th>
-                                                                <th scope="col">Format</th>
-                                                                <th scope="col">Size</th>
-                                                                <th scope="col">Action</th>
+
+                                {/* Download Options Section */}
+                                {downloadOptions && downloadOptions.length > 0 && (
+                                    <div className="card options-card p-4 mb-5 rounded-4">
+                                        <div className="card-body">
+                                            <h4 className="card-title text-primary-dark mb-4 text-center">Download Options</h4>
+                                            <div className="table-responsive">
+                                                <table className="table table-hover download-table text-center align-middle">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Quality</th>
+                                                            <th>Format</th>
+                                                            <th>Size</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {downloadOptions.map((option, index) => (
+                                                            <tr key={index}>
+                                                                <td>{option.quality}</td>
+                                                                <td>{option.format}</td>
+                                                                <td>{option.size}</td>
+                                                                <td>
+                                                                    <a
+                                                                        href={option.link}
+                                                                        className="btn btn-sm download-link-btn rounded-pill px-3"
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        // If your PHP handles direct download, you might not need an 'a' tag here.
+                                                                        // Instead, trigger another fetch to the PHP script with the selected option.
+                                                                    >
+                                                                        <i className="fas fa-download me-1"></i> Download
+                                                                    </a>
+                                                                </td>
                                                             </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            {downloadOptions.map((option, index) => (
-                                                                <tr key={index}>
-                                                                    <td>{option.quality}</td>
-                                                                    <td>{option.format}</td>
-                                                                    <td>{option.size}</td>
-                                                                    <td>
-                                                                        <a href={option.link} className="btn btn-success btn-sm rounded-pill px-3 download-link-btn" download={option.format !== 'Audio' ? true : false}>
-                                                                            Download
-                                                                        </a>
-                                                                    </td>
-                                                                </tr>
-                                                            ))}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                                        ))}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div className="alert alert-info mt-4 rounded-3 text-center" role="alert">
+                                                <i className="fas fa-info-circle me-2"></i> Click on a download button to start!
                                             </div>
                                         </div>
-                                    </>
+                                    </div>
                                 )}
 
-                                {/* World-Class Features Section (using the new component) */}
+                                {/* Features Section */}
                                 <FeaturesSection />
-
-                                {/* Ad Area (Example Placeholder) */}
-                                <div className="card shadow-lg p-4 mb-5 rounded-4 border-0 ad-area-card text-center">
-                                    <div className="card-body">
-                                        <h4 className="ad-title mb-3">Support Us!</h4>
-                                        <p className="ad-text">Consider disabling your ad-blocker or clicking on ads to support our free service.</p>
-                                        <div className="ad-placeholder-box p-5 bg-light d-flex align-items-center justify-content-center text-muted rounded-3">
-                                            <span className="fs-5">AD BANNER HERE (300x250 or 728x90)</span>
-                                        </div>
-                                    </div>
-                                </div>
                             </>
                         );
                 }
@@ -884,143 +855,89 @@
 
             return (
                 <div className="app-container">
-                    {/* Header Section */}
-                    <header className="header-custom py-3 shadow-sm">
-                        <nav className="navbar navbar-expand-md navbar-dark container">
-                            <a className="navbar-brand d-flex align-items-center site-title" href="#" onClick={() => handleNavigationSelect('General')}>
-                                <i className="fas fa-play-circle me-2"></i> allvideodownloaderhubs
-                            </a>
-                            {/* Navbar Toggler for mobile sidebar */}
-                            <button
-                                className="navbar-toggler menu-toggle-btn"
-                                type="button"
-                                aria-controls="sidebarMenu"
-                                aria-expanded={isSidebarOpen ? "true" : "false"}
-                                aria-label="Toggle navigation"
-                                onClick={toggleSidebar}
-                            >
-                                <span className="navbar-toggler-icon"></span>
-                            </button>
-                        </nav>
+                    {/* Header */}
+                    <header className="header-custom py-3 px-4 d-flex justify-content-between align-items-center w-100">
+                        <button className="menu-toggle-btn d-md-none" onClick={toggleSidebar} aria-label="Toggle navigation">
+                            <i className="fas fa-bars"></i>
+                        </button>
+                        <a href="#" className="site-title text-decoration-none h4 mb-0 text-white" onClick={() => handleNavigationSelect('General')}>
+                            allvideodownloaderhubs.in
+                        </a>
+                        <div className="d-none d-md-flex align-items-center"> {/* Desktop nav */}
+                            <a href="#" className="text-white text-decoration-none mx-3 fw-medium" onClick={() => handleNavigationSelect('AboutUs')}>About Us</a>
+                            <a href="#" className="text-white text-decoration-none mx-3 fw-medium" onClick={() => handleNavigationSelect('Contact')}>Contact</a>
+                        </div>
                     </header>
 
-                    {/* Main Layout: Sidebar + Content */}
-                    <div className="d-flex flex-grow-1">
-                        {/* Sidebar Navigation */}
-                        <nav id="sidebarMenu" className={`sidebar bg-light p-4 d-flex flex-column ${isSidebarOpen ? 'sidebar-open' : 'd-none d-md-flex'}`}>
-                            <h4 className="sidebar-title">Platforms</h4>
-                            <ul className="nav flex-column sidebar-nav-list">
-                                <li className="nav-item">
-                                    <a
-                                        className={`nav-link sidebar-nav-link ${currentPage === 'General' ? 'active' : ''}`}
-                                        href="#"
-                                        onClick={() => handleNavigationSelect('General')}
-                                    >
-                                        <i className="fas fa-globe"></i> General Downloader
-                                    </a>
-                                </li>
-                                <li className="nav-item">
-                                    <a
-                                        className={`nav-link sidebar-nav-link ${currentPage === 'YouTube' ? 'active' : ''}`}
-                                        href="#"
-                                        onClick={() => handleNavigationSelect('YouTube')}
-                                    >
-                                        <i className="fab fa-youtube"></i> YouTube
-                                    </a>
-                                </li>
-                                <li className="nav-item">
-                                    <a
-                                        className={`nav-link sidebar-nav-link ${currentPage === 'Facebook' ? 'active' : ''}`}
-                                        href="#"
-                                        onClick={() => handleNavigationSelect('Facebook')}
-                                    >
-                                        <i className="fab fa-facebook"></i> Facebook
-                                    </a>
-                                </li>
-                                <li className="nav-item">
-                                    <a
-                                        className={`nav-link sidebar-nav-link ${currentPage === 'TikTok' ? 'active' : ''}`}
-                                        href="#"
-                                        onClick={() => handleNavigationSelect('TikTok')}
-                                    >
-                                        <i className="fab fa-tiktok"></i> TikTok
-                                    </a>
-                                </li>
-                                <li className="nav-item">
-                                    <a
-                                        className={`nav-link sidebar-nav-link ${currentPage === 'Pinterest' ? 'active' : ''}`}
-                                        href="#"
-                                        onClick={() => handleNavigationSelect('Pinterest')}
-                                    >
-                                        <i className="fab fa-pinterest"></i> Pinterest
-                                    </a>
-                                </li>
-                            </ul>
+                    {/* Sidebar for Mobile & Desktop */}
+                    <nav className={`sidebar ${isSidebarOpen ? 'sidebar-open' : ''} d-flex flex-column`}>
+                        <h4 className="sidebar-title mt-4">Platforms</h4>
+                        <ul className="list-unstyled sidebar-nav-list flex-grow-1">
+                            <li className="nav-item">
+                                <a href="#" className={`sidebar-nav-link ${currentPage === 'General' ? 'active' : ''}`} onClick={() => handleNavigationSelect('General')}>
+                                    <i className="fas fa-globe"></i> All Platforms
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a href="#" className={`sidebar-nav-link ${currentPage === 'YouTube' ? 'active' : ''}`} onClick={() => handleNavigationSelect('YouTube')}>
+                                    <i className="fab fa-youtube text-danger"></i> YouTube
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a href="#" className={`sidebar-nav-link ${currentPage === 'Facebook' ? 'active' : ''}`} onClick={() => handleNavigationSelect('Facebook')}>
+                                    <i className="fab fa-facebook text-primary"></i> Facebook
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a href="#" className={`sidebar-nav-link ${currentPage === 'TikTok' ? 'active' : ''}`} onClick={() => handleNavigationSelect('TikTok')}>
+                                    <i className="fab fa-tiktok text-dark"></i> TikTok
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a href="#" className={`sidebar-nav-link ${currentPage === 'Pinterest' ? 'active' : ''}`} onClick={() => handleNavigationSelect('Pinterest')}>
+                                    <i className="fab fa-pinterest text-danger"></i> Pinterest
+                                </a>
+                            </li>
+                        </ul>
+                        <h4 className="sidebar-title mt-4">Info</h4>
+                        <ul className="list-unstyled sidebar-nav-list">
+                            <li className="nav-item">
+                                <a href="#" className={`sidebar-nav-link ${currentPage === 'PrivacyPolicy' ? 'active' : ''}`} onClick={() => handleNavigationSelect('PrivacyPolicy')}>
+                                    <i className="fas fa-file-contract"></i> Privacy Policy
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a href="#" className={`sidebar-nav-link ${currentPage === 'TermsConditions' ? 'active' : ''}`} onClick={() => handleNavigationSelect('TermsConditions')}>
+                                    <i className="fas fa-gavel"></i> Terms & Conditions
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
 
-                            <h4 className="sidebar-title mt-4">Information</h4>
-                            <ul className="nav flex-column sidebar-nav-list">
-                                <li className="nav-item">
-                                    <a
-                                        className={`nav-link sidebar-nav-link ${currentPage === 'AboutUs' ? 'active' : ''}`}
-                                        href="#"
-                                        onClick={() => handleNavigationSelect('AboutUs')}
-                                    >
-                                        <i className="fas fa-info-circle"></i> About Us
-                                    </a>
-                                </li>
-                                <li className="nav-item">
-                                    <a
-                                        className={`nav-link sidebar-nav-link ${currentPage === 'Contact' ? 'active' : ''}`}
-                                        href="#"
-                                        onClick={() => handleNavigationSelect('Contact')}
-                                    >
-                                        <i className="fas fa-envelope"></i> Contact Us
-                                    </a>
-                                </li>
-                                <li className="nav-item">
-                                    <a
-                                        className={`nav-link sidebar-nav-link ${currentPage === 'PrivacyPolicy' ? 'active' : ''}`}
-                                        href="#"
-                                        onClick={() => handleNavigationSelect('PrivacyPolicy')}
-                                    >
-                                        <i className="fas fa-user-shield"></i> Privacy Policy
-                                    </a>
-                                </li>
-                                <li className="nav-item">
-                                    <a
-                                        className={`nav-link sidebar-nav-link ${currentPage === 'TermsConditions' ? 'active' : ''}`}
-                                        href="#"
-                                        onClick={() => handleNavigationSelect('TermsConditions')}
-                                    >
-                                        <i className="fas fa-file-contract"></i> Terms & Conditions
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                        {/* Overlay for when sidebar is open on mobile */}
-                        {isSidebarOpen && <div className="overlay d-md-none" onClick={toggleSidebar}></div>}
+                    {/* Overlay for mobile sidebar */}
+                    {isSidebarOpen && <div className="overlay d-md-none" onClick={toggleSidebar}></div>}
 
-                        {/* Main Content Area */}
-                        <main className="main-content-wrapper">
-                            <h1 className="main-title">{getMainTitle()}</h1>
-                            {renderMainContent()}
-                        </main>
-                    </div>
+                    {/* Main Content Wrapper */}
+                    <main className="main-content-wrapper">
+                        {renderMainContent()}
+                    </main>
 
-                    {/* Footer Section */}
-                    <footer className="footer-custom text-white text-center">
+                    {/* Footer */}
+                    <footer className="footer-custom mt-auto text-light text-center">
                         <div className="container">
-                            <ul className="list-inline footer-links mb-3">
-                                <li className="list-inline-item"><a href="#" onClick={() => handleNavigationSelect('AboutUs')} className="text-white">About Us</a></li>
-                                <li className="list-inline-item mx-3">|</li>
-                                <li className="list-inline-item"><a href="#" onClick={() => handleNavigationSelect('Contact')} className="text-white">Contact</a></li>
-                                <li className="list-inline-item mx-3">|</li>
-                                <li className="list-inline-item"><a href="#" onClick={() => handleNavigationSelect('PrivacyPolicy')} className="text-white">Privacy Policy</a></li>
-                                <li className="list-inline-item mx-3">|</li>
-                                <li className="list-inline-item"><a href="#" onClick={() => handleNavigationSelect('TermsConditions')} className="text-white">Terms & Conditions</a></li>
-                            </ul>
-                            <p className="footer-text mb-0">&copy; 2025 allvideodownloaderhubs.in. All rights reserved.</p>
-                            <p className="footer-text">Made with <i className="fas fa-heart text-danger"></i> for you.</p>
+                            <div className="row">
+                                <div className="col-12 col-md-6 mb-3 mb-md-0">
+                                    <p className="footer-text mb-0">&copy; {new Date().getFullYear()} allvideodownloaderhubs.in. All rights reserved.</p>
+                                </div>
+                                <div className="col-12 col-md-6">
+                                    <ul className="list-inline footer-links mb-0">
+                                        <li className="list-inline-item"><a href="#" onClick={() => handleNavigationSelect('AboutUs')}>About Us</a></li>
+                                        <li className="list-inline-item"><a href="#" onClick={() => handleNavigationSelect('Contact')}>Contact</a></li>
+                                        <li className="list-inline-item"><a href="#" onClick={() => handleNavigationSelect('PrivacyPolicy')}>Privacy Policy</a></li>
+                                        <li className="list-inline-item"><a href="#" onClick={() => handleNavigationSelect('TermsConditions')}>Terms</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </footer>
                 </div>
@@ -1030,5 +947,12 @@
         // Render the main App component into the 'root' div
         ReactDOM.render(<App />, document.getElementById('root'));
     </script>
+
+    <!-- Bootstrap Bundle with Popper (for responsive features like navbar collapse) -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"
+    ></script>
 </body>
 </html>
