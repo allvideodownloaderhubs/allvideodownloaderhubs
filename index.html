@@ -1,958 +1,607 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="icon" href="favicon-16x16.png" type="image/png">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>allvideodownloaderhubs</title>
-    <meta name="description" content="Download videos from YouTube, Facebook, TikTok, Pinterest, and more with allvideodownloaderhubs. Fast, free, and easy video downloads.">
-    <meta name="keywords" content="video downloader, youtube downloader, facebook video download, tiktok video download, pinterest video download, free video downloader, online video downloader">
-    <meta name="author" content="allvideodownloaderhubs">
+    <html lang="en">
+    <head>
+        <link rel="icon" href="favicon-16x16.png" type="image/png">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>allvideodownloaderhubs</title>
+        <meta name="description" content="Download videos from YouTube, Facebook, TikTok, Pinterest, and more with allvideodownloaderhubs. Fast, free, and easy video downloads.">
+        <meta name="keywords" content="video downloader, youtube downloader, facebook video download, tiktok video download, pinterest video download, free video downloader, online video downloader">
+        <meta name="author" content="allvideodownloaderhubs">
 
-    <!-- Bootstrap CSS for responsive design and components -->
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-        crossorigin="anonymous"
-    />
-    <!-- Font Awesome CSS for icons -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer"
-    />
-    <style>
-        /* Import Google's Inter font for consistent typography */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        <link
+            rel="stylesheet"
+            href="[https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css](https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css)"
+            xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css)"
+            xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <style>
+            /* Import Google's Inter font for consistent typography */
+            @import url('[https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap)');
 
-        /* CSS Variables for a centralized and themeable color palette and common values */
-        :root {
-            --primary-color: #007bff; /* Original Bootstrap primary blue */
-            --primary-dark: #0056b3; /* Darker blue for hover/active states */
-            --primary-light: #e0f2ff; /* Lighter blue for subtle highlights */
-            --accent-color: #28a745; /* Success green for download buttons */
-            --accent-dark: #218838; /* Darker green */
-            --text-dark: #343a40; /* Dark grey for primary text */
-            --text-light: #f8f9fa; /* Light grey for text on dark backgrounds */
-            --bg-light: #f8f9fa; /* Very light background */
-            --bg-subtle: #e9ecef; /* Slightly darker light background for body */
-            --card-bg: #ffffff; /* White background for cards */
-            --shadow-light: rgba(0, 0, 0, 0.08); /* Lighter, more subtle shadow */
-            --shadow-medium: rgba(0, 0, 0, 0.12); /* Medium shadow for hover effects */
-            --shadow-strong: rgba(0, 0, 0, 0.18); /* Stronger shadow */
-            --border-radius-base: 0.75rem; /* Standard rounded corners */
-            --border-radius-large: 1.25rem; /* Larger rounded corners for main elements */
-        }
-
-        /* Base styles for the entire page, ensuring full height and responsive layout */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-subtle);
-            color: var(--text-dark);
-            margin: 0; /* Remove default body margin */
-            min-height: 100vh; /* Ensure body takes full viewport height */
-            display: flex;
-            flex-direction: column; /* Allows footer to stick to bottom */
-            line-height: 1.6; /* Improved readability for body text */
-        }
-
-        /* React root div to fill available space and manage internal layout */
-        #root {
-            flex-grow: 1; /* Allows the React app to expand and push footer down */
-            display: flex;
-            flex-direction: column; /* Ensures vertical stacking within the app */
-        }
-
-        /* Container for the main application content, applying a subtle background gradient */
-        .app-container {
-            background: linear-gradient(to bottom right, #f0f2f5, #e0e5ec);
-            flex-grow: 1; /* Allows content area to fill remaining vertical space */
-            display: flex;
-            flex-direction: column; /* Default to column layout on small screens */
-        }
-
-        /* Custom Header Styling */
-        .header-custom {
-            background: linear-gradient(to right, var(--primary-color), var(--primary-dark)); /* Gradient for a vibrant header */
-            box-shadow: 0 4px 15px var(--shadow-medium); /* Soft shadow for depth */
-            position: sticky; /* Keeps header visible on scroll */
-            top: 0;
-            z-index: 1020; /* Ensures header is above other elements like sidebar on scroll */
-        }
-        .site-title {
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            transition: transform 0.2s ease-in-out; /* Smooth hover effect */
-            color: var(--text-light); /* Ensures title text is white and readable */
-            text-decoration: none; /* Remove underline from link */
-        }
-        .site-title:hover {
-            transform: scale(1.02); /* Slight scale on hover */
-        }
-        .menu-toggle-btn {
-            border: none;
-            background-color: transparent; /* Transparent background */
-            color: white; /* White icon color */
-            font-size: 1.4rem; /* Slightly larger icon */
-            transition: transform 0.2s ease-in-out; /* Smooth hover effect */
-        }
-        .menu-toggle-btn:hover {
-            transform: scale(1.1); /* Slight scale on hover */
-        }
-
-        /* Side Menu Styling */
-        .sidebar {
-            width: 280px; /* Slightly wider sidebar for better readability */
-            flex-shrink: 0; /* Prevents sidebar from shrinking */
-            background-color: var(--card-bg); /* White background */
-            border-right: 1px solid #e0e0e0; /* Subtle right border */
-            box-shadow: 2px 0 10px var(--shadow-light); /* Soft shadow */
-            padding: 2rem 0; /* Vertical padding */
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease; /* Smooth transitions for opening/closing */
-            z-index: 1000; /* Ensures sidebar is above content on small screens */
-            height: 100%; /* Take full height available in flex container */
-            overflow-y: auto; /* Enable scrolling if menu content is long */
-        }
-        .sidebar-title {
-            font-weight: 600;
-            color: var(--primary-dark);
-            margin-bottom: 1.5rem;
-            padding-left: 1.5rem; /* Indent title to match nav items */
-            font-size: 1.25rem; /* Larger title for sidebar sections */
-        }
-        .sidebar-nav-list {
-            padding-left: 0; /* Remove default ul padding */
-        }
-        .sidebar-nav-list .nav-item {
-            margin-bottom: 0.75rem;
-        }
-        .sidebar-nav-link {
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: all 0.2s ease; /* Smooth hover effects */
-            border-radius: 0.5rem; /* Rounded corners for links */
-            padding: 0.75rem 1.5rem; /* Adequate padding for touch targets */
-            display: flex; /* For icon and text alignment */
-            align-items: center;
-            text-decoration: none; /* Remove underline */
-            font-size: 1.05rem; /* Slightly larger text for nav links */
-        }
-        .sidebar-nav-link:hover {
-            background-color: var(--primary-light);
-            color: var(--primary-dark);
-            transform: translateX(5px); /* Slide effect on hover */
-        }
-        .sidebar-nav-link.active {
-            background-color: var(--primary-light);
-            color: var(--primary-dark);
-            font-weight: 600;
-            border-left: 4px solid var(--primary-color); /* Active indicator bar */
-            padding-left: calc(1.5rem - 4px + 4px); /* Adjust padding for border to maintain visual alignment */
-        }
-        .sidebar-nav-link i {
-            width: 28px; /* Fixed width for icons to align text */
-            text-align: center;
-            margin-right: 0.75rem; /* Space between icon and text */
-            font-size: 1.2rem; /* Slightly larger icons */
-        }
-
-        /* Responsive adjustments for sidebar */
-        @media (max-width: 767.98px) { /* On small screens (Bootstrap's md breakpoint and below) */
-            .sidebar {
-                position: fixed; /* Fixed position for off-canvas effect */
-                top: 0;
-                left: 0;
-                height: 100vh; /* Full viewport height */
-                transform: translateX(-100%); /* Hidden by default */
-                box-shadow: 5px 0 15px var(--shadow-medium);
-                padding-top: 5rem; /* Adjust padding for fixed header */
+            /* CSS Variables for a centralized and themeable color palette and common values */
+            :root {
+                --primary-color: #007bff; /* Original Bootstrap primary blue */
+                --primary-dark: #0056b3; /* Darker blue for hover/active states */
+                --primary-light: #e0f2ff; /* Lighter blue for subtle highlights */
+                --accent-color: #28a745; /* Success green for download buttons */
+                --accent-dark: #218838; /* Darker green */
+                --text-dark: #343a40; /* Dark grey for primary text */
+                --text-light: #f8f9fa; /* Light grey for text on dark backgrounds */
+                --bg-light: #f8f9fa; /* Very light background */
+                --bg-subtle: #e9ecef; /* Slightly darker light background for body */
+                --card-bg: #ffffff; /* White background for cards */
+                --shadow-light: rgba(0, 0, 0, 0.08); /* Lighter, more subtle shadow */
+                --shadow-medium: rgba(0, 0, 0, 0.12); /* Medium shadow for hover effects */
+                --shadow-strong: rgba(0, 0, 0, 0.18); /* Stronger shadow */
+                --border-radius-base: 0.75rem; /* Standard rounded corners */
+                --border-radius-large: 1.25rem; /* Larger rounded corners for main elements */
             }
-            .sidebar-open {
-                transform: translateX(0%); /* Slide in when open */
+
+            /* Base styles for the entire page, ensuring full height and responsive layout */
+            body {
+                font-family: 'Inter', sans-serif;
+                background-color: var(--bg-subtle);
+                color: var(--text-dark);
+                margin: 0; /* Remove default body margin */
+                min-height: 100vh; /* Ensure body takes full viewport height */
+                display: flex;
+                flex-direction: column; /* Allows footer to stick to bottom */
+                line-height: 1.6; /* Improved readability for body text */
             }
-            /* Overlay to dim content when sidebar is open */
-            .overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-                z-index: 999; /* Below sidebar but above main content */
-                display: none; /* Hidden by default */
+
+            /* React root div to fill available space and manage internal layout */
+            #root {
+                flex-grow: 1; /* Allows the React app to expand and push footer down */
+                display: flex;
+                flex-direction: column; /* Ensures vertical stacking within the app */
             }
-            .sidebar-open + .overlay {
-                display: block; /* Show overlay when sidebar is open */
-            }
-        }
-        @media (min-width: 768px) { /* On medium screens and up (desktop) */
+
+            /* Container for the main application content, applying a subtle background gradient */
             .app-container {
-                flex-direction: row; /* Horizontal layout for sidebar and main content */
+                background: linear-gradient(to bottom right, #f0f2f5, #e0e5ec);
+                flex-grow: 1; /* Allows content area to fill remaining vertical space */
+                display: flex;
+                flex-direction: column; /* Default to column layout on small screens */
             }
+
+            /* Custom Header Styling */
+            .header-custom {
+                background: linear-gradient(to right, var(--primary-color), var(--primary-dark)); /* Gradient for a vibrant header */
+                box-shadow: 0 4px 15px var(--shadow-medium); /* Soft shadow for depth */
+                position: sticky; /* Keeps header visible on scroll */
+                top: 0;
+                z-index: 1020; /* Ensures header is above other elements like sidebar on scroll */
+            }
+            .site-title {
+                font-weight: 700;
+                letter-spacing: 0.5px;
+                transition: transform 0.2s ease-in-out; /* Smooth hover effect */
+                color: var(--text-light); /* Ensures title text is white and readable */
+                text-decoration: none; /* Remove underline from link */
+            }
+            .site-title:hover {
+                transform: scale(1.02); /* Slight scale on hover */
+            }
+            .menu-toggle-btn {
+                border: none;
+                background-color: transparent; /* Transparent background */
+                color: white; /* White icon color */
+                font-size: 1.4rem; /* Slightly larger icon */
+                transition: transform 0.2s ease-in-out; /* Smooth hover effect */
+            }
+            .menu-toggle-btn:hover {
+                transform: scale(1.1); /* Slight scale on hover */
+            }
+
+            /* Side Menu Styling */
+            .sidebar {
+                width: 280px; /* Slightly wider sidebar for better readability */
+                flex-shrink: 0; /* Prevents sidebar from shrinking */
+                background-color: var(--card-bg); /* White background */
+                border-right: 1px solid #e0e0e0; /* Subtle right border */
+                box-shadow: 2px 0 10px var(--shadow-light); /* Soft shadow */
+                padding: 2rem 0; /* Vertical padding */
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease; /* Smooth transitions for opening/closing */
+                z-index: 1000; /* Ensures sidebar is above content on small screens */
+                height: 100%; /* Take full height available in flex container */
+                overflow-y: auto; /* Enable scrolling if menu content is long */
+            }
+            .sidebar-title {
+                font-weight: 600;
+                color: var(--primary-dark);
+                margin-bottom: 1.5rem;
+                padding-left: 1.5rem; /* Indent title to match nav items */
+                font-size: 1.25rem; /* Larger title for sidebar sections */
+            }
+            .sidebar-nav-list {
+                padding-left: 0; /* Remove default ul padding */
+            }
+            .sidebar-nav-list .nav-item {
+                margin-bottom: 0.75rem;
+            }
+            .sidebar-nav-link {
+                color: var(--text-dark);
+                font-weight: 500;
+                transition: all 0.2s ease; /* Smooth hover effects */
+                border-radius: 0.5rem; /* Rounded corners for links */
+                padding: 0.75rem 1.5rem; /* Adequate padding for touch targets */
+                display: flex; /* For icon and text alignment */
+                align-items: center;
+                text-decoration: none; /* Remove underline */
+                font-size: 1.05rem; /* Slightly larger text for nav links */
+            }
+            .sidebar-nav-link:hover {
+                background-color: var(--primary-light);
+                color: var(--primary-dark);
+                transform: translateX(5px); /* Slide effect on hover */
+            }
+            .sidebar-nav-link.active {
+                background-color: var(--primary-light);
+                color: var(--primary-dark);
+                font-weight: 600;
+                border-left: 4px solid var(--primary-color); /* Active indicator bar */
+                padding-left: calc(1.5rem - 4px + 4px); /* Adjust padding for border to maintain visual alignment */
+            }
+            .sidebar-nav-link i {
+                width: 28px; /* Fixed width for icons to align text */
+                text-align: center;
+                margin-right: 0.75rem; /* Space between icon and text */
+                font-size: 1.2rem; /* Slightly larger icons */
+            }
+
+            /* Responsive adjustments for sidebar */
+            @media (max-width: 767.98px) { /* On small screens (Bootstrap's md breakpoint and below) */
+                .sidebar {
+                    position: fixed; /* Fixed position for off-canvas effect */
+                    top: 0;
+                    left: 0;
+                    height: 100vh; /* Full viewport height */
+                    transform: translateX(-100%); /* Hidden by default */
+                    box-shadow: 5px 0 15px var(--shadow-medium);
+                    padding-top: 5rem; /* Adjust padding for fixed header */
+                }
+                .sidebar-open {
+                    transform: translateX(0%); /* Slide in when open */
+                }
+                /* Overlay to dim content when sidebar is open */
+                .overlay {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+                    z-index: 999; /* Below sidebar but above main content */
+                    display: none; /* Hidden by default */
+                }
+                .sidebar-open + .overlay {
+                    display: block; /* Show overlay when sidebar is open */
+                }
+            }
+            @media (min-width: 768px) { /* On medium screens and up (desktop) */
+                .app-container {
+                    flex-direction: row; /* Horizontal layout for sidebar and main content */
+                }
+                .main-content-wrapper {
+                    margin-left: 0; /* No margin on desktop */
+                }
+            }
+
+
+            /* Main Content Area Styling */
             .main-content-wrapper {
-                margin-left: 0; /* No margin on desktop */
+                flex-grow: 1; /* Allows main content to fill remaining space */
+                padding: 2.5rem; /* Consistent padding */
+                overflow-y: auto; /* Enables scrolling for content if it overflows vertically */
+                display: flex; /* Use flexbox for main content */
+                flex-direction: column; /* Stack content vertically */
+                align-items: center; /* Center content horizontally within the wrapper */
+                max-width: 1200px; /* Limit max width for better readability on very wide screens */
+                margin: 0 auto; /* Center the main content wrapper itself */
             }
-        }
+            .main-title {
+                font-weight: 700;
+                color: var(--primary-dark);
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.05); /* Subtle text shadow */
+                margin-bottom: 2.5rem; /* Increased spacing below title */
+                text-align: center; /* Center align title */
+                font-size: 2.5rem; /* Larger main title */
+                width: 100%; /* Ensure title takes full width */
+            }
+
+            /* General Card Styling */
+            .download-card, .options-card, .ad-area-card, .preview-card, .info-card, .features-card {
+                background-color: var(--card-bg);
+                border-radius: var(--border-radius-large); /* Consistent large rounded corners */
+                box-shadow: 0 10px 40px var(--shadow-light); /* Softer, deeper shadow */
+                transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+                border: none; /* Remove default Bootstrap card border */
+                width: 100%; /* Ensure cards take full available width in column layout */
+                max-width: 900px; /* Limit max width of cards for better design */
+                margin-bottom: 2rem; /* Add some spacing between cards */
+            }
+            .download-card:hover, .options-card:hover, .preview-card:hover, .features-card:hover {
+                transform: translateY(-8px); /* Lift effect on hover */
+                box-shadow: 0 15px 50px var(--shadow-medium); /* Enhanced shadow on hover */
+            }
+            .info-card {
+                padding: 3rem; /* Extra padding for informational cards */
+            }
+            .info-card h3 {
+                color: var(--primary-dark);
+                font-weight: 700;
+                margin-bottom: 1.8rem; /* Increased spacing */
+                font-size: 1.8rem; /* Larger info card titles */
+            }
+            .info-card p, .info-card ul {
+                font-size: 1.05rem; /* Slightly larger body text */
+                line-height: 1.8; /* Improved readability */
+                color: var(--text-dark);
+            }
+            .info-card ul {
+                list-style: none; /* Remove default bullet points */
+                padding-left: 0;
+            }
+            .info-card ul li {
+                margin-bottom: 0.8rem; /* Increased spacing */
+            }
+            .info-card ul li i {
+                color: var(--primary-color);
+                margin-right: 0.8rem; /* Increased spacing */
+                font-size: 1.3rem; /* Slightly larger icons */
+            }
+
+            /* Specific styles for the Features Section card */
+            .features-card .feature-icon {
+                font-size: 3rem; /* Larger icons for features */
+                color: var(--primary-color);
+                margin-bottom: 1.2rem; /* Increased spacing */
+                transition: transform 0.3s ease;
+            }
+            .features-card .feature-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 1.5rem; /* More padding for feature items */
+            }
+            .features-card .feature-item:hover .feature-icon {
+                transform: scale(1.1); /* Zoom effect on icon hover */
+            }
+            .features-card .feature-title {
+                font-weight: 600;
+                color: var(--primary-dark);
+                font-size: 1.3rem; /* Larger feature titles */
+                margin-bottom: 0.5rem; /* Space between title and description */
+            }
+            .features-card .text-muted {
+                font-size: 0.95rem; /* Slightly smaller description for compactness */
+                color: #6c757d; /* Standard muted color */
+            }
+            .features-card .row {
+                --bs-gutter-x: 1.5rem; /* Adjust horizontal gutter for feature items */
+                --bs-gutter-y: 2.5rem; /* Adjust vertical gutter for feature items */
+            }
+            @media (min-width: 992px) {
+                .features-card .col-lg-4 {
+                    width: calc(33.333333% - var(--bs-gutter-x) + var(--bs-gutter-x) / 3 * 2); /* Adjust width for equal spacing */
+                }
+            }
 
 
-        /* Main Content Area Styling */
-        .main-content-wrapper {
-            flex-grow: 1; /* Allows main content to fill remaining space */
-            padding: 2.5rem; /* Consistent padding */
-            overflow-y: auto; /* Enables scrolling for content if it overflows vertically */
-        }
-        .main-title {
-            font-weight: 700;
-            color: var(--primary-dark);
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05); /* Subtle text shadow */
-            margin-bottom: 2.5rem; /* Increased spacing below title */
-            text-align: center; /* Center align title */
-            font-size: 2.5rem; /* Larger main title */
-        }
+            /* Input Field Styling */
+            .input-field {
+                border: 2px solid var(--primary-light); /* Custom border color */
+                box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Subtle inner shadow */
+                transition: all 0.3s ease; /* Smooth transition on focus */
+                font-size: 1.15rem; /* Larger font size */
+                padding: 0.8rem 1.25rem; /* More generous padding */
+            }
+            .input-field:focus {
+                border-color: var(--primary-color); /* Highlight border on focus */
+                box-shadow: 0 0 0 0.3rem rgba(0, 123, 255, 0.3); /* Bootstrap-like focus ring with more spread */
+                background-color: #fff;
+            }
+            .input-label {
+                font-weight: 600;
+            }
 
-        /* General Card Styling */
-        .download-card, .options-card, .ad-area-card, .preview-card, .info-card, .features-card {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius-large); /* Consistent large rounded corners */
-            box-shadow: 0 10px 40px var(--shadow-light); /* Softer, deeper shadow */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
-            border: none; /* Remove default Bootstrap card border */
-        }
-        .download-card:hover, .options-card:hover, .preview-card:hover, .features-card:hover {
-            transform: translateY(-8px); /* Lift effect on hover */
-            box-shadow: 0 15px 50px var(--shadow-medium); /* Enhanced shadow on hover */
-        }
-        .info-card {
-            padding: 3rem; /* Extra padding for informational cards */
-        }
-        .info-card h3 {
-            color: var(--primary-dark);
-            font-weight: 700;
-            margin-bottom: 1.8rem; /* Increased spacing */
-            font-size: 1.8rem; /* Larger info card titles */
-        }
-        .info-card p, .info-card ul {
-            font-size: 1.05rem; /* Slightly larger body text */
-            line-height: 1.8; /* Improved readability */
-            color: var(--text-dark);
-        }
-        .info-card ul {
-            list-style: none; /* Remove default bullet points */
-            padding-left: 0;
-        }
-        .info-card ul li {
-            margin-bottom: 0.8rem; /* Increased spacing */
-        }
-        .info-card ul li i {
-            color: var(--primary-color);
-            margin-right: 0.8rem; /* Increased spacing */
-            font-size: 1.3rem; /* Slightly larger icons */
-        }
-
-        /* Specific styles for the Features Section card */
-        .features-card .feature-icon {
-            font-size: 3rem; /* Larger icons for features */
-            color: var(--primary-color);
-            margin-bottom: 1.2rem; /* Increased spacing */
-            transition: transform 0.3s ease;
-        }
-        .features-card .feature-item:hover .feature-icon {
-            transform: scale(1.1); /* Zoom effect on icon hover */
-        }
-        .features-card .feature-title {
-            font-weight: 600;
-            color: var(--primary-dark);
-            font-size: 1.3rem; /* Larger feature titles */
-        }
-        .features-card .text-muted {
-            font-size: 0.95rem; /* Slightly smaller description for compactness */
-        }
+            /* Button Styling */
+            .download-btn {
+                background: linear-gradient(to right, var(--primary-color), var(--primary-dark)); /* Gradient background */
+                border: none;
+                font-weight: 600;
+                letter-spacing: 0.7px; /* Increased letter spacing for impact */
+                transition: all 0.3s ease; /* Smooth hover/active transitions */
+                box-shadow: 0 6px 15px rgba(0, 123, 255, 0.35); /* Softer, deeper shadow */
+                color: white; /* Ensure text is white */
+                padding: 0.8rem 1.5rem; /* More generous padding */
+                font-size: 1.1rem; /* Slightly larger font */
+            }
+            .download-btn:hover {
+                background: linear-gradient(to right, var(--primary-dark), #003c7a); /* Darker gradient on hover */
+                transform: translateY(-5px) scale(1.02); /* More pronounced lift and scale */
+                box-shadow: 0 8px 20px rgba(0, 123, 255, 0.45); /* Enhanced shadow on hover */
+            }
+            .download-btn:active {
+                transform: translateY(0); /* Return to original position on click */
+                box-shadow: 0 2px 8px rgba(0, 123, 255, 0.25); /* Smaller shadow on click */
+            }
+            .download-btn:disabled {
+                opacity: 0.6; /* Dim disabled button */
+                cursor: not-allowed;
+                transform: none;
+                box-shadow: none;
+            }
 
 
-        /* Input Field Styling */
-        .input-field {
-            border: 2px solid var(--primary-light); /* Custom border color */
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Subtle inner shadow */
-            transition: all 0.3s ease; /* Smooth transition on focus */
-            font-size: 1.15rem; /* Larger font size */
-            padding: 0.8rem 1.25rem; /* More generous padding */
-        }
-        .input-field:focus {
-            border-color: var(--primary-color); /* Highlight border on focus */
-            box-shadow: 0 0 0 0.3rem rgba(0, 123, 255, 0.3); /* Bootstrap-like focus ring with more spread */
-            background-color: #fff;
-        }
-        .input-label {
-            font-weight: 600;
-        }
+            .download-link-btn {
+                background-color: var(--accent-color); /* Green background */
+                border: none;
+                font-weight: 500;
+                transition: all 0.2s ease;
+                color: white; /* Ensure text is white */
+                padding: 0.5rem 1rem; /* Adjusted padding */
+            }
+            .download-link-btn:hover {
+                background-color: var(--accent-dark); /* Darker green on hover */
+                transform: translateY(-2px); /* Slight lift on hover */
+            }
 
-        /* Button Styling */
-        .download-btn {
-            background: linear-gradient(to right, var(--primary-color), var(--primary-dark)); /* Gradient background */
-            border: none;
-            font-weight: 600;
-            letter-spacing: 0.7px; /* Increased letter spacing for impact */
-            transition: all 0.3s ease; /* Smooth hover/active transitions */
-            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.35); /* Softer, deeper shadow */
-            color: white; /* Ensure text is white */
-            padding: 0.8rem 1.5rem; /* More generous padding */
-            font-size: 1.1rem; /* Slightly larger font */
-        }
-        .download-btn:hover {
-            background: linear-gradient(to right, var(--primary-dark), #003c7a); /* Darker gradient on hover */
-            transform: translateY(-5px) scale(1.02); /* More pronounced lift and scale */
-            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.45); /* Enhanced shadow on hover */
-        }
-        .download-btn:active {
-            transform: translateY(0); /* Return to original position on click */
-            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.25); /* Smaller shadow on click */
-        }
-        .download-btn:disabled {
-            opacity: 0.6; /* Dim disabled button */
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
+            /* Table Styling for Download Options */
+            .download-table {
+                width: 100%; /* Ensure table takes full width of its container */
+            }
+            .download-table thead th {
+                background-color: var(--primary-color); /* Blue header */
+                color: white;
+                font-weight: 600;
+                border-bottom: none;
+                padding: 1rem 0.75rem; /* More padding for header cells */
+                text-align: center; /* Center align header text */
+            }
+            .download-table tbody tr {
+                transition: background-color 0.2s ease; /* Smooth zebra striping and hover */
+            }
+            .download-table tbody tr:nth-child(even) {
+                background-color: #f2f2f2; /* Light grey for even rows */
+            }
+            .download-table tbody tr:hover {
+                background-color: var(--primary-light); /* Light blue on row hover */
+            }
+            .download-table tbody td {
+                padding: 0.8rem 0.75rem; /* More padding for body cells */
+                font-size: 1rem; /* Consistent font size */
+                text-align: center; /* Center align body text */
+            }
 
 
-        .download-link-btn {
-            background-color: var(--accent-color); /* Green background */
-            border: none;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            color: white; /* Ensure text is white */
-            padding: 0.5rem 1rem; /* Adjusted padding */
-        }
-        .download-link-btn:hover {
-            background-color: var(--accent-dark); /* Darker green on hover */
-            transform: translateY(-2px); /* Slight lift on hover */
-        }
+            /* Ad Area Styling (Placeholder) */
+            .ad-area-card {
+                background-color: #fff8e1; /* Softer light yellow background */
+                border: 1px solid #ffe082; /* Matching border color */
+                box-shadow: 0 4px 12px rgba(255, 193, 7, 0.15); /* Softer shadow */
+                padding: 1.5rem; /* Standard padding */
+                text-align: center; /* Center align ad content */
+            }
+            .ad-title {
+                color: #b38800; /* Darker yellow text */
+                font-weight: 600;
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem; /* Space below title */
+            }
+            .ad-text {
+                color: #b38800;
+                font-size: 1rem;
+            }
+            .ad-placeholder-box {
+                border: 2px dashed #ffb300; /* Dashed warning border */
+                min-height: 150px; /* Minimum height for ad space */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
 
-        /* Table Styling for Download Options */
-        .download-table thead th {
-            background-color: var(--primary-color); /* Blue header */
-            color: white;
-            font-weight: 600;
-            border-bottom: none;
-            padding: 1rem 0.75rem; /* More padding for header cells */
-        }
-        .download-table tbody tr {
-            transition: background-color 0.2s ease; /* Smooth zebra striping and hover */
-        }
-        .download-table tbody tr:nth-child(even) {
-            background-color: #f2f2f2; /* Light grey for even rows */
-        }
-        .download-table tbody tr:hover {
-            background-color: var(--primary-light); /* Light blue on row hover */
-        }
-        .download-table tbody td {
-            padding: 0.8rem 0.75rem; /* More padding for body cells */
-            font-size: 1rem; /* Consistent font size */
-        }
+            /* Footer Styling */
+            .footer-custom {
+                background: linear-gradient(to right, #2c3e50, #212529); /* Darker, richer gradient for footer */
+                box-shadow: 0 -4px 15px var(--shadow-medium); /* Shadow above footer */
+                padding-top: 2.5rem; /* More padding */
+                padding-bottom: 2.5rem; /* More padding */
+                margin-top: auto; /* Pushes footer to the bottom of the page */
+                text-align: center; /* Center align footer content */
+            }
+            .footer-text {
+                font-size: 0.95rem; /* Slightly larger text */
+                color: rgba(255,255,255,0.85); /* Slightly less transparent white text */
+                margin-bottom: 0.5rem; /* Space below text */
+            }
+            .footer-links {
+                padding-left: 0; /* Remove default list padding */
+                margin-bottom: 0; /* Remove default margin */
+            }
+            .footer-links .list-inline-item {
+                margin: 0 0.75rem; /* Adjust spacing between links */
+            }
+            .footer-links .list-inline-item a {
+                font-size: 0.95rem; /* Slightly larger text */
+                color: rgba(255,255,255,0.85);
+                transition: color 0.2s ease;
+                text-decoration: none; /* Remove underline */
+            }
+            .footer-links .list-inline-item a:hover {
+                color: var(--primary-light); /* Highlight links on hover with a lighter color */
+            }
 
+            /* Loading Spinner Styling */
+            .spinner-border {
+                width: 1.6rem; /* Slightly larger spinner */
+                height: 1.6rem;
+                margin-right: 0.6rem; /* More space */
+            }
 
-        /* Ad Area Styling (Placeholder) */
-        .ad-area-card {
-            background-color: #fff8e1; /* Softer light yellow background */
-            border: 1px solid #ffe082; /* Matching border color */
-            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.15); /* Softer shadow */
-        }
-        .ad-title {
-            color: #b38800; /* Darker yellow text */
-            font-weight: 600;
-            font-size: 1.5rem;
-        }
-        .ad-text {
-            color: #b38800;
-            font-size: 1rem;
-        }
-        .ad-placeholder-box {
-            border: 2px dashed #ffb300; /* Dashed warning border */
-            min-height: 150px; /* Minimum height for ad space */
-        }
+            /* Video Preview Specific Styles */
+            .video-preview-thumbnail {
+                max-width: 100%;
+                height: auto;
+                border-radius: var(--border-radius-base);
+                box-shadow: 0 6px 15px rgba(0,0,0,0.15); /* More pronounced shadow */
+                max-height: 400px; /* Increased max height for preview */
+                object-fit: contain; /* Ensure image fits well within its bounds */
+            }
+            .preview-placeholder-text {
+                color: var(--text-dark);
+                font-style: italic;
+                font-size: 1rem; /* Slightly larger text */
+                margin-top: 0.5rem; /* Space below the image */
+            }
+        </style>
+    </head>
+    <body>
+        <div id="root"></div>
 
-        /* Footer Styling */
-        .footer-custom {
-            background: linear-gradient(to right, #2c3e50, #212529); /* Darker, richer gradient for footer */
-            box-shadow: 0 -4px 15px var(--shadow-medium); /* Shadow above footer */
-            padding-top: 2.5rem; /* More padding */
-            padding-bottom: 2.5rem; /* More padding */
-            margin-top: auto; /* Pushes footer to the bottom of the page */
-        }
-        .footer-text {
-            font-size: 0.95rem; /* Slightly larger text */
-            color: rgba(255,255,255,0.85); /* Slightly less transparent white text */
-        }
-        .footer-links .list-inline-item a {
-            font-size: 0.95rem; /* Slightly larger text */
-            color: rgba(255,255,255,0.85);
-            transition: color 0.2s ease;
-            text-decoration: none; /* Remove underline */
-        }
-        .footer-links .list-inline-item a:hover {
-            color: var(--primary-light); /* Highlight links on hover with a lighter color */
-        }
+        <script crossorigin src="[https://unpkg.com/react@18/umd/react.production.min.js](https://unpkg.com/react@18/umd/react.production.min.js)"></script>
+        <script crossorigin src="[https://unpkg.com/react-dom@18/umd/react-dom.production.min.js](https://unpkg.com/react-dom@18/umd/react-dom.production.min.js)"></script>
+        <script src="[https://unpkg.com/@babel/standalone/babel.min.js](https://unpkg.com/@babel/standalone/babel.min.js)"></script>
 
-        /* Loading Spinner Styling */
-        .spinner-border {
-            width: 1.6rem; /* Slightly larger spinner */
-            height: 1.6rem;
-            margin-right: 0.6rem; /* More space */
-        }
+        <script type="text/babel">
+            // Destructure useState and useEffect from React for easier use
+            const { useState, useEffect } = React;
 
-        /* Video Preview Specific Styles */
-        .video-preview-thumbnail {
-            max-width: 100%;
-            height: auto;
-            border-radius: var(--border-radius-base);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15); /* More pronounced shadow */
-            max-height: 400px; /* Increased max height for preview */
-            object-fit: contain; /* Ensure image fits well within its bounds */
-        }
-        .preview-placeholder-text {
-            color: var(--text-dark);
-            font-style: italic;
-            font-size: 1rem; /* Slightly larger text */
-        }
-    </style>
-</head>
-<body>
-    <div id="root"></div>
+            // --- Reusable Components (for better modularity) ---
 
-    <!-- React and Babel CDNs -->
-    <!-- React.js library -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <!-- React DOM for rendering React components to the DOM -->
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <!-- Babel for transpiling JSX and ES6+ features in the browser -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <script type="text/babel">
-        // Destructure useState and useEffect from React for easier use
-        const { useState, useEffect } = React;
-
-        // --- Reusable Components (for better modularity) ---
-
-        /**
-         * InfoCard Component: Renders a generic card for About Us, Contact, Privacy Policy, or Terms & Conditions.
-         * Props:
-         * - title (string): The title to display at the top of the card.
-         * - children (ReactNode): Content to be rendered inside the card body.
-         */
-        const InfoCard = ({ title, children }) => (
-            <div className="card shadow-lg mb-5 rounded-4 border-0 info-card">
-                <div className="card-body">
-                    <h3 className="card-title text-center mb-4">{title}</h3>
-                    {children}
-                </div>
-            </div>
-        );
-
-        /**
-         * FeaturesSection Component: Displays a list of features with icons, titles, and descriptions.
-         */
-        const FeaturesSection = () => {
-            // Array of feature objects
-            const features = [
-                { icon: 'fas fa-shield-alt', title: 'Secure & Private', description: 'Your privacy is our priority. We do not store any personal data.' },
-                { icon: 'fas fa-tachometer-alt', title: 'Lightning Fast', description: 'Experience rapid video processing and download speeds.' },
-                { icon: 'fas fa-share-alt', title: 'Multi-Platform', description: 'Supports YouTube, Facebook, TikTok, Pinterest, and more platforms.' },
-                { icon: 'fas fa-file-download', title: 'Multiple Formats', description: 'Download in various qualities and formats (MP4, MP3, etc.).' },
-                { icon: 'fas fa-mobile-alt', title: 'Mobile Friendly', description: 'Enjoy seamless downloads on any device, anywhere.' },
-                { icon: 'fas fa-star', title: 'User-Friendly', description: 'Simple and intuitive interface for effortless video saving.' },
-            ];
-
-            return (
-                <div className="card shadow-lg p-4 mb-5 rounded-4 border-0 bg-info-subtle text-info-emphasis features-card">
+            /**
+             * InfoCard Component: Renders a generic card for About Us, Contact, Privacy Policy, or Terms & Conditions.
+             * Props:
+             * - title (string): The title to display at the top of the card.
+             * - children (ReactNode): Content to be rendered inside the card body.
+             */
+            const InfoCard = ({ title, children }) => (
+                <div className="card shadow-lg mb-5 rounded-4 border-0 info-card">
                     <div className="card-body">
-                        <h3 className="card-title text-primary-dark mb-5 text-center">Our World-Class Features</h3>
-                        <div className="row g-4 justify-content-center">
-                            {features.map((feature, index) => (
-                                <div key={index} className="col-12 col-md-6 col-lg-4 d-flex align-items-stretch">
-                                    <div className="text-center p-3 feature-item flex-fill">
-                                        <i className={`${feature.icon} feature-icon mb-3`}></i>
-                                        <h5 className="feature-title">{feature.title}</h5>
-                                        <p className="text-muted">{feature.description}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                        <h3 className="card-title text-center mb-4">{title}</h3>
+                        {children}
                     </div>
                 </div>
             );
-        };
-
-        // --- Main App Component ---
-        const App = () => {
-            // State variables using React hooks
-            const [videoUrl, setVideoUrl] = useState(''); // Stores the input video URL
-            const [downloadOptions, setDownloadOptions] = useState(null); // Stores fetched download options
-            const [error, setError] = useState(''); // Stores error messages
-            const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Controls sidebar visibility on mobile
-            const [isLoading, setIsLoading] = useState(false); // Indicates if data is being processed
-            const [currentPage, setCurrentPage] = useState('General'); // Controls which main content page is displayed
-            const [videoThumbnail, setVideoThumbnail] = useState(null); // Stores the URL for the video thumbnail
 
             /**
-             * Extracts YouTube video ID from a given URL.
-             * @param {string} url - The video URL.
-             * @returns {string|null} The YouTube video ID or null if not found.
+             * FeaturesSection Component: Displays a list of features with icons, titles, and descriptions.
              */
-            const getYouTubeVideoId = (url) => {
-                const regExp = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
-                const match = url.match(regExp);
-                return (match && match[1]) ? match[1] : null;
-            };
+            const FeaturesSection = () => {
+                // Array of feature objects
+                const features = [
+                    { icon: 'fas fa-shield-alt', title: 'Secure & Private', description: 'Your privacy is our priority. We do not store any personal data.' },
+                    { icon: 'fas fa-tachometer-alt', title: 'Lightning Fast', description: 'Experience rapid video processing and download speeds.' },
+                    { icon: 'fas fa-share-alt', title: 'Multi-Platform', description: 'Supports YouTube, Facebook, TikTok, Pinterest, and more platforms.' },
+                    { icon: 'fas fa-file-download', title: 'Multiple Formats', description: 'Download in various qualities and formats (MP4, MP3, etc.).' },
+                    { icon: 'fas fa-mobile-alt', title: 'Mobile Friendly', description: 'Enjoy seamless downloads on any device, anywhere.' },
+                    { icon: 'fas fa-star', title: 'User-Friendly', description: 'Simple and intuitive interface for effortless video saving.' },
+                ];
 
-            /**
-             * Validates if a given string is a syntactically correct URL.
-             * @param {string} url - The string to validate.
-             * @returns {boolean} True if valid URL, false otherwise.
-             */
-            const isValidUrl = (url) => {
-                try {
-                    new URL(url);
-                    return true;
-                } catch (e) {
-                    return false;
-                }
-            };
-
-            /**
-             * Handles the download button click, makes API call to PHP backend, and sets download options.
-             * @param {Event} e - The form submission event.
-             */
-            const handleDownload = async (e) => {
-                e.preventDefault(); // Prevent default form submission
-                setError(''); // Clear previous errors
-                setDownloadOptions(null); // Clear previous download options
-                setVideoThumbnail(null); // Clear previous thumbnail
-                setIsLoading(true); // Set loading state to true
-
-                // Input validation
-                if (!videoUrl) {
-                    setError('Please enter a video URL.');
-                    setIsLoading(false);
-                    return;
-                }
-
-                if (!isValidUrl(videoUrl)) {
-                    setError('Please enter a valid URL (e.g., https://www.example.com/video).');
-                    setIsLoading(false);
-                    return;
-                }
-
-                try {
-                    // Make a fetch call to your PHP backend script on Hostinger
-                    // Replace '/download.php' with the actual path if your PHP file is in a subdirectory,
-                    // e.g., 'https://www.allvideodownloaderhubs.in/api/download.php'
-                    const response = await fetch('download.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json', // Sending JSON to PHP backend
-                        },
-                        body: JSON.stringify({ url: videoUrl }) // Send video URL as JSON
-                    });
-
-                    // Check if the response is OK (status 200-299)
-                    if (response.ok) {
-                        const data = await response.json(); // PHP script should return JSON
-
-                        if (data.success) {
-                            setDownloadOptions(data.options);
-                            setVideoThumbnail(data.thumbnail || null); // Use thumbnail from backend
-                        } else {
-                            setError(data.message || 'Failed to fetch download options.');
-                        }
-                    } else {
-                        // Handle HTTP errors (e.g., 404, 500)
-                        const errorText = await response.text();
-                        setError(`Server error: ${response.status} - ${errorText || 'Unknown error'}`);
-                    }
-                } catch (err) {
-                    // Handle network errors (e.g., no internet, CORS issues)
-                    console.error("Frontend fetch error:", err);
-                    setError(`An unexpected error occurred: ${err.message}. Please try again.`);
-                } finally {
-                    setIsLoading(false); // Always stop loading, regardless of success or error
-                }
-            };
-
-            /**
-             * Returns the dynamic main title based on the currently selected page.
-             * @returns {string} The main title text.
-             */
-            const getMainTitle = () => {
-                switch (currentPage) {
-                    case 'YouTube': return 'Download YouTube Videos!';
-                    case 'Facebook': return 'Download Facebook Videos!';
-                    case 'TikTok': return 'Download TikTok Videos!';
-                    case 'Pinterest': return 'Download Pinterest Videos & Images!';
-                    case 'AboutUs': return 'About allvideodownloaderhubs.in';
-                    case 'Contact': return 'Contact Us';
-                    case 'PrivacyPolicy': return 'Privacy Policy';
-                    case 'TermsConditions': return 'Terms & Conditions';
-                    default: return 'Download Videos from Any Platform!';
-                }
-            };
-
-            /**
-             * Returns the dynamic input placeholder text based on the currently selected page.
-             * @returns {string} The placeholder text for the URL input.
-             */
-            const getInputPlaceholder = () => {
-                switch (currentPage) {
-                    case 'YouTube': return 'Paste YouTube video link here...';
-                    case 'Facebook': return 'Paste Facebook video link here...';
-                    case 'TikTok': return 'Paste TikTok video link here...';
-                    case 'Pinterest': return 'Paste Pinterest link (video/image) here...';
-                    default: return 'e.g., https://www.example.com/video-link';
-                }
-            };
-
-            /**
-             * Toggles the visibility of the sidebar for mobile views.
-             */
-            const toggleSidebar = () => {
-                setIsSidebarOpen(!isSidebarOpen);
-            };
-
-            /**
-             * Handles navigation clicks from the sidebar, updating the current page.
-             * Also clears form states for a clean experience on page change.
-             * @param {string} page - The name of the page to navigate to.
-             */
-            const handleNavigationSelect = (page) => {
-                setCurrentPage(page);
-                setVideoUrl(''); // Clear URL input when changing page
-                setDownloadOptions(null); // Clear previous options
-                setError(''); // Clear any previous errors
-                setVideoThumbnail(null); // Clear thumbnail on page change
-                setIsSidebarOpen(false); // Close sidebar on mobile after selection
-            };
-
-            // useEffect hook to handle window resize, closing sidebar on larger screens
-            useEffect(() => {
-                const handleResize = () => {
-                    if (window.innerWidth >= 768) { // Bootstrap's md breakpoint
-                        setIsSidebarOpen(false); // Ensure sidebar is closed on desktop
-                    }
-                };
-                window.addEventListener('resize', handleResize);
-                // Cleanup function to remove event listener on component unmount
-                return () => window.removeEventListener('resize', handleResize);
-            }, []); // Empty dependency array means this effect runs once on mount
-
-            // --- Render functions for various content sections ---
-
-            const renderAboutUs = () => (
-                <InfoCard title="About allvideodownloaderhubs.in">
-                    <p>Welcome to allvideodownloaderhubs.in, your one-stop solution for downloading videos from a multitude of online platforms! We strive to provide a fast, free, and incredibly user-friendly experience, enabling you to save your favorite videos for offline viewing without hassle.</p>
-                    <p>Our mission is to simplify the video download process. With support for popular sites like YouTube, Facebook, TikTok, Pinterest, and many others, you can quickly get high-quality videos and audio files directly to your device. We are committed to your privacy and security, ensuring that your data remains confidential and your downloads are safe.</p>
-                    <p>Thank you for choosing allvideodownloaderhubs.in. Enjoy your videos, anytime, anywhere!</p>
-                </InfoCard>
-            );
-
-            const renderContact = () => (
-                <InfoCard title="Contact Us">
-                    <p>Have questions, feedback, or need assistance? We're here to help!</p>
-                    <p>You can reach us directly via email:</p>
-                    <p className="lead text-center fw-bold text-primary-dark">
-                        <i className="fas fa-envelope me-2"></i> support@allvideodownloaderhubs.in
-                    </p>
-                    <p>We aim to respond to all inquiries within 24-48 business hours.</p>
-                    <p>For technical issues, please include:</p>
-                    <ul>
-                        <li><i className="fas fa-check-circle"></i> The URL you were trying to download.</li>
-                        <li><i className="fas fa-check-circle"></i> A description of the error or issue you encountered.</li>
-                        <li><i className="fas fa-check-circle"></i> The device and browser you are using.</li>
-                    </ul>
-                    <p>Your feedback is valuable to us as we continuously work to improve our service!</p>
-                </InfoCard>
-            );
-
-            const renderPrivacyPolicy = () => (
-                <InfoCard title="Privacy Policy">
-                    <p>At allvideodownloaderhubs.in, your privacy is of utmost importance to us. This Privacy Policy outlines the types of information we collect, how it's used, and the measures we take to protect it.</p>
-                    <h4>Information We Collect:</h4>
-                    <ul>
-                        <li><i className="fas fa-user-shield"></i> <strong>Non-Personal Information:</strong> We may collect non-personally identifiable information such as browser type, operating system, IP address (anonymized), and access times to analyze trends, administer the site, and track user movements for aggregate use. This data helps us improve our service.</li>
-                        <li><i className="fas fa-video"></i> <strong>Video URLs:</strong> When you use our service, the video URLs you paste are processed solely for the purpose of generating download links. We do not store these URLs or any content associated with them on our servers beyond what is necessary to facilitate the download process.</li>
-                        <li><i className="fas fa-cookie-bite"></i> <strong>Cookies:</strong> We may use cookies to enhance your experience, such as remembering your preferences. You can configure your browser to refuse cookies, but some parts of our service may not function properly without them.</li>
-                    </ul>
-                    <h4>How We Use Information:</h4>
-                    <p>The information collected is used exclusively to operate, maintain, and improve the features and functionality of allvideodownloaderhubs.in. We do not sell, trade, or otherwise transfer your personally identifiable information to outside parties.</p>
-                    <h4>Data Security:</h4>
-                    <p>We implement a variety of security measures to maintain the safety of your information when you use our service. However, no method of transmission over the Internet or method of electronic storage is 100% secure.</p>
-                    <h4>Third-Party Links:</h4>
-                    <p>Our website may contain links to third-party websites or services that are not owned or controlled by allvideodownloaderhubs.in. We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party sites or services.</p>
-                    <h4>Changes to This Policy:</h4>
-                    <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
-                    <p>By using our site, you consent to our Privacy Policy.</p>
-                </InfoCard>
-            );
-
-            const renderTermsConditions = () => (
-                <InfoCard title="Terms & Conditions">
-                    <p>Welcome to allvideodownloaderhubs.in. By accessing or using our website, you agree to comply with and be bound by the following Terms and Conditions.</p>
-                    <h4>Acceptance of Terms:</h4>
-                    <p>By using this service, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use our website.</p>
-                    <h4>Service Description:</h4>
-                    <p>allvideodownloaderhubs.in provides a tool to facilitate the downloading of publicly available video content from various online platforms. We do not host any video content on our servers. Our service acts solely as an intermediary.</p>
-                    <h4>User Responsibilities:</h4>
-                    <ul>
-                        <li><i className="fas fa-check-circle"></i> You agree to use this service only for lawful purposes.</li>
-                        <li><i className="fas fa-check-circle"></i> You are solely responsible for compliance with any copyright laws and terms of service of the video platforms from which you download content.</li>
-                        <li><i className="fas fa-check-circle"></i> You must not use this service to download copyrighted material without permission from the copyright holder.</li>
-                        <li><i className="fas fa-check-circle"></i> You agree not to use our service for any commercial purposes without prior written consent from us.</li>
-                    </ul>
-                    <h4>Disclaimer of Warranties:</h4>
-                    <p>Our service is provided "as is" without any warranties, express or implied. We do not guarantee that the service will be uninterrupted, error-free, or free of viruses or other harmful components.</p>
-                    <h4>Limitation of Liability:</h4>
-                    <p>In no event shall allvideodownloaderhubs.in be liable for any direct, indirect, incidental, special, or consequential damages arising out of or in any way connected with the use of our service.</p>
-                    <h4>Changes to Terms:</h4>
-                    <p>We reserve the right to modify these Terms and Conditions at any time. Your continued use of the website after any such changes constitutes your acceptance of the new Terms and Conditions.</p>
-                    <p>If you have any questions about these Terms, please contact us.</p>
-                </InfoCard>
-            );
-
-            // Conditional rendering for the main content area based on currentPage state
-            const renderMainContent = () => {
-                switch (currentPage) {
-                    case 'AboutUs':
-                        return renderAboutUs();
-                    case 'Contact':
-                        return renderContact();
-                    case 'PrivacyPolicy':
-                        return renderPrivacyPolicy();
-                    case 'TermsConditions':
-                        return renderTermsConditions();
-                    default: // 'General', 'YouTube', 'Facebook', 'TikTok', 'Pinterest'
-                        return (
-                            <>
-                                {/* Main Input Card */}
-                                <div className="card download-card p-4 p-md-5 mb-5 rounded-4">
-                                    <div className="card-body">
-                                        <h2 className="main-title text-center mb-4">{getMainTitle()}</h2>
-                                        <form onSubmit={handleDownload} className="row g-3 align-items-center">
-                                            <div className="col-12 col-lg-9">
-                                                <label htmlFor="videoUrl" className="form-label input-label visually-hidden">Video URL</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control form-control-lg input-field rounded-pill"
-                                                    id="videoUrl"
-                                                    placeholder={getInputPlaceholder()}
-                                                    value={videoUrl}
-                                                    onChange={(e) => setVideoUrl(e.target.value)}
-                                                    required
-                                                    disabled={isLoading}
-                                                />
-                                            </div>
-                                            <div className="col-12 col-lg-3 d-grid">
-                                                <button
-                                                    type="submit"
-                                                    className="btn btn-lg download-btn rounded-pill"
-                                                    disabled={isLoading || !videoUrl.trim()}
-                                                >
-                                                    {isLoading ? (
-                                                        <>
-                                                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                                            Loading...
-                                                        </>
-                                                    ) : (
-                                                        <>
-                                                            <i className="fas fa-cloud-download-alt me-2"></i>
-                                                            Download
-                                                        </>
-                                                    )}
-                                                </button>
-                                            </div>
-                                        </form>
-                                        {error && (
-                                            <div className="alert alert-danger mt-4 rounded-3" role="alert">
-                                                <i className="fas fa-exclamation-triangle me-2"></i> {error}
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-
-                                {/* Video Preview Section */}
-                                {videoThumbnail && (currentPage === 'General' || currentPage === 'YouTube') && (
-                                    <div className="card preview-card p-4 mb-5 rounded-4">
-                                        <div className="card-body text-center">
-                                            <h4 className="card-title text-primary-dark mb-4">Video Preview</h4>
-                                            <img
-                                                src={videoThumbnail}
-                                                alt="Video Thumbnail"
-                                                className="video-preview-thumbnail mb-3"
-                                                onError={(e) => {
-                                                    // Fallback for broken thumbnail images
-                                                    e.target.onerror = null;
-                                                    e.target.src = "https://placehold.co/640x360/cccccc/333333?text=Thumbnail+Not+Available";
-                                                    e.target.alt = "Thumbnail Not Available";
-                                                }}
-                                            />
-                                            <p className="preview-placeholder-text">Thumbnail is a representation and may not reflect final video quality.</p>
+                return (
+                    <div className="card shadow-lg p-4 mb-5 rounded-4 border-0 bg-info-subtle text-info-emphasis features-card">
+                        <div className="card-body">
+                            <h3 className="card-title text-primary-dark mb-5 text-center">Our World-Class Features</h3>
+                            <div className="row g-4 justify-content-center">
+                                {features.map((feature, index) => (
+                                    <div key={index} className="col-12 col-md-6 col-lg-4 d-flex align-items-stretch">
+                                        <div className="text-center p-3 feature-item flex-fill">
+                                            <i className={`${feature.icon} feature-icon mb-3`}></i>
+                                            <h5 className="feature-title">{feature.title}</h5>
+                                            <p className="text-muted">{feature.description}</p>
                                         </div>
                                     </div>
-                                )}
-
-
-                                {/* Download Options Section */}
-                                {downloadOptions && downloadOptions.length > 0 && (
-                                    <div className="card options-card p-4 mb-5 rounded-4">
-                                        <div className="card-body">
-                                            <h4 className="card-title text-primary-dark mb-4 text-center">Download Options</h4>
-                                            <div className="table-responsive">
-                                                <table className="table table-hover download-table text-center align-middle">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Quality</th>
-                                                            <th>Format</th>
-                                                            <th>Size</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {downloadOptions.map((option, index) => (
-                                                            <tr key={index}>
-                                                                <td>{option.quality}</td>
-                                                                <td>{option.format}</td>
-                                                                <td>{option.size}</td>
-                                                                <td>
-                                                                    <a
-                                                                        href={option.link}
-                                                                        className="btn btn-sm download-link-btn rounded-pill px-3"
-                                                                        target="_blank"
-                                                                        rel="noopener noreferrer"
-                                                                        // If your PHP handles direct download, you might not need an 'a' tag here.
-                                                                        // Instead, trigger another fetch to the PHP script with the selected option.
-                                                                    >
-                                                                        <i className="fas fa-download me-1"></i> Download
-                                                                    </a>
-                                                                </td>
-                                                            </tr>
-                                                        ))}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div className="alert alert-info mt-4 rounded-3 text-center" role="alert">
-                                                <i className="fas fa-info-circle me-2"></i> Click on a download button to start!
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-
-                                {/* Features Section */}
-                                <FeaturesSection />
-                            </>
-                        );
-                }
-            };
-
-            return (
-                <div className="app-container">
-                    {/* Header */}
-                    <header className="header-custom py-3 px-4 d-flex justify-content-between align-items-center w-100">
-                        <button className="menu-toggle-btn d-md-none" onClick={toggleSidebar} aria-label="Toggle navigation">
-                            <i className="fas fa-bars"></i>
-                        </button>
-                        <a href="#" className="site-title text-decoration-none h4 mb-0 text-white" onClick={() => handleNavigationSelect('General')}>
-                            allvideodownloaderhubs.in
-                        </a>
-                        <div className="d-none d-md-flex align-items-center"> {/* Desktop nav */}
-                            <a href="#" className="text-white text-decoration-none mx-3 fw-medium" onClick={() => handleNavigationSelect('AboutUs')}>About Us</a>
-                            <a href="#" className="text-white text-decoration-none mx-3 fw-medium" onClick={() => handleNavigationSelect('Contact')}>Contact</a>
-                        </div>
-                    </header>
-
-                    {/* Sidebar for Mobile & Desktop */}
-                    <nav className={`sidebar ${isSidebarOpen ? 'sidebar-open' : ''} d-flex flex-column`}>
-                        <h4 className="sidebar-title mt-4">Platforms</h4>
-                        <ul className="list-unstyled sidebar-nav-list flex-grow-1">
-                            <li className="nav-item">
-                                <a href="#" className={`sidebar-nav-link ${currentPage === 'General' ? 'active' : ''}`} onClick={() => handleNavigationSelect('General')}>
-                                    <i className="fas fa-globe"></i> All Platforms
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a href="#" className={`sidebar-nav-link ${currentPage === 'YouTube' ? 'active' : ''}`} onClick={() => handleNavigationSelect('YouTube')}>
-                                    <i className="fab fa-youtube text-danger"></i> YouTube
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a href="#" className={`sidebar-nav-link ${currentPage === 'Facebook' ? 'active' : ''}`} onClick={() => handleNavigationSelect('Facebook')}>
-                                    <i className="fab fa-facebook text-primary"></i> Facebook
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a href="#" className={`sidebar-nav-link ${currentPage === 'TikTok' ? 'active' : ''}`} onClick={() => handleNavigationSelect('TikTok')}>
-                                    <i className="fab fa-tiktok text-dark"></i> TikTok
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a href="#" className={`sidebar-nav-link ${currentPage === 'Pinterest' ? 'active' : ''}`} onClick={() => handleNavigationSelect('Pinterest')}>
-                                    <i className="fab fa-pinterest text-danger"></i> Pinterest
-                                </a>
-                            </li>
-                        </ul>
-                        <h4 className="sidebar-title mt-4">Info</h4>
-                        <ul className="list-unstyled sidebar-nav-list">
-                            <li className="nav-item">
-                                <a href="#" className={`sidebar-nav-link ${currentPage === 'PrivacyPolicy' ? 'active' : ''}`} onClick={() => handleNavigationSelect('PrivacyPolicy')}>
-                                    <i className="fas fa-file-contract"></i> Privacy Policy
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a href="#" className={`sidebar-nav-link ${currentPage === 'TermsConditions' ? 'active' : ''}`} onClick={() => handleNavigationSelect('TermsConditions')}>
-                                    <i className="fas fa-gavel"></i> Terms & Conditions
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-
-                    {/* Overlay for mobile sidebar */}
-                    {isSidebarOpen && <div className="overlay d-md-none" onClick={toggleSidebar}></div>}
-
-                    {/* Main Content Wrapper */}
-                    <main className="main-content-wrapper">
-                        {renderMainContent()}
-                    </main>
-
-                    {/* Footer */}
-                    <footer className="footer-custom mt-auto text-light text-center">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-12 col-md-6 mb-3 mb-md-0">
-                                    <p className="footer-text mb-0">&copy; {new Date().getFullYear()} allvideodownloaderhubs.in. All rights reserved.</p>
-                                </div>
-                                <div className="col-12 col-md-6">
-                                    <ul className="list-inline footer-links mb-0">
-                                        <li className="list-inline-item"><a href="#" onClick={() => handleNavigationSelect('AboutUs')}>About Us</a></li>
-                                        <li className="list-inline-item"><a href="#" onClick={() => handleNavigationSelect('Contact')}>Contact</a></li>
-                                        <li className="list-inline-item"><a href="#" onClick={() => handleNavigationSelect('PrivacyPolicy')}>Privacy Policy</a></li>
-                                        <li className="list-inline-item"><a href="#" onClick={() => handleNavigationSelect('TermsConditions')}>Terms</a></li>
-                                    </ul>
-                                </div>
+                                ))}
                             </div>
                         </div>
-                    </footer>
-                </div>
-            );
-        };
+                    </div>
+                );
+            };
 
-        // Render the main App component into the 'root' div
-        ReactDOM.render(<App />, document.getElementById('root'));
-    </script>
+            // --- Main App Component ---
+            const App = () => {
+                // State variables using React hooks
+                const [videoUrl, setVideoUrl] = useState(''); // Stores the input video URL
+                const [downloadOptions, setDownloadOptions] = useState(null); // Stores fetched download options
+                const [error, setError] = useState(''); // Stores error messages
+                const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Controls sidebar visibility on mobile
+                const [isLoading, setIsLoading] = useState(false); // Indicates if data is being processed
+                const [currentPage, setCurrentPage] = useState('General'); // Controls which main content page is displayed
+                const [videoThumbnail, setVideoThumbnail] = useState(null); // Stores the URL for the video thumbnail
 
-    <!-- Bootstrap Bundle with Popper (for responsive features like navbar collapse) -->
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"
-    ></script>
-</body>
-</html>
+                /**
+                 * Extracts YouTube video ID from a given URL.
+                 * @param {string} url - The video URL.
+                 * @returns {string|null} The YouTube video ID or null if not found.
+                 */
+                const getYouTubeVideoId = (url) => {
+                    const regExp = /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[&?]v=)|youtu\.be\/)([^"&?/\s]{11})/i;
+                    const match = url.match(regExp);
+                    return (match && match
+
+= [
+                    { icon: 'fas fa-shield-alt', title: 'Secure & Private', description: 'Your privacy is our priority. We do not store any personal data.' },
+                    { icon: 'fas fa-tachometer-alt', title: 'Lightning Fast', description: 'Experience rapid video processing and download speeds.' },
+                    { icon: 'fas fa-share-alt', title: 'Multi-Platform', description: 'Supports YouTube, Facebook, TikTok, Pinterest, and more platforms.' },
+                    { icon: 'fas fa-file-download', title: 'Multiple Formats', description: 'Download in various qualities and formats (MP4, MP3, etc.).' },
+                    { icon: 'fas fa-mobile-alt', title: 'Mobile Friendly', description: 'Enjoy seamless downloads on any device, anywhere.' },
+                    { icon: 'fas fa-star', title: 'User-Friendly', description: 'Simple and intuitive interface for effortless video saving.' },
+                ];
+
+                return (
+                    <div className="card shadow-lg p-4 mb-5 rounded-4 border-0 bg-info-subtle text-info-emphasis features-card">
+                        <div className="card-body">
+                            <h3 className="card-title text-primary-dark mb-5 text-center">Our World-Class Features</h3>
+                            <div className="row g-4 justify-content-center">
+                                {features.map((feature, index) => (
+                                    <div key={index} className="col-12 col-md-6 col-lg-4 d-flex align-items-stretch">
+                                        <div className="text-center p-3 feature-item flex-fill">
+                                            <i className={`${feature.icon} feature-icon mb-3`}></i>
+                                            <h5 className="feature-title">{feature.title}</h5>
+                                            <p className="text-muted">{feature.description}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                );
+            };
+
+            // --- Main App Component ---
+            const App = () => {
+                // State variables using React hooks
+                const [videoUrl, setVideoUrl] = useState(''); // Stores the input video URL
+                const [downloadOptions, setDownloadOptions] = useState(null); // Stores fetched download options
+                const [error, setError] = useState(''); // Stores error messages
+                const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Controls sidebar visibility on mobile
+                const [isLoading, setIsLoading] = useState(false); // Indicates if data is being processed
+                const [currentPage, setCurrentPage] = useState('General'); // Controls which main content page is displayed
+                const [videoThumbnail, setVideoThumbnail] = useState(null); // Stores the URL for the video thumbnail
+
+                /**
+                 * Extracts YouTube video ID from a given URL.
+                 * @param {string} url - The video URL.
+                 * @returns {string|null} The YouTube video ID or null if not found.
+                 */
+                const getYouTubeVideoId = (url) => {
+                    const regExp = /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[&?]v=)|youtu\.be\/)([^"&?/\s]{11})/i;
+                    const match = url.match(regExp);
+                    return (match && match
+
+= [
+                    { icon: 'fas fa-shield-alt', title: 'Secure & Private', description: 'Your privacy is our priority. We do not store any personal data.' },
+                    { icon: 'fas fa-tachometer-alt', title: 'Lightning Fast', description: 'Experience rapid video processing and download speeds.' },
+                    { icon: 'fas fa-share-alt', title: 'Multi-Platform', description: 'Supports YouTube, Facebook, TikTok, Pinterest, and more platforms.' },
+                    { icon: 'fas fa-file-download', title: 'Multiple Formats', description: 'Download in various qualities and formats (MP4, MP3, etc.).' },
+                    { icon: 'fas fa-mobile-alt', title: 'Mobile Friendly', description: 'Enjoy seamless downloads on any device, anywhere.' },
+                    { icon: 'fas fa-star', title: 'User-Friendly', description: 'Simple and intuitive interface for effortless video saving
