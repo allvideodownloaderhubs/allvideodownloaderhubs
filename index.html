@@ -496,21 +496,58 @@
             margin-top: 1rem;
         }
         .format-btn {
-            padding: 0.8rem 1.5rem;
+            padding: 1rem 1.5rem;
             border: 2px solid var(--primary-color);
-            background-color: transparent;
+            background: linear-gradient(135deg, transparent, rgba(0, 123, 255, 0.05));
             color: var(--primary-color);
             border-radius: var(--border-radius-base);
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
+            min-width: 140px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
         .format-btn:hover, .format-btn.active {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+            border-color: var(--primary-light);
+        }
+        .format-btn small {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            display: block;
+            margin-top: 0.25rem;
+        }
+        .format-btn .badge {
+            font-size: 0.7rem;
+            margin-top: 0.25rem;
+        }
+        
+        /* Video Preview */
+        .video-preview {
+            background: var(--card-bg);
+            border-radius: var(--border-radius-base);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px var(--shadow-light);
+            border: 1px solid rgba(0, 123, 255, 0.1);
+        }
+        .video-preview img {
+            border-radius: var(--border-radius-base);
+            box-shadow: 0 4px 15px var(--shadow-light);
+            max-width: 100%;
+            height: auto;
+        }
+        .video-preview h6 {
+            color: var(--primary-dark);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
         }
 
         /* Footer Styling */
@@ -952,12 +989,203 @@
         });
 
         // Download form functionality
-        document.getElementById('downloadForm').addEventListener('submit', function(e) {
+        document.getElementById('downloadForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const urlInput = document.getElementById('videoUrl');
             const downloadBtn = document.getElementById('downloadBtn');
             const statusMessage = document.getElementById('statusMessage');
+            const formatSelection = document.getElementById('formatSelection');
+            
+            const videoUrl = urlInput.value.trim();
+            
+            if (!videoUrl) {
+                showStatus('Please enter a valid video URL', 'error');
+                return;
+            }
+            
+            // Show loading state
+            downloadBtn.disabled = true;
+            downloadBtn.innerHTML = '<span class="loading-spinner"></span> Processing...';
+            showStatus('Analyzing video URL...', 'info');
+            
+            try {
+                // Detect platform and process video
+                const platform = detectPlatform(videoUrl);
+                if (!platform) {
+                    throw new Error('Unsupported platform. Please use YouTube, TikTok, Facebook, Instagram, or Twitter URLs.');
+                }
+                
+                // Simulate API call and get video information
+                const videoInfo = await processVideoUrl(videoUrl, platform);
+                
+                if (videoInfo.success) {
+                    showStatus('Video found! Choose your preferred format and quality.', 'success');
+                    displayFormatOptions(videoInfo.formats, videoInfo.title, videoInfo.thumbnail);
+                } else {
+                    throw new Error(videoInfo.error || 'Failed to process video');
+                }
+                
+            } catch (error) {
+                showStatus(error.message, 'error');
+                console.error('Download error:', error);
+            } finally {
+                // Reset button state
+                downloadBtn.disabled = false;
+                downloadBtn.innerHTML = '<i class="fas fa-download me-2"></i>Download';
+            }
+        });
+        
+        // Platform detection function
+        function detectPlatform(url) {
+            const platforms = {
+                youtube: /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/,
+                tiktok: /tiktok\.com\/@[\w.-]+\/video\/(\d+)/,
+                facebook: /facebook\.com\/.*\/videos\/(\d+)/,
+                instagram: /instagram\.com\/(?:p|reel)\/([A-Za-z0-9_-]+)/,
+                twitter: /twitter\.com\/\w+\/status\/(\d+)/
+            };
+            
+            for (const [platform, regex] of Object.entries(platforms)) {
+                if (regex.test(url)) {
+                    return platform;
+                }
+            }
+            return null;
+        }
+        
+        // Process video URL using real API
+        async function processVideoUrl(url, platform) {
+            try {
+                const response = await fetch('/api/video-info', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ url: url })
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Failed to fetch video information');
+                }
+                
+                return await response.json();
+            } catch (error) {
+                console.error('API Error:', error);
+                return { 
+                    success: false, 
+                    error: error.message || 'Network error - please check your connection'
+                };
+            }
+        }
+        
+        // Display format options
+        function displayFormatOptions(formats, title, thumbnail) {
+            const formatSelection = document.getElementById('formatSelection');
+            const formatButtons = document.getElementById('formatButtons');
+            
+            // Clear previous options
+            formatButtons.innerHTML = '';
+            
+            // Add video preview
+            const previewHtml = `
+                <div class="video-preview mb-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-4">
+                            <img src="${thumbnail}" alt="Video Thumbnail" class="img-fluid rounded" style="max-height: 150px; object-fit: cover;">
+                        </div>
+                        <div class="col-md-8">
+                            <h6 class="mb-2">${title}</h6>
+                            <p class="text-muted mb-0">Choose your preferred format and quality:</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            formatButtons.innerHTML = previewHtml;
+            
+            // Add format buttons
+            formats.forEach((format, index) => {
+                const button = document.createElement('button');
+                button.className = 'btn btn-outline-primary format-btn me-2 mb-2';
+                button.innerHTML = `
+                    <i class="fas fa-download me-2"></i>
+                    ${format.quality} ${format.format.toUpperCase()}
+                    <small class="d-block">${format.size}</small>
+                    ${format.watermark === false ? '<small class="badge bg-success">No Watermark</small>' : ''}
+                `;
+                
+                button.addEventListener('click', () => {
+                    downloadVideo(format, title);
+                });
+                
+                formatButtons.appendChild(button);
+            });
+            
+            formatSelection.style.display = 'block';
+        }
+        
+        // Download video function
+        async function downloadVideo(format, title) {
+            showStatus(`Preparing download for ${format.quality} ${format.format.toUpperCase()}...`, 'info');
+            
+            try {
+                const url = document.getElementById('videoUrl').value.trim();
+                
+                // Create form data for download request
+                const downloadData = {
+                    url: url,
+                    format_id: format.format_id,
+                    quality: format.quality
+                };
+                
+                showStatus('Starting download...', 'info');
+                
+                // Make download request
+                const response = await fetch('/api/download', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(downloadData)
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Download failed');
+                }
+                
+                // Get the file as blob
+                const blob = await response.blob();
+                const downloadUrl = window.URL.createObjectURL(blob);
+                
+                // Create download link
+                const link = document.createElement('a');
+                link.href = downloadUrl;
+                link.download = `${title}.${format.format}`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Clean up the blob URL
+                window.URL.revokeObjectURL(downloadUrl);
+                
+                showStatus(`Download completed! ${format.quality} ${format.format.toUpperCase()} (${format.size})`, 'success');
+                
+            } catch (error) {
+                console.error('Download error:', error);
+                showStatus(`Download failed: ${error.message}`, 'error');
+            }
+        }
+        
+        // Status message function
+        function showStatus(message, type) {
+            const statusMessage = document.getElementById('statusMessage');
+            statusMessage.className = `status-message status-${type}`;
+            statusMessage.innerHTML = message;
+            statusMessage.style.display = 'block';
+        }
             const formatSelection = document.getElementById('formatSelection');
             
             const url = urlInput.value.trim();
