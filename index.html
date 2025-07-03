@@ -9,8 +9,11 @@
     <meta name="keywords" content="video downloader, youtube downloader, facebook video download, tiktok video download, pinterest video download, free video downloader, online video downloader">
     <meta name="author" content="allvideodownloaderhubs">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- External Stylesheets (Bootstrap & Font Awesome) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- All CSS Styles for the website are included here -->
     <style>
         /* Import Google's Inter font for consistent typography */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -39,79 +42,77 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-subtle);
             color: var(--text-dark);
-            margin: 0; /* Remove default body margin */
-            min-height: 100vh; /* Ensure body takes full viewport height */
+            margin: 0;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column; /* Allows footer to stick to bottom */
-            line-height: 1.6; /* Improved readability for body text */
+            flex-direction: column;
+            line-height: 1.6;
         }
 
-        /* React root div to fill available space and manage internal layout */
         #root {
-            flex-grow: 1; /* Allows the React app to expand and push footer down */
+            flex-grow: 1;
             display: flex;
-            flex-direction: column; /* Ensures vertical stacking within the app */
+            flex-direction: column;
         }
 
-        /* Container for the main application content, applying a subtle background gradient */
         .app-container {
             background: linear-gradient(to bottom right, #f0f2f5, #e0e5ec);
-            flex-grow: 1; /* Allows content area to fill remaining vertical space */
+            flex-grow: 1;
             display: flex;
-            flex-direction: column; /* Default to column layout on small screens */
+            flex-direction: column;
         }
 
-        /* Custom Header Styling */
+        /* Header Styling */
         .header-custom {
-            background: linear-gradient(to right, var(--primary-color), var(--primary-dark)); /* Gradient for a vibrant header */
-            box-shadow: 0 4px 15px var(--shadow-medium); /* Soft shadow for depth */
-            position: sticky; /* Keeps header visible on scroll */
+            background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+            box-shadow: 0 4px 15px var(--shadow-medium);
+            position: sticky;
             top: 0;
-            z-index: 1020; /* Ensures header is above other elements like sidebar on scroll */
+            z-index: 1020;
         }
         .site-title {
             font-weight: 700;
             letter-spacing: 0.5px;
-            transition: transform 0.2s ease-in-out; /* Smooth hover effect */
-            color: var(--text-light); /* Ensures title text is white and readable */
-            text-decoration: none; /* Remove underline from link */
+            transition: transform 0.2s ease-in-out;
+            color: var(--text-light);
+            text-decoration: none;
         }
         .site-title:hover {
-            transform: scale(1.02); /* Slight scale on hover */
+            transform: scale(1.02);
         }
         .menu-toggle-btn {
             border: none;
-            background-color: transparent; /* Transparent background */
-            color: white; /* White icon color */
-            font-size: 1.4rem; /* Slightly larger icon */
-            transition: transform 0.2s ease-in-out; /* Smooth hover effect */
+            background-color: transparent;
+            color: white;
+            font-size: 1.4rem;
+            transition: transform 0.2s ease-in-out;
         }
         .menu-toggle-btn:hover {
-            transform: scale(1.1); /* Slight scale on hover */
+            transform: scale(1.1);
         }
 
         /* Side Menu Styling */
         .sidebar {
-            width: 280px; /* Slightly wider sidebar for better readability */
-            flex-shrink: 0; /* Prevents sidebar from shrinking */
-            background-color: var(--card-bg); /* White background */
-            border-right: 1px solid #e0e0e0; /* Subtle right border */
-            box-shadow: 2px 0 10px var(--shadow-light); /* Soft shadow */
-            padding: 2rem 0; /* Vertical padding */
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease; /* Smooth transitions for opening/closing */
-            z-index: 1000; /* Ensures sidebar is above content on small screens */
-            height: 100%; /* Take full height available in flex container */
-            overflow-y: auto; /* Enable scrolling if menu content is long */
+            width: 280px;
+            flex-shrink: 0;
+            background-color: var(--card-bg);
+            border-right: 1px solid #e0e0e0;
+            box-shadow: 2px 0 10px var(--shadow-light);
+            padding: 2rem 0;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+            z-index: 1000;
+            height: 100%;
+            overflow-y: auto;
         }
         .sidebar-title {
             font-weight: 600;
             color: var(--primary-dark);
             margin-bottom: 1.5rem;
-            padding-left: 1.5rem; /* Indent title to match nav items */
-            font-size: 1.25rem; /* Larger title for sidebar sections */
+            padding-left: 1.5rem;
+            font-size: 1.25rem;
         }
         .sidebar-nav-list {
-            padding-left: 0; /* Remove default ul padding */
+            padding-left: 0;
         }
         .sidebar-nav-list .nav-item {
             margin-bottom: 0.75rem;
@@ -119,135 +120,131 @@
         .sidebar-nav-link {
             color: var(--text-dark);
             font-weight: 500;
-            transition: all 0.2s ease; /* Smooth hover effects */
-            border-radius: 0.5rem; /* Rounded corners for links */
-            padding: 0.75rem 1.5rem; /* Adequate padding for touch targets */
-            display: flex; /* For icon and text alignment */
+            transition: all 0.2s ease;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            display: flex;
             align-items: center;
-            text-decoration: none; /* Remove underline */
-            font-size: 1.05rem; /* Slightly larger text for nav links */
+            text-decoration: none;
+            font-size: 1.05rem;
         }
         .sidebar-nav-link:hover {
             background-color: var(--primary-light);
             color: var(--primary-dark);
-            transform: translateX(5px); /* Slide effect on hover */
+            transform: translateX(5px);
         }
         .sidebar-nav-link.active {
             background-color: var(--primary-light);
             color: var(--primary-dark);
             font-weight: 600;
-            border-left: 4px solid var(--primary-color); /* Active indicator bar */
-            padding-left: calc(1.5rem - 4px); /* Adjust padding for border to maintain visual alignment */
+            border-left: 4px solid var(--primary-color);
+            padding-left: calc(1.5rem - 4px);
         }
         .sidebar-nav-link i {
-            width: 28px; /* Fixed width for icons to align text */
+            width: 28px;
             text-align: center;
-            margin-right: 0.75rem; /* Space between icon and text */
-            font-size: 1.2rem; /* Slightly larger icons */
+            margin-right: 0.75rem;
+            font-size: 1.2rem;
         }
 
-        /* Responsive adjustments for sidebar */
-        @media (max-width: 767.98px) { /* On small screens (Bootstrap's md breakpoint and below) */
+        /* Responsive Sidebar */
+        @media (max-width: 767.98px) {
             .sidebar {
-                position: fixed; /* Fixed position for off-canvas effect */
+                position: fixed;
                 top: 0;
                 left: 0;
-                height: 100vh; /* Full viewport height */
-                transform: translateX(-100%); /* Hidden by default */
+                height: 100vh;
+                transform: translateX(-100%);
                 box-shadow: 5px 0 15px var(--shadow-medium);
-                padding-top: 5rem; /* Adjust padding for fixed header */
+                padding-top: 5rem;
             }
             .sidebar-open {
-                transform: translateX(0%); /* Slide in when open */
+                transform: translateX(0%);
             }
-            /* Overlay to dim content when sidebar is open */
             .overlay {
                 position: fixed;
                 top: 0;
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-                z-index: 999; /* Below sidebar but above main content */
-                display: none; /* Hidden by default */
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                display: none;
             }
             .sidebar-open + .overlay {
-                display: block; /* Show overlay when sidebar is open */
+                display: block;
             }
         }
-        @media (min-width: 768px) { /* On medium screens and up (desktop) */
+        @media (min-width: 768px) {
             .app-container {
-                flex-direction: row; /* Horizontal layout for sidebar and main content */
-            }
-            .main-content-wrapper {
-                margin-left: 0; /* No margin on desktop */
+                flex-direction: row;
             }
         }
 
-        /* Main Content Area Styling */
+        /* Main Content Styling */
         .main-content-wrapper {
-            flex-grow: 1; /* Allows main content to fill remaining space */
-            padding: 2.5rem; /* Consistent padding */
-            overflow-y: auto; /* Enables scrolling for content if it overflows vertically */
-            display: flex; /* Use flexbox for main content */
-            flex-direction: column; /* Stack content vertically */
-            align-items: center; /* Center content horizontally within the wrapper */
+            flex-grow: 1;
+            padding: 2.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .main-title {
             font-weight: 700;
             color: var(--primary-dark);
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05); /* Subtle text shadow */
-            margin-bottom: 2.5rem; /* Increased spacing below title */
-            text-align: center; /* Center align title */
-            font-size: 2.5rem; /* Larger main title */
-            width: 100%; /* Ensure title takes full width */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+            margin-bottom: 2.5rem;
+            text-align: center;
+            font-size: 2.5rem;
+            width: 100%;
         }
 
         /* General Card Styling */
-        .download-card, .options-card, .ad-area-card, .preview-card, .info-card, .features-card {
+        .download-card, .info-card, .features-card {
             background-color: var(--card-bg);
-            border-radius: var(--border-radius-large); /* Consistent large rounded corners */
-            box-shadow: 0 10px 40px var(--shadow-light); /* Softer, deeper shadow */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
-            border: none; /* Remove default Bootstrap card border */
-            width: 100%; /* Ensure cards take full available width in column layout */
-            max-width: 900px; /* Limit max width of cards for better design */
-            margin-bottom: 2rem; /* Add some spacing between cards */
+            border-radius: var(--border-radius-large);
+            box-shadow: 0 10px 40px var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 2rem;
         }
-        .download-card:hover, .options-card:hover, .preview-card:hover, .features-card:hover {
-            transform: translateY(-8px); /* Lift effect on hover */
-            box-shadow: 0 15px 50px var(--shadow-medium); /* Enhanced shadow on hover */
+        .download-card:hover, .info-card:hover, .features-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px var(--shadow-medium);
         }
         .info-card {
-            padding: 3rem; /* Extra padding for informational cards */
+            padding: 3rem;
         }
         .info-card h3 {
             color: var(--primary-dark);
             font-weight: 700;
-            margin-bottom: 1.8rem; /* Increased spacing */
-            font-size: 1.8rem; /* Larger info card titles */
+            margin-bottom: 1.8rem;
+            font-size: 1.8rem;
         }
         .info-card p, .info-card ul {
-            font-size: 1.05rem; /* Slightly larger body text */
-            line-height: 1.8; /* Improved readability */
+            font-size: 1.05rem;
+            line-height: 1.8;
             color: var(--text-dark);
         }
         .info-card ul {
-            list-style: none; /* Remove default bullet points */
+            list-style: none;
             padding-left: 0;
         }
         .info-card ul li {
-            margin-bottom: 0.8rem; /* Increased spacing */
+            margin-bottom: 0.8rem;
         }
         .info-card ul li i {
             color: var(--primary-color);
-            margin-right: 0.8rem; /* Increased spacing */
-            font-size: 1.3rem; /* Slightly larger icons */
+            margin-right: 0.8rem;
+            font-size: 1.3rem;
         }
 
-        /* Feature Section Card */
+        /* Features Section */
         .features-card .feature-icon {
-            font-size: 3rem; /* Larger icons for features */
+            font-size: 3rem;
             color: var(--primary-color);
             margin-bottom: 1.5rem;
         }
@@ -256,13 +253,8 @@
             font-weight: 600;
             margin-bottom: 1rem;
         }
-        .features-card p {
-            color: var(--text-dark);
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        /* Social Media Buttons Styling */
+        
+        /* Social Media Section */
         .social-media-section {
             margin: 2rem 0;
             padding: 2rem;
@@ -298,30 +290,20 @@
             box-shadow: 0 8px 25px var(--shadow-medium);
             color: white;
         }
-        .social-btn.youtube {
-            background: linear-gradient(135deg, #ff0000, #cc0000);
-        }
-        .social-btn.facebook {
-            background: linear-gradient(135deg, #1877f2, #166fe5);
-        }
-        .social-btn.pinterest {
-            background: linear-gradient(135deg, #e60023, #bd081c);
-        }
-        .social-btn.instagram {
-            background: linear-gradient(135deg, #e4405f, #833ab4, #f56040);
-        }
-        .social-btn.twitter {
-            background: linear-gradient(135deg, #1da1f2, #0d8bd9);
-        }
-        .social-btn.tiktok {
-            background: linear-gradient(135deg, #000000, #333333);
-        }
+        .social-btn.youtube { background: linear-gradient(135deg, #ff0000, #cc0000); }
+        .social-btn.facebook { background: linear-gradient(135deg, #1877f2, #166fe5); }
+        .social-btn.pinterest { background: linear-gradient(135deg, #e60023, #bd081c); }
+        .social-btn.instagram { background: linear-gradient(135deg, #e4405f, #833ab4, #f56040); }
+        .social-btn.twitter { background: linear-gradient(135deg, #1da1f2, #0d8bd9); }
+        .social-btn.tiktok { background: linear-gradient(135deg, #000000, #333333); }
 
-        /* Advertisement Areas Styling */
+        /* Advertisement Areas */
         .ad-container {
             margin: 3rem 0;
             padding: 0;
             text-align: center;
+            width: 100%;
+            max-width: 900px;
         }
         .ad-banner {
             background: linear-gradient(135deg, #f8f9fa, #e9ecef);
@@ -329,8 +311,6 @@
             border-radius: var(--border-radius-large);
             padding: 3rem 2rem;
             margin: 2rem 0;
-            position: relative;
-            overflow: hidden;
             transition: all 0.3s ease;
             box-shadow: 0 5px 20px var(--shadow-light);
         }
@@ -339,30 +319,9 @@
             box-shadow: 0 10px 30px var(--shadow-medium);
             transform: translateY(-2px);
         }
-        .ad-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 123, 255, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-        .ad-banner:hover::before {
-            left: 100%;
-        }
         .ad-banner h4 {
             color: var(--primary-dark);
             font-weight: 600;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-        .ad-banner p {
-            color: var(--text-dark);
-            margin-bottom: 0;
-            font-size: 1.1rem;
-            opacity: 0.8;
         }
         .ad-banner .ad-icon {
             font-size: 3rem;
@@ -380,32 +339,6 @@
             border-radius: var(--border-radius-large);
             text-align: center;
             box-shadow: 0 5px 20px var(--shadow-medium);
-            position: relative;
-            overflow: hidden;
-        }
-        .sidebar-ad::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: pulse 3s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-        .sidebar-ad h5 {
-            font-weight: 700;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-        .sidebar-ad p {
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-            opacity: 0.9;
         }
         .sidebar-ad .btn-ad {
             background: rgba(255, 255, 255, 0.2);
@@ -416,31 +349,10 @@
             font-weight: 600;
             text-decoration: none;
             transition: all 0.3s ease;
-            display: inline-block;
         }
         .sidebar-ad .btn-ad:hover {
             background: white;
             color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Responsive Advertisement */
-        @media (max-width: 768px) {
-            .ad-banner {
-                padding: 2rem 1rem;
-                margin: 1.5rem 0;
-            }
-            .ad-banner h4 {
-                font-size: 1.3rem;
-            }
-            .ad-banner p {
-                font-size: 1rem;
-            }
-            .sidebar-ad {
-                margin: 1.5rem 1rem;
-                padding: 1.5rem 1rem;
-            }
         }
 
         /* Form Styling */
@@ -458,23 +370,18 @@
             border: none;
             padding: 1.2rem;
             font-size: 1.05rem;
-            background-color: var(--card-bg);
-            border-radius: 0;
         }
         .form-control:focus {
             box-shadow: none;
             border-color: var(--primary-color);
-            background-color: var(--card-bg);
         }
         .btn-download {
             background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
             border: none;
             padding: 1.2rem 2rem;
             font-weight: 600;
-            font-size: 1.05rem;
             color: white;
             transition: all 0.3s ease;
-            border-radius: 0;
         }
         .btn-download:hover {
             background: linear-gradient(135deg, var(--accent-dark), #1e7e34);
@@ -483,9 +390,9 @@
             color: white;
         }
 
-        /* Format Selection */
+        /* Format Selection & Video Preview */
         .format-selection {
-            margin: 2rem 0;
+            margin-top: 2rem;
             text-align: center;
         }
         .format-buttons {
@@ -493,61 +400,38 @@
             justify-content: center;
             gap: 1rem;
             flex-wrap: wrap;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
         }
         .format-btn {
             padding: 1rem 1.5rem;
             border: 2px solid var(--primary-color);
-            background: linear-gradient(135deg, transparent, rgba(0, 123, 255, 0.05));
+            background-color: transparent;
             color: var(--primary-color);
             border-radius: var(--border-radius-base);
             font-weight: 600;
             transition: all 0.3s ease;
             text-decoration: none;
-            display: inline-block;
             min-width: 140px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
         }
-        .format-btn:hover, .format-btn.active {
+        .format-btn:hover {
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             color: white;
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
-            border-color: var(--primary-light);
         }
-        .format-btn small {
-            font-size: 0.8rem;
-            opacity: 0.9;
-            display: block;
-            margin-top: 0.25rem;
-        }
-        .format-btn .badge {
-            font-size: 0.7rem;
-            margin-top: 0.25rem;
-        }
-        
-        /* Video Preview */
         .video-preview {
             background: var(--card-bg);
             border-radius: var(--border-radius-base);
             padding: 1.5rem;
-            margin-bottom: 1.5rem;
             box-shadow: 0 4px 15px var(--shadow-light);
-            border: 1px solid rgba(0, 123, 255, 0.1);
+            text-align: left;
         }
         .video-preview img {
             border-radius: var(--border-radius-base);
-            box-shadow: 0 4px 15px var(--shadow-light);
-            max-width: 100%;
-            height: auto;
         }
         .video-preview h6 {
             color: var(--primary-dark);
             font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
         }
 
         /* Footer Styling */
@@ -562,19 +446,13 @@
             margin: 0 auto;
             padding: 0 2rem;
         }
-        .footer-section {
-            margin-bottom: 2rem;
-        }
         .footer-title {
             font-weight: 600;
-            font-size: 1.2rem;
             margin-bottom: 1rem;
-            color: var(--text-light);
         }
         .footer-links {
             list-style: none;
             padding: 0;
-            margin: 0;
         }
         .footer-links li {
             margin-bottom: 0.5rem;
@@ -582,13 +460,11 @@
         .footer-link {
             color: rgba(248, 249, 250, 0.8);
             text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
+            transition: color 0.3s ease;
         }
         .footer-link:hover {
             color: var(--text-light);
             text-decoration: underline;
-            transform: translateX(5px);
         }
         .footer-bottom {
             border-top: 1px solid rgba(248, 249, 250, 0.2);
@@ -596,36 +472,9 @@
             padding-top: 1.5rem;
             text-align: center;
             font-size: 0.9rem;
-            color: rgba(248, 249, 250, 0.7);
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .main-content-wrapper {
-                padding: 1.5rem;
-            }
-            .main-title {
-                font-size: 2rem;
-                margin-bottom: 2rem;
-            }
-            .social-buttons {
-                gap: 1rem;
-            }
-            .social-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
-            }
-            .format-buttons {
-                gap: 0.5rem;
-            }
-            .format-btn {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
-            }
-        }
-
-        /* Loading and Status Styling */
+        /* Loading Spinner and Status Messages */
         .loading-spinner {
             display: inline-block;
             width: 20px;
@@ -638,7 +487,6 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-
         .status-message {
             margin: 1rem 0;
             padding: 1rem;
@@ -646,20 +494,18 @@
             text-align: center;
             font-weight: 500;
         }
-        .status-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .status-error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        .status-info {
-            background-color: #d1ecf1;
-            color: #0c5460;
-            border: 1px solid #bee5eb;
+        .status-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .status-error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .status-info { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+
+        /* General Responsive Design */
+        @media (max-width: 768px) {
+            .main-content-wrapper { padding: 1.5rem; }
+            .main-title { font-size: 2rem; }
+            .social-btn { width: 50px; height: 50px; font-size: 1.5rem; }
+            .format-btn { padding: 0.8rem 1.2rem; font-size: 0.9rem; }
+            .ad-banner { padding: 2rem 1rem; }
+            .info-card { padding: 2rem; }
         }
     </style>
 </head>
@@ -668,7 +514,7 @@
         <!-- Header -->
         <header class="header-custom">
             <div class="container-fluid">
-                <div class="d-flex justify-content-between align-items-center py-3">
+                <div class="d-flex justify-content-between align-items-center py-3 px-md-4">
                     <div class="d-flex align-items-center">
                         <button class="menu-toggle-btn d-md-none me-3" id="menuToggle" aria-label="Toggle menu">
                             <i class="fas fa-bars"></i>
@@ -679,9 +525,8 @@
                         </a>
                     </div>
                     <div class="d-none d-md-flex align-items-center">
-                        <span class="text-light me-3">
-                            <i class="fas fa-shield-alt me-1"></i>
-                            Secure & Fast Downloads
+                        <span class="text-light">
+                            <i class="fas fa-shield-alt me-2"></i>Secure & Fast Downloads
                         </span>
                     </div>
                 </div>
@@ -692,64 +537,21 @@
             <!-- Sidebar -->
             <nav class="sidebar" id="sidebar">
                 <div class="sidebar-title">
-                    <i class="fas fa-video me-2"></i>
-                    Supported Platforms
+                    <i class="fas fa-video me-2"></i> Supported Platforms
                 </div>
                 <ul class="sidebar-nav-list">
-                    <li class="nav-item">
-                        <a href="#" class="sidebar-nav-link active">
-                            <i class="fab fa-youtube"></i>
-                            YouTube
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="sidebar-nav-link">
-                            <i class="fab fa-facebook"></i>
-                            Facebook
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="sidebar-nav-link">
-                            <i class="fab fa-tiktok"></i>
-                            TikTok
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="sidebar-nav-link">
-                            <i class="fab fa-pinterest"></i>
-                            Pinterest
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="sidebar-nav-link">
-                            <i class="fab fa-instagram"></i>
-                            Instagram
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="sidebar-nav-link">
-                            <i class="fab fa-twitter"></i>
-                            Twitter
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="sidebar-nav-link">
-                            <i class="fab fa-vimeo"></i>
-                            Vimeo
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="sidebar-nav-link">
-                            <i class="fas fa-play-circle"></i>
-                            Dailymotion
-                        </a>
-                    </li>
+                    <li class="nav-item"><a href="#" class="sidebar-nav-link active"><i class="fab fa-youtube"></i>YouTube</a></li>
+                    <li class="nav-item"><a href="#" class="sidebar-nav-link"><i class="fab fa-facebook"></i>Facebook</a></li>
+                    <li class="nav-item"><a href="#" class="sidebar-nav-link"><i class="fab fa-tiktok"></i>TikTok</a></li>
+                    <li class="nav-item"><a href="#" class="sidebar-nav-link"><i class="fab fa-pinterest"></i>Pinterest</a></li>
+                    <li class="nav-item"><a href="#" class="sidebar-nav-link"><i class="fab fa-instagram"></i>Instagram</a></li>
+                    <li class="nav-item"><a href="#" class="sidebar-nav-link"><i class="fab fa-twitter"></i>Twitter</a></li>
+                    <li class="nav-item"><a href="#" class="sidebar-nav-link"><i class="fab fa-vimeo"></i>Vimeo</a></li>
+                    <li class="nav-item"><a href="#" class="sidebar-nav-link"><i class="fas fa-play-circle"></i>Dailymotion</a></li>
                 </ul>
-
-                <!-- Sidebar Advertisement -->
                 <div class="sidebar-ad">
                     <h5><i class="fas fa-star me-2"></i>Premium Features</h5>
-                    <p>Unlock faster downloads, batch processing, and premium quality options!</p>
+                    <p>Unlock faster downloads, batch processing, and more!</p>
                     <a href="#" class="btn-ad">Upgrade Now</a>
                 </div>
             </nav>
@@ -759,152 +561,65 @@
 
             <!-- Main Content -->
             <main class="main-content-wrapper">
-                <h1 class="main-title">
-                    <i class="fas fa-download me-3"></i>
-                    Free Video Downloader
-                </h1>
+                <h1 class="main-title"><i class="fas fa-download me-3"></i>Free Video Downloader</h1>
 
-                <!-- Download Form -->
                 <div class="download-card card">
-                    <div class="card-body p-4">
+                    <div class="card-body p-4 p-md-5">
                         <form class="url-input-form" id="downloadForm">
                             <div class="input-group">
-                                <input 
-                                    type="url" 
-                                    class="form-control" 
-                                    placeholder="Paste your video URL here..." 
-                                    required
-                                    id="videoUrl"
-                                    aria-label="Video URL"
-                                >
+                                <input type="url" class="form-control" placeholder="Paste your video URL here..." required id="videoUrl" aria-label="Video URL">
                                 <button class="btn btn-download" type="submit" id="downloadBtn">
-                                    <i class="fas fa-download me-2"></i>
-                                    Download
+                                    <i class="fas fa-download me-2"></i>Download
                                 </button>
                             </div>
                         </form>
-
-                        <!-- Status Message -->
                         <div id="statusMessage" class="status-message" style="display: none;"></div>
-
-                        <!-- Format Selection -->
                         <div class="format-selection" id="formatSelection" style="display: none;">
-                            <h5 class="mb-3">Choose Format & Quality:</h5>
-                            <div class="format-buttons" id="formatButtons">
-                                <!-- Format buttons will be populated dynamically -->
-                            </div>
+                            <div id="formatButtonsContainer"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Top Advertisement Banner -->
                 <div class="ad-container">
                     <div class="ad-banner">
                         <i class="fas fa-bullhorn ad-icon"></i>
                         <h4>Boost Your Downloads</h4>
-                        <p>Get premium speeds and unlimited downloads - Perfect for content creators and professionals</p>
+                        <p>Get premium speeds for content creators and professionals.</p>
                     </div>
                 </div>
 
-                <!-- Social Media Section -->
                 <div class="social-media-section">
-                    <h3 class="social-media-title">Follow Us On Social Media</h3>
+                    <h3 class="social-media-title">Find Us On Social Media</h3>
                     <div class="social-buttons">
-                        <a href="https://youtube.com" class="social-btn youtube" target="_blank" rel="noopener noreferrer" aria-label="Follow us on YouTube">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                        <a href="https://facebook.com" class="social-btn facebook" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="https://pinterest.com" class="social-btn pinterest" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Pinterest">
-                            <i class="fab fa-pinterest-p"></i>
-                        </a>
-                        <a href="https://instagram.com" class="social-btn instagram" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://twitter.com" class="social-btn twitter" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="https://tiktok.com" class="social-btn tiktok" target="_blank" rel="noopener noreferrer" aria-label="Follow us on TikTok">
-                            <i class="fab fa-tiktok"></i>
-                        </a>
+                        <a href="https://youtube.com" class="social-btn youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://facebook.com" class="social-btn facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://pinterest.com" class="social-btn pinterest" target="_blank" rel="noopener noreferrer" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="https://instagram.com" class="social-btn instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com" class="social-btn twitter" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://tiktok.com" class="social-btn tiktok" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
 
-                <!-- Features Section -->
                 <div class="features-card card">
-                    <div class="card-body p-4">
-                        <h3 class="text-center mb-4">Why Choose Our Video Downloader?</h3>
+                    <div class="card-body p-4 p-md-5">
+                        <h3 class="text-center mb-5">Why Choose Us?</h3>
                         <div class="row">
-                            <div class="col-md-4 text-center mb-4">
-                                <div class="feature-icon">
-                                    <i class="fas fa-bolt"></i>
-                                </div>
-                                <h4>Lightning Fast</h4>
-                                <p>Download videos at maximum speed with our optimized servers and advanced technology.</p>
-                            </div>
-                            <div class="col-md-4 text-center mb-4">
-                                <div class="feature-icon">
-                                    <i class="fas fa-shield-alt"></i>
-                                </div>
-                                <h4>100% Secure</h4>
-                                <p>Your privacy is our priority. We don't store your data or track your downloads.</p>
-                            </div>
-                            <div class="col-md-4 text-center mb-4">
-                                <div class="feature-icon">
-                                    <i class="fas fa-mobile-alt"></i>
-                                </div>
-                                <h4>All Devices</h4>
-                                <p>Works perfectly on desktop, mobile, and tablet. No app installation required.</p>
-                            </div>
+                            <div class="col-md-4 text-center mb-4"><div class="feature-icon"><i class="fas fa-bolt"></i></div><h4>Lightning Fast</h4><p>Download videos at maximum speed with our optimized technology.</p></div>
+                            <div class="col-md-4 text-center mb-4"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h4>100% Secure</h4><p>Your privacy is our priority. We don't store your data or track downloads.</p></div>
+                            <div class="col-md-4 text-center mb-4"><div class="feature-icon"><i class="fas fa-mobile-alt"></i></div><h4>All Devices</h4><p>Works perfectly on desktop, mobile, and tablet. No app needed.</p></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Middle Advertisement Banner -->
-                <div class="ad-container">
-                    <div class="ad-banner">
-                        <i class="fas fa-rocket ad-icon"></i>
-                        <h4>Professional Video Tools</h4>
-                        <p>Advanced editing software, converters, and premium downloaders for professionals</p>
-                    </div>
-                </div>
-
-                <!-- How It Works Section -->
                 <div class="info-card card">
-                    <h3><i class="fas fa-question-circle me-2"></i>How It Works</h3>
+                    <h3><i class="fas fa-question-circle me-3"></i>How It Works</h3>
                     <ul>
-                        <li><i class="fas fa-copy"></i>Copy the video URL from your favorite platform</li>
-                        <li><i class="fas fa-paste"></i>Paste the URL in the input field above</li>
-                        <li><i class="fas fa-mouse-pointer"></i>Click the Download button</li>
-                        <li><i class="fas fa-download"></i>Choose your preferred format and quality</li>
-                        <li><i class="fas fa-check-circle"></i>Enjoy your downloaded video!</li>
+                        <li><i class="fas fa-copy"></i>Copy the video URL from your favorite platform.</li>
+                        <li><i class="fas fa-paste"></i>Paste the URL into the input field above.</li>
+                        <li><i class="fas fa-mouse-pointer"></i>Click the "Download" button to process.</li>
+                        <li><i class="fas fa-download"></i>Choose your preferred format and quality.</li>
+                        <li><i class="fas fa-check-circle"></i>Enjoy your downloaded video offline!</li>
                     </ul>
-                </div>
-
-                <!-- Supported Platforms Section -->
-                <div class="info-card card">
-                    <h3><i class="fas fa-globe me-2"></i>Supported Platforms</h3>
-                    <p>Our video downloader supports a wide range of popular platforms:</p>
-                    <ul>
-                        <li><i class="fab fa-youtube"></i>YouTube - HD, Full HD, 4K videos and playlists</li>
-                        <li><i class="fab fa-facebook"></i>Facebook - Public videos and posts</li>
-                        <li><i class="fab fa-tiktok"></i>TikTok - Videos without watermark</li>
-                        <li><i class="fab fa-pinterest"></i>Pinterest - Video pins and stories</li>
-                        <li><i class="fab fa-instagram"></i>Instagram - Posts, stories, and IGTV</li>
-                        <li><i class="fab fa-twitter"></i>Twitter - Video tweets and threads</li>
-                        <li><i class="fab fa-vimeo"></i>Vimeo - HD and premium content</li>
-                        <li><i class="fas fa-play-circle"></i>Dailymotion - All quality formats</li>
-                    </ul>
-                </div>
-
-                <!-- Bottom Advertisement Banner -->
-                <div class="ad-container">
-                    <div class="ad-banner">
-                        <i class="fas fa-crown ad-icon"></i>
-                        <h4>Premium Content Creation Suite</h4>
-                        <p>Complete toolkit for video creators - Download, edit, and publish with professional quality</p>
-                    </div>
                 </div>
             </main>
         </div>
@@ -913,376 +628,124 @@
         <footer class="footer">
             <div class="footer-content">
                 <div class="row">
-                    <div class="col-md-4 footer-section">
-                        <h4 class="footer-title">
-                            <i class="fas fa-download me-2"></i>
-                            AllVideoDownloaderHubs
-                        </h4>
-                        <p class="mb-3">The best free online video downloader supporting multiple platforms. Download videos quickly and securely.</p>
-                    </div>
-                    <div class="col-md-4 footer-section">
-                        <h5 class="footer-title">Quick Links</h5>
-                        <ul class="footer-links">
-                            <li><a href="#" class="footer-link">Home</a></li>
-                            <li><a href="#" class="footer-link">How It Works</a></li>
-                            <li><a href="#" class="footer-link">Supported Sites</a></li>
-                            <li><a href="#" class="footer-link">FAQ</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4 footer-section">
-                        <h5 class="footer-title">Legal</h5>
-                        <ul class="footer-links">
-                            <li><a href="#privacy" class="footer-link">Privacy Policy</a></li>
-                            <li><a href="#terms" class="footer-link">Terms of Service</a></li>
-                            <li><a href="#about" class="footer-link">About Us</a></li>
-                            <li><a href="#contact" class="footer-link">Contact</a></li>
-                        </ul>
-                    </div>
+                    <div class="col-md-4 footer-section"><h4 class="footer-title"><i class="fas fa-download me-2"></i>AllVideoDownloaderHubs</h4><p>The best free online video downloader. Download videos quickly and securely.</p></div>
+                    <div class="col-md-4 footer-section"><h5 class="footer-title">Quick Links</h5><ul class="footer-links"><li><a href="#" class="footer-link">Home</a></li><li><a href="#how" class="footer-link">How It Works</a></li><li><a href="#faq" class="footer-link">FAQ</a></li></ul></div>
+                    <div class="col-md-4 footer-section"><h5 class="footer-title">Legal</h5><ul class="footer-links"><li><a href="#privacy" class="footer-link">Privacy Policy</a></li><li><a href="#terms" class="footer-link">Terms of Service</a></li><li><a href="#contact" class="footer-link">Contact Us</a></li></ul></div>
                 </div>
                 <div class="footer-bottom">
-                    <p>&copy; 2025 AllVideoDownloaderHubs. All rights reserved. | Made with <i class="fas fa-heart text-danger"></i> for video lovers</p>
+                    <p>© <span id="copyright-year">2024</span> AllVideoDownloaderHubs. All rights reserved.</p>
                 </div>
             </div>
         </footer>
     </div>
 
-    <!-- Bootstrap JavaScript -->
+    <!-- Bootstrap JavaScript Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
-    <!-- Custom JavaScript -->
+    <!-- All JavaScript for the website is included here -->
     <script>
-        // Mobile menu toggle functionality
         document.addEventListener('DOMContentLoaded', function() {
+            // --- Mobile Menu Functionality ---
             const menuToggle = document.getElementById('menuToggle');
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('overlay');
-
-            function toggleSidebar() {
-                sidebar.classList.toggle('sidebar-open');
-                overlay.style.display = sidebar.classList.contains('sidebar-open') ? 'block' : 'none';
-            }
-
-            function closeSidebar() {
-                sidebar.classList.remove('sidebar-open');
-                overlay.style.display = 'none';
-            }
-
-            menuToggle.addEventListener('click', toggleSidebar);
-            overlay.addEventListener('click', closeSidebar);
-
-            // Close sidebar when clicking on a nav link on mobile
-            const navLinks = document.querySelectorAll('.sidebar-nav-link');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    if (window.innerWidth < 768) {
-                        closeSidebar();
-                    }
+            if (menuToggle && sidebar && overlay) {
+                const closeSidebar = () => {
+                    sidebar.classList.remove('sidebar-open');
+                    overlay.style.display = 'none';
+                };
+                menuToggle.addEventListener('click', () => {
+                    sidebar.classList.toggle('sidebar-open');
+                    overlay.style.display = sidebar.classList.contains('sidebar-open') ? 'block' : 'none';
                 });
-            });
+                overlay.addEventListener('click', closeSidebar);
+            }
 
-            // Handle window resize
-            window.addEventListener('resize', function() {
-                if (window.innerWidth >= 768) {
-                    closeSidebar();
-                }
-            });
-        });
+            // --- Dynamic Copyright Year ---
+            document.getElementById('copyright-year').textContent = new Date().getFullYear();
 
-        // Download form functionality
-        document.getElementById('downloadForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
+            // --- Download Form Logic ---
+            const downloadForm = document.getElementById('downloadForm');
             const urlInput = document.getElementById('videoUrl');
             const downloadBtn = document.getElementById('downloadBtn');
             const statusMessage = document.getElementById('statusMessage');
             const formatSelection = document.getElementById('formatSelection');
-            
-            const videoUrl = urlInput.value.trim();
-            
-            if (!videoUrl) {
-                showStatus('Please enter a valid video URL', 'error');
-                return;
-            }
-            
-            // Show loading state
-            downloadBtn.disabled = true;
-            downloadBtn.innerHTML = '<span class="loading-spinner"></span> Processing...';
-            showStatus('Analyzing video URL...', 'info');
-            
-            try {
-                // Detect platform and process video
-                const platform = detectPlatform(videoUrl);
-                if (!platform) {
-                    throw new Error('Unsupported platform. Please use YouTube, TikTok, Facebook, Instagram, or Twitter URLs.');
-                }
-                
-                // Simulate API call and get video information
-                const videoInfo = await processVideoUrl(videoUrl, platform);
-                
-                if (videoInfo.success) {
-                    showStatus('Video found! Choose your preferred format and quality.', 'success');
-                    displayFormatOptions(videoInfo.formats, videoInfo.title, videoInfo.thumbnail);
-                } else {
-                    throw new Error(videoInfo.error || 'Failed to process video');
-                }
-                
-            } catch (error) {
-                showStatus(error.message, 'error');
-                console.error('Download error:', error);
-            } finally {
-                // Reset button state
-                downloadBtn.disabled = false;
-                downloadBtn.innerHTML = '<i class="fas fa-download me-2"></i>Download';
-            }
-        });
-        
-        // Platform detection function
-        function detectPlatform(url) {
-            const platforms = {
-                youtube: /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/,
-                tiktok: /tiktok\.com\/@[\w.-]+\/video\/(\d+)/,
-                facebook: /facebook\.com\/.*\/videos\/(\d+)/,
-                instagram: /instagram\.com\/(?:p|reel)\/([A-Za-z0-9_-]+)/,
-                twitter: /twitter\.com\/\w+\/status\/(\d+)/
+            const formatButtonsContainer = document.getElementById('formatButtonsContainer');
+
+            const showStatus = (message, type) => {
+                statusMessage.textContent = message;
+                statusMessage.className = `status-message status-${type}`;
+                statusMessage.style.display = 'block';
             };
-            
-            for (const [platform, regex] of Object.entries(platforms)) {
-                if (regex.test(url)) {
-                    return platform;
-                }
-            }
-            return null;
-        }
-        
-        // Process video URL using real API
-        async function processVideoUrl(url, platform) {
-            try {
-                const response = await fetch('/api/video-info', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ url: url })
-                });
-                
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error || 'Failed to fetch video information');
-                }
-                
-                return await response.json();
-            } catch (error) {
-                console.error('API Error:', error);
-                return { 
-                    success: false, 
-                    error: error.message || 'Network error - please check your connection'
-                };
-            }
-        }
-        
-        // Display format options
-        function displayFormatOptions(formats, title, thumbnail) {
-            const formatSelection = document.getElementById('formatSelection');
-            const formatButtons = document.getElementById('formatButtons');
-            
-            // Clear previous options
-            formatButtons.innerHTML = '';
-            
-            // Add video preview
-            const previewHtml = `
-                <div class="video-preview mb-4">
-                    <div class="row align-items-center">
-                        <div class="col-md-4">
-                            <img src="${thumbnail}" alt="Video Thumbnail" class="img-fluid rounded" style="max-height: 150px; object-fit: cover;">
+
+            const displayFormatOptions = (videoInfo) => {
+                formatButtonsContainer.innerHTML = ''; // Clear previous options
+                const previewHtml = `
+                    <div class="video-preview mb-4">
+                        <div class="row align-items-center g-3">
+                            <div class="col-md-3"><img src="${videoInfo.thumbnail}" alt="Video Thumbnail" class="img-fluid rounded"></div>
+                            <div class="col-md-9"><h6 class="mb-1">${videoInfo.title}</h6><p class="text-muted small mb-0">Choose a format:</p></div>
                         </div>
-                        <div class="col-md-8">
-                            <h6 class="mb-2">${title}</h6>
-                            <p class="text-muted mb-0">Choose your preferred format and quality:</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            formatButtons.innerHTML = previewHtml;
-            
-            // Add format buttons
-            formats.forEach((format, index) => {
-                const button = document.createElement('button');
-                button.className = 'btn btn-outline-primary format-btn me-2 mb-2';
-                button.innerHTML = `
-                    <i class="fas fa-download me-2"></i>
-                    ${format.quality} ${format.format.toUpperCase()}
-                    <small class="d-block">${format.size}</small>
-                    ${format.watermark === false ? '<small class="badge bg-success">No Watermark</small>' : ''}
-                `;
-                
-                button.addEventListener('click', () => {
-                    downloadVideo(format, title);
-                });
-                
-                formatButtons.appendChild(button);
-            });
-            
-            formatSelection.style.display = 'block';
-        }
-        
-        // Download video function
-        async function downloadVideo(format, title) {
-            showStatus(`Preparing download for ${format.quality} ${format.format.toUpperCase()}...`, 'info');
-            
-            try {
-                const url = document.getElementById('videoUrl').value.trim();
-                
-                // Create form data for download request
-                const downloadData = {
-                    url: url,
-                    format_id: format.format_id,
-                    quality: format.quality
-                };
-                
-                showStatus('Starting download...', 'info');
-                
-                // Make download request
-                const response = await fetch('/api/download', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(downloadData)
-                });
-                
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error || 'Download failed');
-                }
-                
-                // Get the file as blob
-                const blob = await response.blob();
-                const downloadUrl = window.URL.createObjectURL(blob);
-                
-                // Create download link
-                const link = document.createElement('a');
-                link.href = downloadUrl;
-                link.download = `${title}.${format.format}`;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                
-                // Clean up the blob URL
-                window.URL.revokeObjectURL(downloadUrl);
-                
-                showStatus(`Download completed! ${format.quality} ${format.format.toUpperCase()} (${format.size})`, 'success');
-                
-            } catch (error) {
-                console.error('Download error:', error);
-                showStatus(`Download failed: ${error.message}`, 'error');
-            }
-        }
-        
-        // Status message function
-        function showStatus(message, type) {
-            const statusMessage = document.getElementById('statusMessage');
-            statusMessage.className = `status-message status-${type}`;
-            statusMessage.innerHTML = message;
-            statusMessage.style.display = 'block';
-        }
-            const formatSelection = document.getElementById('formatSelection');
-            
-            const url = urlInput.value.trim();
-            
-            if (!url) {
-                showStatus('Please enter a valid video URL.', 'error');
-                return;
-            }
-            
-            // Show loading state
-            downloadBtn.innerHTML = '<span class="loading-spinner me-2"></span>Processing...';
-            downloadBtn.disabled = true;
-            
-            // Simulate API call
-            setTimeout(() => {
-                // Reset button
-                downloadBtn.innerHTML = '<i class="fas fa-download me-2"></i>Download';
-                downloadBtn.disabled = false;
-                
-                // Show format selection
-                showFormatOptions();
-                showStatus('Video detected! Please choose your preferred format and quality.', 'success');
-            }, 2000);
-        });
-        
-        function showStatus(message, type) {
-            const statusMessage = document.getElementById('statusMessage');
-            statusMessage.textContent = message;
-            statusMessage.className = `status-message status-${type}`;
-            statusMessage.style.display = 'block';
-            
-            // Auto-hide after 5 seconds for success/info messages
-            if (type === 'success' || type === 'info') {
-                setTimeout(() => {
-                    statusMessage.style.display = 'none';
-                }, 5000);
-            }
-        }
-        
-        function showFormatOptions() {
-            const formatSelection = document.getElementById('formatSelection');
-            const formatButtons = document.getElementById('formatButtons');
-            
-            // Sample format options
-            const formats = [
-                { type: 'MP4', quality: '1080p', size: '45 MB' },
-                { type: 'MP4', quality: '720p', size: '28 MB' },
-                { type: 'MP4', quality: '480p', size: '18 MB' },
-                { type: 'MP3', quality: '320kbps', size: '8 MB' },
-                { type: 'MP3', quality: '128kbps', size: '3 MB' }
-            ];
-            
-            formatButtons.innerHTML = '';
-            
-            formats.forEach(format => {
-                const button = document.createElement('a');
-                button.href = '#';
-                button.className = 'format-btn';
-                button.innerHTML = `
-                    <i class="fas fa-${format.type === 'MP4' ? 'video' : 'music'} me-2"></i>
-                    ${format.type} ${format.quality}
-                    <small class="d-block">${format.size}</small>
-                `;
-                
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    downloadFile(format);
-                });
-                
-                formatButtons.appendChild(button);
-            });
-            
-            formatSelection.style.display = 'block';
-        }
-        
-        function downloadFile(format) {
-            showStatus(`Preparing ${format.type} ${format.quality} download...`, 'info');
-            
-            // Simulate download preparation
-            setTimeout(() => {
-                showStatus(`Download started! ${format.type} ${format.quality} - ${format.size}`, 'success');
-                
-                // In a real application, this would trigger the actual download
-                // For demo purposes, we'll just show a success message
-            }, 1500);
-        }
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    </div>`;
+                const buttonsHtml = `<div class="format-buttons">${videoInfo.formats.map(format => `
+                    <a href="#" class="format-btn" title="Simulate Download">
+                        <i class="fas fa-${format.type === 'MP4' ? 'video' : 'music'} me-2"></i>
+                        ${format.type} ${format.quality}
+                        <small class="d-block">${format.size}</small>
+                        ${format.no_watermark ? '<span class="badge bg-success mt-1">No Watermark</span>' : ''}
+                    </a>`).join('')}</div>`;
+                formatButtonsContainer.innerHTML = previewHtml + buttonsHtml;
+                formatSelection.style.display = 'block';
+                document.querySelectorAll('.format-btn').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        showStatus(`Download started for ${button.innerText.split('\\n')[0]}! (Simulation)`, 'success');
                     });
+                });
+            };
+
+            const processVideoUrl = async (url) => {
+                return new Promise((resolve, reject) => {
+                    if (!url.startsWith('http')) {
+                        return reject(new Error('Invalid URL. Please paste a full video link.'));
+                    }
+                    setTimeout(() => { // Simulate network delay
+                        resolve({
+                            success: true,
+                            title: "Example Video: A Beautiful Scenery",
+                            thumbnail: "https://via.placeholder.com/480x270.png?text=Video+Preview",
+                            formats: [
+                                { type: 'MP4', quality: '1080p', size: '125 MB', no_watermark: true },
+                                { type: 'MP4', quality: '720p', size: '78 MB', no_watermark: true },
+                                { type: 'MP3', quality: '128kbps', size: '5.2 MB' }
+                            ]
+                        });
+                    }, 1500);
+                });
+            };
+
+            downloadForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const url = urlInput.value.trim();
+                if (!url) {
+                    showStatus('Please paste a video URL first.', 'error');
+                    return;
+                }
+                downloadBtn.disabled = true;
+                downloadBtn.innerHTML = '<span class="loading-spinner"></span> Processing...';
+                showStatus('Analyzing video URL...', 'info');
+                formatSelection.style.display = 'none';
+                try {
+                    const videoInfo = await processVideoUrl(url);
+                    if (videoInfo.success) {
+                        showStatus('Video found!', 'success');
+                        displayFormatOptions(videoInfo);
+                    }
+                } catch (error) {
+                    showStatus(error.message, 'error');
+                } finally {
+                    downloadBtn.disabled = false;
+                    downloadBtn.innerHTML = '<i class="fas fa-download me-2"></i> Download';
                 }
             });
         });
