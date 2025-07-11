@@ -1,9 +1,7 @@
-
 <?php
-header('Content-Type: application/json');
 
-if (!isset($_POST['url'])) {
-    echo json_encode(['success' => false, 'error' => 'URL is missing']);
+if (!isset($_POST['url']) || empty($_POST['url'])) {
+    echo "<div class='alert alert-danger'>Video URL is missing.</div>";
     exit;
 }
 
@@ -11,10 +9,11 @@ $url = $_POST['url'];
 $api_url = 'https://yt-download.org/api/widget/mp3/' . urlencode($url);
 
 $response = @file_get_contents($api_url);
+
 if ($response === FALSE) {
-    echo json_encode(['success' => false, 'error' => 'Failed to fetch video info']);
+    echo "<div class='alert alert-danger'>Failed to fetch download links. Please try again later.</div>";
     exit;
 }
 
-echo json_encode(['success' => true, 'html' => $response]);
+echo $response;
 ?>
